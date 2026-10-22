@@ -315,6 +315,26 @@ window.PHONE = {
           "time": "오후 7:22"
         },
         {
+          "from": "송하린",
+          "text": "그럼 회의하면서 정할까용?",
+          "time": "오후 7:25"
+        },
+        {
+          "from": "송하린",
+          "text": "https://meet.google.com/b03-0209-13w",
+          "time": "오후 7:25",
+          "preview": {
+            "title": "Google Meet",
+            "desc": "영상 회의에 참여하려면 링크를 클릭하세요.",
+            "domain": "meet.google.com"
+          }
+        },
+        {
+          "from": "조장 김나연",
+          "text": "좋아요!! 8시에 다들 들어와 주세요",
+          "time": "오후 7:26"
+        },
+        {
           "day": "2026년 10월 23일 금요일"
         },
         {

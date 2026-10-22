@@ -302,6 +302,12 @@ img{-webkit-user-drag:none}
 .prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
 
 /* messenger extras */
+.bb .lnk{color:#2f6fd6;text-decoration:underline;word-break:break-all}
+.bb.haspv{padding-bottom:0;overflow:hidden;max-width:240px}
+.lpv{margin:9px -11px 0;padding:10px 12px 11px;border-top:.5px solid rgba(0,0,0,.1);background:#f7f7f7;display:flex;flex-direction:column;gap:2px;white-space:normal}
+.lpv b{font-size:14px;font-weight:600;color:#111}
+.lpv span{font-size:12.5px;color:#666;line-height:1.35}
+.lpv small{font-size:11.5px;color:#999;margin-top:2px}
 .av.post,.ln .sav.post{background:#fff;border:.5px solid #e3e3e3}
 .av.post svg,.ln .sav.post svg{width:100%;height:100%}
 .bb.alim{padding:0;background:#fff!important;width:252px;border-radius:14px;position:relative;white-space:normal}
@@ -648,7 +654,9 @@ function bodyHTML(c, m, i){
   if (m.img !== undefined) return `<div class="bb img">${photoHTML(m.img, i)}</div>`;
   if (m.voice) { const s = secs(m.voice); const bars = Array.from({ length: 22 }, (_, k) => `<i style="height:${4 + ((k * 7 + s) % 13)}px"></i>`).join(''); return `<button class="bb aud" data-voice="${esc(m.src || '')}" data-sec="${s}"><span class="pl"><svg viewBox="0 0 12 12"><path d="M3 1.5v9l7.5-4.5z"/></svg></span><span class="wv">${bars}</span><span class="du">${esc(m.voice)}</span></button>`; }
   const rq = m.reply ? `<div class="rq"><b>${esc(m.reply.to === 'me' ? D.owner : m.reply.to === 'them' ? c.name : m.reply.to)}에게 답장</b><span>${esc(m.reply.text)}</span></div>` : '';
-  return `<div class="bb">${rq}${esc(m.text)}</div>`;
+  const linked = esc(m.text).replace(/(https?:\/\/[^\s<]+)/g, '<span class="lnk">$1</span>');
+  const pv = m.preview ? `<div class="lpv"><b>${esc(m.preview.title || '')}</b><span>${esc(m.preview.desc || '')}</span><small>${esc(m.preview.domain || '')}</small></div>` : '';
+  return `<div class="bb${m.preview ? ' haspv' : ''}">${rq}${linked}${pv}</div>`;
 }
 function lineHTML(c, m, i, first, showTime){
   const me = m.from === 'me', who = whoOf(c, m), body = bodyHTML(c, m, i);
