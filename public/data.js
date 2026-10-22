@@ -66,11 +66,21 @@ window.PHONE = {
        { ..., live: true }   처음 방에 들어갈 때 "입력 중…" 후 나타나는 메시지 (맨 끝에 몰아서) */
   chats: [
     {
-      name: "성차니형❤️", avatar: null, unread: 0, last: "", pinned: true,
-      profile: { status: "경영학과 22" },
-      draftLoop: ["형 햄버거 사갈까요"],
-      messages: [
-        { day: "2026년 10월 23일 금요일" }
+      "name": "성차니형❤️",
+      "avatar": null,
+      "unread": 0,
+      "last": "",
+      "pinned": true,
+      "profile": {
+        "status": "경영학과 22"
+      },
+      "draftLoop": [
+        "형 햄버거 사갈까요"
+      ],
+      "messages": [
+        {
+          "day": "2026년 10월 23일 금요일"
+        }
       ]
     },
     {
@@ -97,6 +107,11 @@ window.PHONE = {
         {
           "from": "정하은",
           "text": "L이면 나 원피스 되는데",
+          "time": "오후 8:05"
+        },
+        {
+          "from": "정하은",
+          "sticker": "stickers/dog09.png",
           "time": "오후 8:05"
         },
         {
@@ -168,8 +183,13 @@ window.PHONE = {
           "time": "오후 10:42"
         },
         {
+          "from": "정하은",
+          "sticker": "stickers/dog07.png",
+          "time": "오후 10:42"
+        },
+        {
           "from": "최유나",
-          "sticker": "🫠",
+          "sticker": "stickers/dog08.png",
           "time": "오후 10:43"
         },
         {
@@ -286,6 +306,11 @@ window.PHONE = {
           "time": "오후 10:03"
         },
         {
+          "from": "조장 김나연",
+          "sticker": "stickers/pig04.png",
+          "time": "오후 10:03"
+        },
+        {
           "from": "이도윤",
           "text": "저는 템플릿 먼저 만들어 둘게요",
           "time": "오후 10:09"
@@ -293,6 +318,11 @@ window.PHONE = {
         {
           "from": "조장 김나연",
           "text": "도윤님 사랑해요 진짜",
+          "time": "오후 10:15"
+        },
+        {
+          "from": "조장 김나연",
+          "sticker": "stickers/pig12.png",
           "time": "오후 10:15"
         }
       ]
@@ -345,14 +375,37 @@ window.PHONE = {
         },
         {
           "from": "총무 윤서아",
+          "sticker": "stickers/dog06.png",
+          "time": "오후 9:42"
+        },
+        {
+          "from": "총무 윤서아",
           "text": "야르 근데 회의 때 투표해요 ㅋㅋ",
           "time": "오후 9:47"
         }
       ]
     },
-    { name: "엄마", avatar: null, unread: 0, last: "", messages: [] },
-    { name: "아빠", avatar: null, unread: 0, last: "", messages: [] },
-    { name: "형", avatar: null, unread: 0, last: "", messages: [] },
+    {
+      "name": "엄마",
+      "avatar": null,
+      "unread": 0,
+      "last": "",
+      "messages": []
+    },
+    {
+      "name": "아빠",
+      "avatar": null,
+      "unread": 0,
+      "last": "",
+      "messages": []
+    },
+    {
+      "name": "형",
+      "avatar": null,
+      "unread": 0,
+      "last": "",
+      "messages": []
+    },
     {
       "name": "전공 과제방",
       "group": 5,
@@ -371,6 +424,11 @@ window.PHONE = {
         {
           "from": "강민서",
           "text": "A4 5장 이상 참고문헌 빼고",
+          "time": "오후 4:15"
+        },
+        {
+          "from": "강민서",
+          "sticker": "stickers/pig03.png",
           "time": "오후 4:15"
         },
         {
@@ -433,6 +491,11 @@ window.PHONE = {
         {
           "from": "백소율",
           "text": "ㅋㅋㅋㅋㅋㅋ 승우 기부천사",
+          "time": "오후 9:14"
+        },
+        {
+          "from": "백소율",
+          "sticker": "stickers/pig10.png",
           "time": "오후 9:14"
         },
         {
@@ -592,6 +655,11 @@ window.PHONE = {
           "time": "오후 4:40"
         },
         {
+          "from": "서민지",
+          "sticker": "stickers/pig05.png",
+          "time": "오후 4:40"
+        },
+        {
           "from": "유태경",
           "text": "MT 개재밌었다 ㄹㅇ",
           "time": "오후 4:52"
@@ -683,6 +751,11 @@ window.PHONE = {
           "time": "오전 10:01"
         },
         {
+          "from": "윤지아",
+          "sticker": "stickers/dog12.png",
+          "time": "오전 10:01"
+        },
+        {
           "from": "최강현",
           "text": "나 스포츠 마케팅 날아감 하",
           "time": "오전 10:02"
@@ -766,6 +839,11 @@ window.PHONE = {
         {
           "from": "한예린",
           "text": "애들 보고 싶다 벌써",
+          "time": "오후 6:05"
+        },
+        {
+          "from": "한예린",
+          "sticker": "stickers/dog02.png",
           "time": "오후 6:05"
         },
         {
