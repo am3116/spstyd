@@ -21,7 +21,7 @@ window.PHONE = {
 
   /* 잠금화면 알림 — 형식: { app: "messenger", from: "성차니형❤️", text: "...", time: "방금" } */
   lockNotes: [
-    { app: "messenger", from: "23체교 동기방🔥", text: "과대 이서준: 접영 안 합니다 다들 진정하세요", time: "2분 전" },
+    { app: "messenger", from: "23 체교", text: "과대 이서준: 접영 안 합니다 다들 진정하세요", time: "2분 전" },
     { app: "clock", from: "알람", text: "오전 9:30 · 일어나", time: "내일" }
   ],
 
@@ -85,7 +85,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "23체교 동기방🔥",
+      "name": "23 체교",
       "group": 41,
       "avatar": null,
       "unread": 27,
@@ -211,7 +211,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "김태오",
+      "name": "태오",
       "avatar": null,
       "unread": 3,
       "last": "오후 10:52",
@@ -237,7 +237,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "⚽️토요일 축구⚽️",
+      "name": "토요일 축구",
       "group": 18,
       "avatar": null,
       "unread": 9,
@@ -290,7 +290,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "서양음악의이해 3조🎻",
+      "name": "서양음악 3조",
       "group": 4,
       "avatar": null,
       "unread": 6,
@@ -355,7 +355,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "김나연 (서양음악 조장)",
+      "name": "서양음악 조장",
       "avatar": null,
       "unread": 1,
       "last": "오후 10:06",
@@ -371,7 +371,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "체교 학생회 집행부",
+      "name": "학생회",
       "group": 12,
       "avatar": null,
       "unread": 4,
@@ -424,7 +424,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "과대 이서준",
+      "name": "과대 서준",
       "avatar": null,
       "unread": 1,
       "last": "오후 9:31",
@@ -497,7 +497,7 @@ window.PHONE = {
       "icon": "post"
     },
     {
-      "name": "운생리 레포트 팀",
+      "name": "운생리 레포트",
       "group": 5,
       "avatar": null,
       "unread": 0,
@@ -629,7 +629,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "헬스장 트레이너쌤",
+      "name": "PT쌤",
       "avatar": null,
       "unread": 0,
       "last": "10월 20일",
@@ -650,7 +650,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "임용 가보자고📚",
+      "name": "임용 스터디",
       "group": 6,
       "avatar": null,
       "unread": 0,
@@ -715,7 +715,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "이건우",
+      "name": "건우",
       "avatar": null,
       "unread": 2,
       "last": "10월 10일",
@@ -736,7 +736,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "고딩 찌질이들",
+      "name": "고딩 놈들",
       "group": 9,
       "avatar": null,
       "unread": 0,
@@ -801,7 +801,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "MT 3조 (고기 6kg)",
+      "name": "MT 3조",
       "group": 8,
       "avatar": null,
       "unread": 0,
@@ -879,7 +879,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "수강신청 같이 해요🙏",
+      "name": "수강신청",
       "group": 3,
       "avatar": null,
       "unread": 0,
@@ -983,7 +983,7 @@ window.PHONE = {
       ]
     },
     {
-      "name": "한빛고 교생들🍎",
+      "name": "교생 4조",
       "group": 5,
       "avatar": null,
       "unread": 0,
