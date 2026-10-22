@@ -58,7 +58,7 @@ img{-webkit-user-drag:none}
 .lk-notes{position:absolute;left:10px;right:10px;bottom:120px;display:flex;flex-direction:column;gap:8px}
 .ncard{display:flex;gap:11px;align-items:flex-start;padding:12px 14px;border-radius:22px;background:rgba(240,240,245,.6);-webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);color:#111;text-align:left;width:100%}
 .ncard .ni{width:38px;height:38px;border-radius:9px;overflow:hidden;flex:none}
-.ncard .ni svg{width:100%;height:100%}
+.ncard .ni svg,.ncard .ni img{width:100%;height:100%;display:block}
 .ncard .nt{flex:1;min-width:0}
 .ncard .nh{display:flex;justify-content:space-between;gap:8px;font-size:15px;font-weight:600}
 .ncard .nh small{font-weight:400;color:rgba(0,0,0,.5);font-size:13px;white-space:nowrap}
@@ -211,7 +211,7 @@ img{-webkit-user-drag:none}
 .cin .fld{flex:1;height:38px;border-radius:19px;background:#f3f3f3;padding:0 14px;font-size:15px;color:#aaa;display:flex;align-items:center}
 
 /* banner */
-.banner{position:absolute;top:8px;left:8px;right:8px;z-index:70}
+.banner{position:absolute;top:52px;left:8px;right:8px;z-index:70}
 .banner .ncard{background:rgba(245,245,247,.86);box-shadow:0 8px 30px rgba(0,0,0,.18)}
 
 /* notes */
@@ -541,11 +541,11 @@ const ICON = {
   notes:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fff"/><rect width="60" height="16" fill="#f8d34c"/><g stroke="#d8d8dc" stroke-width="1.4"><line x1="8" y1="27" x2="52" y2="27"/><line x1="8" y1="36" x2="52" y2="36"/><line x1="8" y1="45" x2="52" y2="45"/></g></svg>',
   clock:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#111"/><circle cx="30" cy="30" r="23" fill="#fff"/><g stroke="#111" stroke-linecap="round"><line x1="30" y1="30" x2="30" y2="15" stroke-width="2.6"/><line x1="30" y1="30" x2="41" y2="34" stroke-width="2.6"/></g><line x1="30" y1="30" x2="22" y2="44" stroke="#ff9f0a" stroke-width="1.3"/><circle cx="30" cy="30" r="2" fill="#ff9f0a"/></svg>',
   weather:'<svg viewBox="0 0 60 60"><defs><linearGradient id="wg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fa3f7"/><stop offset="1" stop-color="#1e6fd9"/></linearGradient></defs><rect width="60" height="60" fill="url(#wg)"/><circle cx="23" cy="24" r="10" fill="#ffd84a"/><path d="M18 44h24a8 8 0 0 0 0-16 11 11 0 0 0-21 3 6.5 6.5 0 0 0-3 13z" fill="#fff"/></svg>',
-  settings:'<svg viewBox="0 0 60 60"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8b8be"/><stop offset="1" stop-color="#7c7c84"/></linearGradient></defs><rect width="60" height="60" fill="url(#sg)"/><circle cx="30" cy="30" r="15" fill="none" stroke="#e8e8ec" stroke-width="7" stroke-dasharray="4.7 3.15"/><circle cx="30" cy="30" r="11" fill="none" stroke="#e8e8ec" stroke-width="3"/><circle cx="30" cy="30" r="4" fill="#e8e8ec"/></svg>',
+  settings:'<img src="icons/settings.png" alt="">',
   phone:'<svg viewBox="0 0 60 60"><defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6ee07f"/><stop offset="1" stop-color="#2fb94a"/></linearGradient></defs><rect width="60" height="60" fill="url(#pg2)"/><path d="M21 15c1.8-1.8 4.3-1.3 5.3.9l2 4.6c.8 1.8.2 3.6-1.3 4.6l-1.8 1.2c1.8 4 5 7.3 9 9.2l1.2-1.8c1-1.5 2.9-2.1 4.6-1.3l4.6 2c2.2 1 2.7 3.6.9 5.3l-2.6 2.6c-3 3-9.6 1.4-16.2-5.2S15 21 18.2 17.8z" fill="#fff"/></svg>',
   safari:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fff"/><circle cx="30" cy="30" r="21" fill="#2a8cf0"/><g fill="none" stroke="#fff" stroke-width="1.6"><circle cx="30" cy="30" r="15"/><ellipse cx="30" cy="30" rx="6.5" ry="15"/><line x1="15" y1="30" x2="45" y2="30"/><path d="M17.5 22h25M17.5 38h25"/></g></svg>',
   music:'<img src="icons/music.svg" alt="">',
-  messenger:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fee500"/><path d="M30 13c-10.5 0-19 6.6-19 14.8 0 5.3 3.6 9.9 9 12.5l-1.9 7c-.2.7.6 1.2 1.2.8l8.3-5.5c.8.1 1.6.1 2.4.1 10.5 0 19-6.6 19-14.9S40.5 13 30 13z" fill="#3a1d1d"/><g fill="#fee500"><circle cx="22" cy="28" r="2.4"/><circle cx="30" cy="28" r="2.4"/><circle cx="38" cy="28" r="2.4"/></g></svg>'
+  messenger:'<img src="icons/kakao.svg" alt="">',
 };
 const IC = {
   back:'<svg viewBox="0 0 13 21"><path d="M11 2 2.5 10.5 11 19"/></svg>',
