@@ -376,11 +376,6 @@ window.PHONE = {
         },
         {
           "from": "총무 윤서아",
-          "sticker": "stickers/dog06.png",
-          "time": "오후 9:42"
-        },
-        {
-          "from": "총무 윤서아",
           "text": "야르 근데 회의 때 투표해요 ㅋㅋ",
           "time": "오후 9:47"
         }
