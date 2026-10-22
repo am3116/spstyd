@@ -8,8 +8,9 @@ window.PHONE = {
   owner: "박원빈",
   passcode: "0913",
   passHint: "힌트: 형 생일",
-  time: "23:00",                 // 24시간 형식으로 적으면 화면엔 11:00으로 보여요
-  dateText: "10월 23일 금요일",
+  realTime: true,                // true = 실제 한국 시간으로 계속 흘러가요 / false = 아래 시간으로 고정
+  time: "23:00",                 // realTime: false일 때 쓰는 시간 (24시간 형식, 화면엔 11:00)
+  dateText: "10월 23일 금요일",   // realTime: false일 때 쓰는 날짜
   wallpaper: null,               // 홈 화면 배경 (null이면 기본 배경)
   lockWallpaper: "lock.jpg",     // 잠금화면 배경
   wifi: "home_5G",
