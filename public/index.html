@@ -392,40 +392,70 @@ img{-webkit-user-drag:none}
 .prof-acts span{display:flex;flex-direction:column;align-items:center;gap:6px}
 .prof-acts svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.6}
 
-/* music */
-.music{--mred:#fa2d48}
-.music .nb-back,.music .nb-right{color:var(--mred)}
-.music .mdots{font-size:20px;letter-spacing:1px;line-height:1}
-.music .scroll{padding-bottom:170px}
-.phead{display:flex;flex-direction:column;align-items:center;text-align:center;padding:6px 20px 10px}
-.pcov{width:236px;height:236px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:grid;place-items:center;overflow:hidden}
+/* music — 공유 플레이리스트 (iOS 26 애플뮤직 느낌) */
+.music{--mred:#fa2d48;--mtint:#e8e0d5;background:var(--mtint);color:#000}
+.music .scroll{padding-top:112px;padding-bottom:200px}
+.gl{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.08),inset 0 0 0 .5px rgba(255,255,255,.7)}
+.mtop{position:absolute;z-index:6;top:52px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
+.circ{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;flex:none}
+.circ svg{width:22px;height:22px;fill:#111}
+.circ svg.ln,.pill svg.ln,.tabs svg.ln{fill:none;stroke:#111;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mtop .circ svg{width:13px;height:21px;fill:none;stroke:#111;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.pill{height:48px;border-radius:24px;display:flex;align-items:center;gap:30px;padding:0 20px}
+.pill svg{width:23px;height:23px;fill:#111}
+.phead{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px 14px}
+.pcov{width:236px;height:236px;border-radius:12px;box-shadow:0 18px 42px rgba(0,0,0,.16);display:grid;place-items:center;overflow:hidden}
+.ph-cov{background:linear-gradient(135deg,#fa2d48,#7a0f2e)}
 .pcov svg{width:90px;height:90px;fill:rgba(255,255,255,.9)}
-.pcov.grid{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
-.pcov.grid i{display:block;width:100%;height:100%}
-.phead h1{font-size:22px;font-weight:700;margin:16px 0 2px;line-height:1.25;text-wrap:balance}
-.pown{color:var(--mred);font-size:19px;font-weight:500}
-.pdesc{margin:8px 0 0;font-size:14px;color:#3c3c43;line-height:1.4;max-width:300px}
-.pupd{font-size:12px;color:var(--grey);margin-top:6px}
-.pbtn{display:flex;gap:12px;width:100%;margin-top:16px}
-.pbtn button{flex:1;height:46px;border-radius:12px;background:#efeff4;color:var(--mred);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
-.pbtn button svg{width:18px;height:18px;fill:currentColor}
-.mlist{margin-top:8px}
-.mrow{display:flex;align-items:center;gap:12px;width:100%;padding:6px 16px;text-align:left}
-.mrow:active{background:#f0f0f2}
-.mart{width:46px;height:46px;border-radius:6px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.12)}
-.mrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;padding:4px 0 10px;border-bottom:.5px solid var(--sep)}
-.mrow .mt b{font-size:16px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mrow .mt small{font-size:13.5px;color:var(--grey);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.phead h1{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:18px 0 6px;line-height:1.2;display:flex;align-items:center;gap:8px;text-wrap:balance}
+.pstar{color:#8e8a85;font-size:17px}
+.pwho{display:flex;align-items:center;gap:8px;font-size:17px;color:#111}
+.pwho svg{width:7px;height:12px;fill:none;stroke:#111;stroke-width:2}
+.avs{display:flex}
+.avs .cav{width:26px;height:26px;margin-left:-8px;box-shadow:0 0 0 1.5px var(--mtint)}
+.avs .cav:first-child{margin-left:0}
+.cav{display:grid;place-items:center;border-radius:50%;overflow:hidden;background:#b9b3ad;flex:none}
+.cav img{width:100%;height:100%;object-fit:cover}
+.cav svg{width:70%;height:70%}
+.pbtn{display:flex;align-items:center;gap:14px;margin-top:20px}
+.gl2{background:rgba(0,0,0,.07)}
+.pbtn .circ{width:54px;height:54px}
+.pbtn .circ svg{color:#111;width:24px;height:24px}
+.playall{width:182px;height:54px;border-radius:27px;background:#000;color:#fff;font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.playall svg{width:18px;height:18px;fill:#fff}
+.mlist{margin:6px 16px 0 0;border-top:.5px solid rgba(0,0,0,.14);margin-left:20px}
+.mrow{display:flex;align-items:center;gap:10px;width:100%;padding:8px 0;text-align:left;position:relative}
+.mrow+.mrow::before{content:'';position:absolute;top:0;left:58px;right:0;height:.5px;background:rgba(0,0,0,.14)}
+.mrow .star{position:absolute;left:-14px;font-size:11px;color:#6d6863;width:10px;text-align:center}
+.mart-w{position:relative;width:48px;height:52px;flex:none}
+.mart{display:block;width:38px;height:38px;border-radius:5px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.mart-w .cav{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;box-shadow:0 0 0 1.5px var(--mtint)}
+.mrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;padding-left:6px}
+.mrow .mt b{font-size:15.5px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
+.mrow .mt b em{font-style:normal;font-size:9px;font-weight:700;color:#fff;background:#6d6863;border-radius:50%;width:15px;height:15px;display:inline-grid;place-items:center;flex:none}
+.mrow .mt small{font-size:14px;color:#77716b;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mrow.now .mt b{color:var(--mred)}
-.mrow .more{color:#555;font-size:16px;letter-spacing:1px;flex:none}
-.mempty{text-align:center;color:var(--grey);font-size:15px;padding:30px 20px}
-.mfoot{color:var(--grey);font-size:13px;padding:12px 16px 0;margin:0}
-.mini{position:absolute;z-index:7;left:10px;right:10px;bottom:92px;height:60px;border-radius:16px;background:rgba(246,246,248,.94);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 6px 24px rgba(0,0,0,.14);display:flex;align-items:center;gap:12px;padding:0 10px 0 8px}
-.mini .mart{width:44px;height:44px}
-.mini b{flex:1;min-width:0;font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mini button{width:40px;height:44px;display:grid;place-items:center}
-.mini svg{width:24px;height:24px;fill:#111}
-.music .mtab .on{color:var(--mred)}
+.hearts{display:flex;flex-direction:row-reverse;flex:none;min-width:30px;justify-content:flex-start}
+.hearts i{width:30px;height:30px;border-radius:50%;background:#d7cfc6;box-shadow:0 0 0 2px var(--mtint);display:grid;place-items:center;font-style:normal;font-size:15px;margin-left:-20px;position:relative}
+.hearts i:last-child{margin-left:0}
+.mrow .more{color:#333;font-size:15px;letter-spacing:1px;flex:none;width:28px;text-align:center}
+.mempty{text-align:center;color:#77716b;font-size:15px;padding:30px 20px}
+.mfoot{color:#77716b;font-size:13px;padding:12px 0 0 20px;margin:0}
+.mini{position:absolute;z-index:7;left:14px;right:14px;bottom:100px;height:62px;border-radius:31px;background:rgba(250,248,245,.86);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;padding:0 12px 0 10px}
+.mini .mart{width:42px;height:42px;border-radius:7px}
+.mini .mtx{flex:1;min-width:0;display:flex;flex-direction:column}
+.mini b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini small{font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini button{width:42px;height:44px;display:grid;place-items:center}
+.mini svg{width:26px;height:26px;fill:#111}
+.mtabs{position:absolute;z-index:7;left:14px;right:14px;bottom:28px;display:flex;gap:10px;align-items:center}
+.tabs{flex:1;height:64px;border-radius:32px;display:flex;align-items:center;padding:0 5px}
+.tabs>span{flex:1;height:54px;border-radius:27px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:500;color:#111}
+.tabs svg{width:25px;height:25px;fill:#111}
+.tabs>span.on{background:rgba(0,0,0,.07);color:var(--mred)}
+.tabs>span.on svg{fill:var(--mred)}
+.mtabs .circ.big{width:64px;height:64px}
+.mtabs .circ.big svg{width:26px;height:26px}
 .np{position:absolute;inset:0;z-index:30;color:#fff;background:#2a2228;display:flex;flex-direction:column;align-items:center;padding:60px 30px 0;overflow:hidden}
 .np .bgart{position:absolute;inset:-60px;filter:blur(60px) brightness(.55) saturate(1.4);z-index:0}
 .np>*:not(.bgart){position:relative;z-index:1}
@@ -1027,6 +1057,7 @@ function musicPaint(){
     if (!t) return;
     m.querySelector('.mart').style.background = artBg(t, mState.i);
     m.querySelector('b').textContent = t.title;
+    const sm = m.querySelector('small'); if (sm) sm.textContent = t.artist;
     m.querySelector('[data-mplay]').innerHTML = mState.playing ? PAUSE : PLAY;
   });
   document.querySelectorAll('.np').forEach(n => {
@@ -1053,18 +1084,30 @@ function nowPlaying(p){
     if (e.target.closest('[data-mprev]')) return musicPlay(mState.t > 3 ? mState.i : (mState.i - 1 + L) % L);
   });
 }
+function collabAv(i){
+  const c = (D.music.playlist.collab || [])[i];
+  return `<span class="cav">${c && c.avatar ? `<img src="${esc(c.avatar)}" alt="">` : PERSON}</span>`;
+}
 function musicPage(){
-  const P = D.music.playlist, T = P.tracks;
-  const cover = T.length >= 4 ? `<div class="pcov grid">${T.slice(0, 4).map((t, i) => `<i style="background:${artBg(t, i)}"></i>`).join('')}</div>` : `<div class="pcov" style="background:${artBg(T[0], 0)}">${T[0] && T[0].art ? '' : NOTE}</div>`;
-  const total = T.reduce((s, t) => s + msec(t.dur), 0);
-  const rows = T.length ? T.map((t, i) => `<button class="mrow" data-track="${i}"><span class="mart" style="background:${artBg(t, i)}"></span><span class="mt"><b>${esc(t.title)}</b><small>${esc(t.artist)}</small></span><span class="more">···</span></button>`).join('')
+  const P = D.music.playlist, T = P.tracks, C = P.collab || [];
+  const cover = P.cover ? `<div class="pcov" style="background:url('${esc(P.cover)}') center/cover"></div>` : `<div class="pcov ph-cov">${NOTE}</div>`;
+  const who = C.length ? `<button class="pwho"><span class="avs">${C.slice(0, 3).map((_, i) => collabAv(i)).join('')}</span>${esc(C[0].name)}${C.length > 1 ? ` 외 ${C.length - 1}명` : ''}<svg viewBox="0 0 8 13"><path d="M1 1l5.5 5.5L1 12"/></svg></button>` : '';
+  const hearts = n => n ? `<span class="hearts">${Array.from({ length: Math.min(n, 3) }, (_, k) => `<i style="z-index:${3 - k}">${k === 0 ? '❤️' : ''}</i>`).join('')}</span>` : '<span class="hearts"></span>';
+  const rows = T.length ? T.map((t, i) => `<button class="mrow" data-track="${i}"><span class="star">${t.star ? '★' : ''}</span>
+      <span class="mart-w"><span class="mart" style="background:${artBg(t, i)}"></span>${t.by !== undefined && C[t.by] ? collabAv(t.by) : ''}</span>
+      <span class="mt"><b>${esc(t.title)}${t.explicit ? '<em>19</em>' : ''}</b><small>${esc(t.artist)}</small></span>${hearts(t.hearts)}<span class="more">···</span></button>`).join('')
     : '<p class="mempty">플레이리스트에 아직 노래가 없어요.</p>';
-  const p = page('music', 'dark', `${nav('보관함', '', '<span class="mdots">···</span>')}
-    <div class="scroll"><div class="phead">${cover}<h1>${esc(P.title)}</h1><div class="pown">${esc(D.owner)}</div>${P.desc ? `<p class="pdesc">${esc(P.desc)}</p>` : ''}<div class="pupd">${esc(P.updated || '업데이트: 3일 전')}</div>
-      <div class="pbtn"><button data-mall>${PLAY}재생</button><button data-mshuf><svg viewBox="0 0 24 24"><path d="M3 7h3.5c2 0 3 1 4.2 2.8l2.6 4.4C14.5 16 15.5 17 17.5 17H21M3 17h3.5c2 0 3-1 3.6-2M14.4 9c.6-1 1.6-2 3.1-2H21M18.5 4.5 21 7l-2.5 2.5M18.5 14.5 21 17l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>임의 재생</button></div></div>
-      <div class="mlist">${rows}</div>${T.length ? `<p class="mfoot">${T.length}곡, ${Math.max(1, Math.round(total / 60))}분</p>` : ''}</div>
-    <div class="mini" hidden><span class="mart"></span><b></b><button data-mplay aria-label="재생"></button><button data-mnext aria-label="다음 곡"><svg viewBox="0 0 24 24"><path d="M13 12L4 6v12zM22 12l-9-6v12z"/></svg></button></div>
-    <div class="tabbar mtab"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg>지금 듣기</span><span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>둘러보기</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/></svg>라디오</span><span class="on"><svg viewBox="0 0 24 24"><path d="M5 4v16M10 4v16M14.5 4.5l5 15"/></svg>보관함</span><span><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>검색</span></div>`);
+  const p = page('music', 'dark', `
+    <div class="mtop"><button class="gl circ" data-back aria-label="뒤로">${IC.back}</button>
+      <span class="gl pill"><svg viewBox="0 0 24 24"><circle cx="8.5" cy="8" r="3.3"/><circle cx="16" cy="8.5" r="2.8"/><path d="M2.5 19c.6-3.4 3-5.3 6-5.3s5.4 1.9 6 5.3zM14.5 13.9c.5-.1 1-.2 1.5-.2 2.6 0 4.6 1.6 5.2 4.7h-5"/></svg><svg viewBox="0 0 24 24" class="ln"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M5 12v8h14v-8"/></svg><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.7"/><circle cx="12" cy="12" r="1.7"/><circle cx="19" cy="12" r="1.7"/></svg></span></div>
+    <div class="scroll"><div class="phead">${cover}<h1>${esc(P.title)}<span class="pstar">★</span></h1>${who}
+      <div class="pbtn"><button class="gl2 circ" data-mshuf aria-label="임의 재생"><svg viewBox="0 0 24 24"><path d="M3 7h3.5c2 0 3 1 4.2 2.8l2.6 4.4C14.5 16 15.5 17 17.5 17H21M3 17h3.5c2 0 3-1 3.6-2M14.4 9c.6-1 1.6-2 3.1-2H21M18.5 4.5 21 7l-2.5 2.5M18.5 14.5 21 17l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="playall" data-mall>${PLAY}재생</button>
+        <button class="gl2 circ" aria-label="다운로드"><svg viewBox="0 0 24 24"><path d="M12 4v14M6 12.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div></div>
+      <div class="mlist">${rows}</div>${T.length ? `<p class="mfoot">${T.length}곡, ${Math.max(1, Math.round(T.reduce((s, t) => s + msec(t.dur), 0) / 60))}분</p>` : ''}</div>
+    <div class="mini" hidden><span class="mart"></span><span class="mtx"><b></b><small></small></span><button data-mplay aria-label="재생"></button><button data-mnext aria-label="다음 곡"><svg viewBox="0 0 24 24"><path d="M13 12L4 6v12zM22 12l-9-6v12z"/></svg></button></div>
+    <div class="mtabs"><span class="gl tabs"><span><svg viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v9h-5v-6h-6v6H4z"/></svg>홈</span><span><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2"/><rect x="13" y="13" width="7.5" height="7.5" rx="2"/></svg>새로운 음악</span><span><svg viewBox="0 0 24 24" class="ln"><circle cx="12" cy="12" r="2.3"/><path d="M8 8a5.7 5.7 0 0 0 0 8M16 8a5.7 5.7 0 0 1 0 8M5.2 5.2a9.6 9.6 0 0 0 0 13.6M18.8 5.2a9.6 9.6 0 0 1 0 13.6"/></svg>라디오</span><span class="on"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="15" rx="3.5"/><path d="M7 3.5h10M5.5 4.8h13" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M11 17.2a1.8 1.8 0 1 1-1.8-1.8H11V10l4.5-1v6.3a1.8 1.8 0 1 1-1.8-1.8h1.8" fill="#fff"/></svg>보관함</span></span><span class="gl circ big"><svg viewBox="0 0 24 24" class="ln"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg></span></div>`);
+  if (P.tint) p.style.setProperty('--mtint', P.tint);
   p.addEventListener('click', e => {
     const r = e.target.closest('[data-track]'); if (r){ musicPlay(+r.dataset.track); nowPlaying(p); return; }
     if (e.target.closest('[data-mall]')) { musicPlay(0); return; }
