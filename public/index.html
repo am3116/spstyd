@@ -302,6 +302,11 @@ img{-webkit-user-drag:none}
 .prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
 
 /* messenger extras */
+.bb.file{display:flex;gap:10px;align-items:center;min-width:210px;max-width:240px;background:#fff!important;padding:10px 12px}
+.bb.file .fi{width:38px;height:44px;border-radius:5px;background:#e8eef4;display:grid;place-items:center;font-size:10px;font-weight:800;color:#5c87b2;flex:none}
+.bb.file .fx{display:flex;flex-direction:column;min-width:0}
+.bb.file .fn{font-size:14px;font-weight:600;word-break:break-all;line-height:1.3}
+.bb.file .fs{font-size:11.5px;color:#999;margin-top:3px}
 .crow .cn em{font-style:normal;font-size:11px;font-weight:600;color:#fff;background:#b0b0b6;border-radius:4px;padding:1px 5px}
 .crow.blk .cn,.crow.blk .cp{opacity:.55}
 .crow .ct{display:flex;align-items:center;gap:3px}
@@ -620,6 +625,7 @@ const whoOf = (c, m) => m.from === 'me' ? 'me' : (m.from === 'them' ? c.name : m
 const secs = d => { const [a, b] = String(d || '0:05').split(':').map(Number); return (a || 0) * 60 + (b || 0); };
 function bodyHTML(c, m, i){
   if (m.deleted) return `<div class="bb del"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16v.5"/></svg>삭제된 메시지입니다.</div>`;
+  if (m.file){ const ext = (String(m.file).split('.').pop() || 'FILE').toUpperCase().slice(0, 4); return `<div class="bb file"><span class="fi">${esc(ext)}</span><span class="fx"><span class="fn">${esc(m.file)}</span><span class="fs">${esc(m.size || '')}${m.size ? ' · ' : ''}유효기간 ~ ${esc(m.until || '11.22')}</span></span></div>`; }
   if (m.sticker) return `<div class="stk">${/\.(png|jpe?g|gif|webp)$/i.test(m.sticker) ? `<img src="${esc(m.sticker)}" alt="">` : esc(m.sticker)}</div>`;
   if (m.imgs) return `<div class="bb img multi n${Math.min(m.imgs.length, 4)}">${m.imgs.slice(0, 4).map((r, k) => `<div class="cell">${photoHTML(r, i + k)}${k === 3 && m.imgs.length > 4 ? `<span class="more">+${m.imgs.length - 4}</span>` : ''}</div>`).join('')}</div>`;
   if (m.img !== undefined) return `<div class="bb img">${photoHTML(m.img, i)}</div>`;
@@ -790,6 +796,7 @@ function lastText(c){
     if (m.deleted) return '삭제된 메시지입니다.';
     if (m.imgs) return `사진 ${m.imgs.length}장을 보냈습니다.`;
     if (m.img !== undefined) return '사진을 보냈습니다.';
+    if (m.file) return m.file;
     if (m.sticker) return '이모티콘을 보냈습니다.';
     if (m.voice) return '음성메시지를 보냈습니다.';
     return m.text;

@@ -60,6 +60,7 @@ window.PHONE = {
        { from: "me", voice: "0:12", src: "voice1.m4a", time: "..." }   음성메시지
        { from: "me", img: 3, time: "..." }                    사진 한 장 (숫자 = 사진 앱 몇 번째 사진)
        { from: "me", imgs: [1, 2, 3], time: "..." }           사진 여러 장 묶음
+       { from: "them", file: "서양음악의이해_중간고사_족보.pdf", size: "2.4MB", time: "..." }   파일 (족보 등)
        { from: "them", deleted: true, time: "..." }          삭제된 메시지
        { from: "me", read: false, ... }                      안 읽음 '1' 표시
        { ..., live: true }   처음 방에 들어갈 때 "입력 중…" 후 나타나는 메시지 (맨 끝에 몰아서) */
