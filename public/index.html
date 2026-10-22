@@ -493,7 +493,10 @@ setInterval(() => {
 }, 10000);
 $('#batt').setAttribute('width', Math.max(2, 20 * D.battery / 100).toFixed(1));
 if (D.wallpaper) wall.style.backgroundImage = `url('${D.wallpaper}')`;
-function setSB(mode){ const c = mode === 'dark' ? 'dark' : ''; sb.className = c + (stack.length ? ' crumb' : ''); hb.className = c; }
+function setSB(mode){ const c = mode === 'dark' ? 'dark' : ''; const top = stack[stack.length - 1];
+  /* 화면에 이미 '<' 뒤로가기가 있으면 왼쪽 위 '홈'은 숨김 */
+  const crumb = top && !top.querySelector('[data-back]');
+  sb.className = c + (crumb ? ' crumb' : ''); hb.className = c; }
 
 /* ── keypad (shared by lock screen and locked note) ── */
 const LETTERS = ['', 'ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ'];
