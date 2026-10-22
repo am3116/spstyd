@@ -1294,6 +1294,18 @@ window.PHONE = {
   /* 전화 최근 통화 — type: "in" 받음, "out" 건 전화, "missed" 부재중 */
   calls: [],
 
+  /* 음악 앱 — 들어가면 바로 이 플레이리스트가 떠요
+     곡 형식: { title: "곡 제목", artist: "가수", dur: "3:24", art: "앨범사진.jpg 또는 null", src: "노래파일.mp3 또는 null" }
+     src가 없으면 재생 화면만 움직이고 소리는 안 나요 */
+  music: {
+    playlist: {
+      title: "새로운 플레이리스트",
+      desc: "",
+      updated: "업데이트: 3일 전",
+      tracks: []
+    }
+  },
+
   /* 사파리 */
   safari: {
     favorites: [["학", "학교 포털"], ["체", "체육교육과"], ["e", "e-러닝"], ["도", "도서관"]],

@@ -19,6 +19,7 @@ body{background:radial-gradient(ellipse at 50% 30%,#25252c,var(--backdrop) 70%);
 button{font-family:inherit;font:inherit;color:inherit;letter-spacing:inherit;border:0;background:none;padding:0;cursor:pointer}
 button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 svg{display:block}
+[hidden]{display:none!important}
 img{-webkit-user-drag:none}
 
 #phone{position:relative;width:393px;height:852px;flex:none;will-change:transform;border-radius:56px;overflow:hidden;background:#000;isolation:isolate;
@@ -390,6 +391,57 @@ img{-webkit-user-drag:none}
 .prof-acts{display:flex;gap:44px;padding-top:20px;font-size:12px}
 .prof-acts span{display:flex;flex-direction:column;align-items:center;gap:6px}
 .prof-acts svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.6}
+
+/* music */
+.music{--mred:#fa2d48}
+.music .nb-back,.music .nb-right{color:var(--mred)}
+.music .mdots{font-size:20px;letter-spacing:1px;line-height:1}
+.music .scroll{padding-bottom:170px}
+.phead{display:flex;flex-direction:column;align-items:center;text-align:center;padding:6px 20px 10px}
+.pcov{width:236px;height:236px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.18);display:grid;place-items:center;overflow:hidden}
+.pcov svg{width:90px;height:90px;fill:rgba(255,255,255,.9)}
+.pcov.grid{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.pcov.grid i{display:block;width:100%;height:100%}
+.phead h1{font-size:22px;font-weight:700;margin:16px 0 2px;line-height:1.25;text-wrap:balance}
+.pown{color:var(--mred);font-size:19px;font-weight:500}
+.pdesc{margin:8px 0 0;font-size:14px;color:#3c3c43;line-height:1.4;max-width:300px}
+.pupd{font-size:12px;color:var(--grey);margin-top:6px}
+.pbtn{display:flex;gap:12px;width:100%;margin-top:16px}
+.pbtn button{flex:1;height:46px;border-radius:12px;background:#efeff4;color:var(--mred);font-size:16px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px}
+.pbtn button svg{width:18px;height:18px;fill:currentColor}
+.mlist{margin-top:8px}
+.mrow{display:flex;align-items:center;gap:12px;width:100%;padding:6px 16px;text-align:left}
+.mrow:active{background:#f0f0f2}
+.mart{width:46px;height:46px;border-radius:6px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.mrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;padding:4px 0 10px;border-bottom:.5px solid var(--sep)}
+.mrow .mt b{font-size:16px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .mt small{font-size:13.5px;color:var(--grey);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow.now .mt b{color:var(--mred)}
+.mrow .more{color:#555;font-size:16px;letter-spacing:1px;flex:none}
+.mempty{text-align:center;color:var(--grey);font-size:15px;padding:30px 20px}
+.mfoot{color:var(--grey);font-size:13px;padding:12px 16px 0;margin:0}
+.mini{position:absolute;z-index:7;left:10px;right:10px;bottom:92px;height:60px;border-radius:16px;background:rgba(246,246,248,.94);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 6px 24px rgba(0,0,0,.14);display:flex;align-items:center;gap:12px;padding:0 10px 0 8px}
+.mini .mart{width:44px;height:44px}
+.mini b{flex:1;min-width:0;font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mini button{width:40px;height:44px;display:grid;place-items:center}
+.mini svg{width:24px;height:24px;fill:#111}
+.music .mtab .on{color:var(--mred)}
+.np{position:absolute;inset:0;z-index:30;color:#fff;background:#2a2228;display:flex;flex-direction:column;align-items:center;padding:60px 30px 0;overflow:hidden}
+.np .bgart{position:absolute;inset:-60px;filter:blur(60px) brightness(.55) saturate(1.4);z-index:0}
+.np>*:not(.bgart){position:relative;z-index:1}
+.np .grab{width:44px;height:30px;display:grid;place-items:center;margin-bottom:22px}
+.np .grab::before{content:'';width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.45)}
+.np .bigart{width:100%;max-width:330px;aspect-ratio:1;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.45);transition:transform .45s var(--ease)}
+.np.paused .bigart{transform:scale(.84)}
+.np .ti{align-self:stretch;margin-top:34px;font-size:22px;font-weight:600;line-height:1.3}
+.np .ti small{display:block;font-size:19px;font-weight:400;opacity:.65;margin-top:2px}
+.np .bar{align-self:stretch;margin-top:26px;height:6px;border-radius:3px;background:rgba(255,255,255,.25);overflow:hidden}
+.np .bar i{display:block;height:100%;width:0;background:rgba(255,255,255,.85)}
+.np .tt{align-self:stretch;display:flex;justify-content:space-between;font-size:12px;opacity:.65;margin-top:7px;font-variant-numeric:tabular-nums}
+.np .ctl{display:flex;align-items:center;gap:48px;margin-top:28px}
+.np .ctl button{width:56px;height:56px;display:grid;place-items:center}
+.np .ctl svg{width:36px;height:36px;fill:#fff}
+.np .ctl .big svg{width:52px;height:52px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 
@@ -462,6 +514,7 @@ const ICON = {
   settings:'<svg viewBox="0 0 60 60"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8b8be"/><stop offset="1" stop-color="#7c7c84"/></linearGradient></defs><rect width="60" height="60" fill="url(#sg)"/><circle cx="30" cy="30" r="15" fill="none" stroke="#e8e8ec" stroke-width="7" stroke-dasharray="4.7 3.15"/><circle cx="30" cy="30" r="11" fill="none" stroke="#e8e8ec" stroke-width="3"/><circle cx="30" cy="30" r="4" fill="#e8e8ec"/></svg>',
   phone:'<svg viewBox="0 0 60 60"><defs><linearGradient id="pg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6ee07f"/><stop offset="1" stop-color="#2fb94a"/></linearGradient></defs><rect width="60" height="60" fill="url(#pg2)"/><path d="M21 15c1.8-1.8 4.3-1.3 5.3.9l2 4.6c.8 1.8.2 3.6-1.3 4.6l-1.8 1.2c1.8 4 5 7.3 9 9.2l1.2-1.8c1-1.5 2.9-2.1 4.6-1.3l4.6 2c2.2 1 2.7 3.6.9 5.3l-2.6 2.6c-3 3-9.6 1.4-16.2-5.2S15 21 18.2 17.8z" fill="#fff"/></svg>',
   safari:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fff"/><circle cx="30" cy="30" r="21" fill="#2a8cf0"/><g fill="none" stroke="#fff" stroke-width="1.6"><circle cx="30" cy="30" r="15"/><ellipse cx="30" cy="30" rx="6.5" ry="15"/><line x1="15" y1="30" x2="45" y2="30"/><path d="M17.5 22h25M17.5 38h25"/></g></svg>',
+  music:'<svg viewBox="0 0 60 60"><defs><linearGradient id="mg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fb5c74"/><stop offset="1" stop-color="#fa233b"/></linearGradient></defs><rect width="60" height="60" fill="url(#mg)"/><path d="M24 41.5a4.5 4.5 0 1 1-4.5-4.5H24V18l17-3.5v22a4.5 4.5 0 1 1-4.5-4.5H41V20.6l-13 2.7v18.2z" fill="#fff"/></svg>',
   messenger:'<svg viewBox="0 0 60 60"><rect width="60" height="60" fill="#fee500"/><path d="M30 13c-10.5 0-19 6.6-19 14.8 0 5.3 3.6 9.9 9 12.5l-1.9 7c-.2.7.6 1.2 1.2.8l8.3-5.5c.8.1 1.6.1 2.4.1 10.5 0 19-6.6 19-14.9S40.5 13 30 13z" fill="#3a1d1d"/><g fill="#fee500"><circle cx="22" cy="28" r="2.4"/><circle cx="30" cy="28" r="2.4"/><circle cx="38" cy="28" r="2.4"/></g></svg>'
 };
 const IC = {
@@ -570,7 +623,7 @@ function renderHome(){
   homeL.innerHTML = `<div class="hgrid">
     <button class="widget wcal" data-app="calendar"><div class="wd">${esc(D.dateText.split(' ').pop())}</div><div class="wn">${D.calendar.today}</div>${ev.map(e => `<div class="we">${esc(e.title)}<small>${esc(e.time)}</small></div>`).join('') || '<div class="we">일정 없음</div>'}</button>
     <button class="widget wwx" data-app="weather"><div class="c">${esc(w.city)}</div><div class="tp">${w.temp}°</div><div class="ds">${esc(w.desc)}<small>최고:${w.hi}° 최저:${w.lo}°</small></div></button>
-    ${app('photos', '사진')}${app('calendar', '캘린더')}${app('clock', '시계')}${app('weather', '날씨')}${app('settings', '설정')}
+    ${app('photos', '사진')}${app('calendar', '캘린더')}${app('clock', '시계')}${app('weather', '날씨')}${app('settings', '설정')}${app('music', '음악')}
   </div>
   <div class="spot">검색</div>
   <div class="dock">${app('phone', '전화', missed())}${app('safari', 'Safari')}${app('messenger', '메신저', unreadTotal())}${app('notes', '메모')}</div>`;
@@ -934,6 +987,96 @@ function weatherPage(){
     <div class="wcard"><div class="wh">시간별 일기예보</div><div class="hrs">${hrs}</div></div></div>`);
 }
 
+/* ── music ── */
+const MART = ['#f6a5c0,#e9446a','#ffd27a,#f2785c','#9ad0f5,#5b7cf0','#c5b3f6,#8a5cf0','#a8e6cf,#3bb4a1','#f5c6a5,#d77a61','#d6d6d6,#8e8e93','#ffb3a7,#c94b4b'];
+const artBg = (t, i) => t && t.art ? `url('${esc(t.art)}') center/cover` : `linear-gradient(135deg,${MART[i % MART.length]})`;
+const NOTE = '<svg viewBox="0 0 24 24"><path d="M9 18.5a2.5 2.5 0 1 1-2.5-2.5H9V5l10-2v12.5a2.5 2.5 0 1 1-2.5-2.5H19V6.6L11 8.2v10.3z"/></svg>';
+let mState = { i: -1, playing: false, t: 0, timer: null, audio: null };
+const msec = d => { const [a, b] = String(d || '3:00').split(':').map(Number); return (a || 0) * 60 + (b || 0); };
+const mfmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+function musicTick(){
+  const P = D.music.playlist, t = P.tracks[mState.i]; if (!t) return;
+  if (mState.audio && !mState.audio.paused) mState.t = mState.audio.currentTime; else if (mState.playing) mState.t += 0.5;
+  const total = msec(t.dur);
+  if (mState.t >= total){ musicPlay((mState.i + 1) % P.tracks.length); return; }
+  document.querySelectorAll('.np .bar i').forEach(b => b.style.width = (mState.t / total * 100) + '%');
+  document.querySelectorAll('.np .t0').forEach(x => x.textContent = mfmt(mState.t));
+  document.querySelectorAll('.np .t1').forEach(x => x.textContent = '-' + mfmt(total - mState.t));
+}
+function musicPlay(i){
+  const P = D.music.playlist; if (!P.tracks.length) return;
+  mState.i = i; mState.t = 0; mState.playing = true;
+  const t = P.tracks[i];
+  if (mState.audio){ mState.audio.pause(); mState.audio = null; }
+  if (t.src){ mState.audio = new Audio(t.src); mState.audio.play().catch(() => {}); }
+  clearInterval(mState.timer); mState.timer = setInterval(musicTick, 500);
+  musicPaint();
+}
+function musicToggle(){
+  if (mState.i < 0) return musicPlay(0);
+  mState.playing = !mState.playing;
+  if (mState.audio){ mState.playing ? mState.audio.play().catch(() => {}) : mState.audio.pause(); }
+  musicPaint();
+}
+const PLAY = '<svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></svg>', PAUSE = '<svg viewBox="0 0 24 24"><path d="M6.5 4.5h4v15h-4zM13.5 4.5h4v15h-4z"/></svg>';
+function musicPaint(){
+  const P = D.music.playlist, t = P.tracks[mState.i];
+  document.querySelectorAll('.mrow').forEach(r => r.classList.toggle('now', +r.dataset.track === mState.i));
+  document.querySelectorAll('.mini').forEach(m => {
+    m.hidden = !t;
+    if (!t) return;
+    m.querySelector('.mart').style.background = artBg(t, mState.i);
+    m.querySelector('b').textContent = t.title;
+    m.querySelector('[data-mplay]').innerHTML = mState.playing ? PAUSE : PLAY;
+  });
+  document.querySelectorAll('.np').forEach(n => {
+    if (!t) return;
+    n.classList.toggle('paused', !mState.playing);
+    n.querySelector('.bigart').style.background = artBg(t, mState.i);
+    n.querySelector('.bgart').style.background = artBg(t, mState.i);
+    n.querySelector('.ti').innerHTML = `${esc(t.title)}<small>${esc(t.artist)}</small>`;
+    n.querySelector('[data-mplay]').innerHTML = mState.playing ? PAUSE : PLAY;
+  });
+  musicTick();
+}
+function nowPlaying(p){
+  const n = el(`<div class="np"><div class="bgart"></div><button class="grab" aria-label="닫기"></button><div class="bigart"></div><div class="ti"></div>
+    <div class="bar"><i></i></div><div class="tt"><span class="t0">0:00</span><span class="t1">-0:00</span></div>
+    <div class="ctl"><button data-mprev aria-label="이전 곡"><svg viewBox="0 0 24 24"><path d="M11 12l9-6v12zM2 12l9-6v12z"/></svg></button><button data-mplay class="big" aria-label="재생"></button><button data-mnext aria-label="다음 곡"><svg viewBox="0 0 24 24"><path d="M13 12L4 6v12zM22 12l-9-6v12z"/></svg></button></div></div>`);
+  p.appendChild(n); setSB('light'); musicPaint();
+  n.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 380, easing: E });
+  n.addEventListener('click', e => {
+    const P = D.music.playlist, L = P.tracks.length;
+    if (e.target.closest('.grab')){ n.animate([{ transform: 'none' }, { transform: 'translateY(100%)' }], { duration: 300, easing: E }).onfinish = () => n.remove(); setSB('dark'); return; }
+    if (e.target.closest('[data-mplay]')) return musicToggle();
+    if (e.target.closest('[data-mnext]')) return musicPlay((mState.i + 1) % L);
+    if (e.target.closest('[data-mprev]')) return musicPlay(mState.t > 3 ? mState.i : (mState.i - 1 + L) % L);
+  });
+}
+function musicPage(){
+  const P = D.music.playlist, T = P.tracks;
+  const cover = T.length >= 4 ? `<div class="pcov grid">${T.slice(0, 4).map((t, i) => `<i style="background:${artBg(t, i)}"></i>`).join('')}</div>` : `<div class="pcov" style="background:${artBg(T[0], 0)}">${T[0] && T[0].art ? '' : NOTE}</div>`;
+  const total = T.reduce((s, t) => s + msec(t.dur), 0);
+  const rows = T.length ? T.map((t, i) => `<button class="mrow" data-track="${i}"><span class="mart" style="background:${artBg(t, i)}"></span><span class="mt"><b>${esc(t.title)}</b><small>${esc(t.artist)}</small></span><span class="more">···</span></button>`).join('')
+    : '<p class="mempty">플레이리스트에 아직 노래가 없어요.</p>';
+  const p = page('music', 'dark', `${nav('보관함', '', '<span class="mdots">···</span>')}
+    <div class="scroll"><div class="phead">${cover}<h1>${esc(P.title)}</h1><div class="pown">${esc(D.owner)}</div>${P.desc ? `<p class="pdesc">${esc(P.desc)}</p>` : ''}<div class="pupd">${esc(P.updated || '업데이트: 3일 전')}</div>
+      <div class="pbtn"><button data-mall>${PLAY}재생</button><button data-mshuf><svg viewBox="0 0 24 24"><path d="M3 7h3.5c2 0 3 1 4.2 2.8l2.6 4.4C14.5 16 15.5 17 17.5 17H21M3 17h3.5c2 0 3-1 3.6-2M14.4 9c.6-1 1.6-2 3.1-2H21M18.5 4.5 21 7l-2.5 2.5M18.5 14.5 21 17l-2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>임의 재생</button></div></div>
+      <div class="mlist">${rows}</div>${T.length ? `<p class="mfoot">${T.length}곡, ${Math.max(1, Math.round(total / 60))}분</p>` : ''}</div>
+    <div class="mini" hidden><span class="mart"></span><b></b><button data-mplay aria-label="재생"></button><button data-mnext aria-label="다음 곡"><svg viewBox="0 0 24 24"><path d="M13 12L4 6v12zM22 12l-9-6v12z"/></svg></button></div>
+    <div class="tabbar mtab"><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5z"/></svg>지금 듣기</span><span><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg>둘러보기</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.5"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M5 5a10 10 0 0 0 0 14M19 5a10 10 0 0 1 0 14"/></svg>라디오</span><span class="on"><svg viewBox="0 0 24 24"><path d="M5 4v16M10 4v16M14.5 4.5l5 15"/></svg>보관함</span><span><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>검색</span></div>`);
+  p.addEventListener('click', e => {
+    const r = e.target.closest('[data-track]'); if (r){ musicPlay(+r.dataset.track); nowPlaying(p); return; }
+    if (e.target.closest('[data-mall]')) { musicPlay(0); return; }
+    if (e.target.closest('[data-mshuf]')) { if (T.length) musicPlay(Math.floor(Math.random() * T.length)); return; }
+    if (e.target.closest('.mini [data-mplay]')) return musicToggle();
+    if (e.target.closest('.mini [data-mnext]')) return musicPlay((mState.i + 1) % T.length);
+    if (e.target.closest('.mini')) return nowPlaying(p);
+  });
+  requestAnimationFrame(musicPaint);
+  return p;
+}
+
 /* ── settings ── */
 function settingsPage(){
   const ic = (bg, path) => `<span class="st-ic" style="background:${bg}"><svg viewBox="0 0 24 24">${path}</svg></span>`;
@@ -953,7 +1096,7 @@ function settingsPage(){
     </div></div>`);
 }
 
-const APPS = { messenger: messengerPage, notes: notesPage, clock: clockPage, photos: photosPage, calendar: calendarPage, phone: phonePage, safari: safariPage, weather: weatherPage, settings: settingsPage };
+const APPS = { messenger: messengerPage, notes: notesPage, clock: clockPage, photos: photosPage, calendar: calendarPage, phone: phonePage, safari: safariPage, weather: weatherPage, settings: settingsPage, music: musicPage };
 
 setSB('light'); renderLock(); renderHome();
 })();
