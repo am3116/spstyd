@@ -302,6 +302,16 @@ img{-webkit-user-drag:none}
 .prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
 
 /* messenger extras */
+.av.post,.ln .sav.post{background:#fff;border:.5px solid #e3e3e3}
+.av.post svg,.ln .sav.post svg{width:100%;height:100%}
+.bb.alim{padding:0;background:#fff!important;width:252px;border-radius:14px;position:relative;white-space:normal}
+.ln.th.first .bb.alim{border-top-left-radius:4px}
+.alim .ah{background:#f9e54e;padding:13px 14px;font-weight:700;font-size:14.5px;border-radius:14px 14px 0 0;color:#111}
+.ln.th.first .alim .ah{border-top-left-radius:4px}
+.alim .ab{padding:13px 14px 15px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-all;color:#111}
+.alim .tel{color:#2f6fd6;text-decoration:underline}
+.alim .kb{position:absolute;top:-9px;right:-9px;width:28px;height:28px;border-radius:50%;background:#3a3a3a;display:grid;place-items:center;box-shadow:0 0 0 2px var(--kk-sky)}
+.alim .kb svg{width:16px;height:16px}
 .av.ch{background:#4a5b70}
 .ln .sav.ch{background:#4a5b70}
 .bb.file{display:flex;gap:10px;align-items:center;min-width:210px;max-width:240px;background:#fff!important;padding:10px 12px}
@@ -617,6 +627,7 @@ const nav = (back, title = '', right = '', solid = false) => `<div class="nav${s
 
 /* ── messenger ── */
 const nowTime = () => { const [h, m] = String(D.time).split(':').map(Number); const pm = h >= 12; const hh = h % 12 || 12; return `${pm ? '오후' : '오전'} ${hh}:${String(m).padStart(2, '0')}`; };
+const POST_AV = '<svg viewBox="0 0 24 24"><rect width="24" height="24" fill="#fff"/><path d="M4 7.5h16v10H4z" fill="#e2352b"/><path d="M4 7.5l8 6 8-6" fill="none" stroke="#fff" stroke-width="1.6"/><path d="M15.5 16h5M16.5 14h4" stroke="#f2b51d" stroke-width="1.3"/></svg>';
 const CHANNEL_AV = '<svg viewBox="0 0 24 24"><path d="M12 4a5 5 0 0 0-5 5v3.2L5.5 15h13L17 12.2V9a5 5 0 0 0-5-5zM10 17.5a2 2 0 0 0 4 0" fill="#fff"/></svg>';
 const GROUP_AV = '<svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3.3" fill="#fff"/><circle cx="16" cy="9" r="3.3" fill="#fff"/><path d="M1.5 19c.5-3.3 3-5.2 6.5-5.2s6 1.9 6.5 5.2zM9.5 19c.5-3.3 3-5.2 6.5-5.2s6 1.9 6.5 5.2z" fill="#fff"/></svg>';
 /* 사진 참조: 숫자 = 사진 앱의 몇 번째 사진(1부터), 글자 = 파일 이름, null = 빈 타일 */
@@ -628,6 +639,7 @@ const whoOf = (c, m) => m.from === 'me' ? 'me' : (m.from === 'them' ? c.name : m
 const secs = d => { const [a, b] = String(d || '0:05').split(':').map(Number); return (a || 0) * 60 + (b || 0); };
 function bodyHTML(c, m, i){
   if (m.deleted) return `<div class="bb del"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5M12 16v.5"/></svg>삭제된 메시지입니다.</div>`;
+  if (m.alim){ const body = esc(m.text).replace(/(\d{2,4}-\d{3,4}-\d{4})/g, '<span class="tel">$1</span>'); return `<div class="bb alim"><span class="kb"><svg viewBox="0 0 24 24"><path d="M12 4a5 5 0 0 0-5 5v3.2L5.5 15h13L17 12.2V9a5 5 0 0 0-5-5zM10 17.5a2 2 0 0 0 4 0" fill="#fff"/></svg></span><div class="ah">${esc(m.alim)}</div><div class="ab">${body}</div></div>`; }
   if (m.file){ const ext = (String(m.file).split('.').pop() || 'FILE').toUpperCase().slice(0, 4); return `<div class="bb file"><span class="fi">${esc(ext)}</span><span class="fx"><span class="fn">${esc(m.file)}</span><span class="fs">${esc(m.size || '')}${m.size ? ' · ' : ''}유효기간 ~ ${esc(m.until || '11.22')}</span></span></div>`; }
   if (m.sticker) return `<div class="stk">${/\.(png|jpe?g|gif|webp)$/i.test(m.sticker) ? `<img src="${esc(m.sticker)}" alt="">` : esc(m.sticker)}</div>`;
   if (m.imgs) return `<div class="bb img multi n${Math.min(m.imgs.length, 4)}">${m.imgs.slice(0, 4).map((r, k) => `<div class="cell">${photoHTML(r, i + k)}${k === 3 && m.imgs.length > 4 ? `<span class="more">+${m.imgs.length - 4}</span>` : ''}</div>`).join('')}</div>`;
@@ -640,8 +652,8 @@ function lineHTML(c, m, i, first, showTime){
   const me = m.from === 'me', who = whoOf(c, m), body = bodyHTML(c, m, i);
   const tm = showTime ? `<div class="tm">${me && m.read === false ? '<span class="rd">1</span>' : ''}<span>${esc(m.time)}</span></div>` : '';
   if (me) return `<div class="ln me${first ? ' first' : ''}"><div class="col"><div class="wrap">${body}${tm}</div></div></div>`;
-  const av = c.channel ? CHANNEL_AV : c.group ? PERSON : avatar(c.avatar);
-  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.channel ? ' ch' : ''}" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
+  const av = c.icon === 'post' ? POST_AV : c.channel ? CHANNEL_AV : c.group ? PERSON : avatar(c.avatar);
+  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.icon === 'post' ? ' post' : c.channel ? ' ch' : ''}" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
 }
 function chatPage(c){
   const playLive = !c._played; c._played = true; c.unread = 0;
@@ -765,7 +777,7 @@ function showProfile(c, who, p){
   s.onclick = e => { if (e.target.closest('.px') || e.target === s){ s.remove(); setSB('dark'); } };
 }
 function chatRow(c, i){
-  return `<button class="crow${c.blocked ? ' blk' : ''}" data-chat="${i}"><div class="av${c.channel ? ' ch' : ''}">${c.channel ? CHANNEL_AV : c.group ? GROUP_AV : avatar(c.avatar)}</div>
+  return `<button class="crow${c.blocked ? ' blk' : ''}" data-chat="${i}"><div class="av${c.icon === 'post' ? ' post' : c.channel ? ' ch' : ''}">${c.icon === 'post' ? POST_AV : c.channel ? CHANNEL_AV : c.group ? GROUP_AV : avatar(c.avatar)}</div>
     <div class="bd"><div class="cn">${esc(c.name)}${c.group ? `<small>${c.group}</small>` : ''}${c.blocked ? '<em>차단</em>' : ''}</div><div class="cp">${esc(lastText(c))}</div></div>
     <div class="cm"><span class="ct">${c.pinned ? '<svg class="pin" viewBox="0 0 24 24"><path d="M15 3l6 6-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg>' : ''}${esc(c.last)}</span>${c.unread ? `<span class="kbdg">${c.unread}</span>` : ''}</div></button>`;
 }
@@ -801,6 +813,7 @@ function lastText(c){
     if (m.deleted) return '삭제된 메시지입니다.';
     if (m.imgs) return `사진 ${m.imgs.length}장을 보냈습니다.`;
     if (m.img !== undefined) return '사진을 보냈습니다.';
+    if (m.alim) return String(m.text).split('\n')[0];
     if (m.file) return m.file;
     if (m.sticker) return '이모티콘을 보냈습니다.';
     if (m.voice) return '음성메시지를 보냈습니다.';
