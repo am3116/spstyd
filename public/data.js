@@ -10,7 +10,8 @@ window.PHONE = {
   passHint: "힌트: 형 생일",
   time: "23:00",                 // 24시간 형식으로 적으면 화면엔 11:00으로 보여요
   dateText: "10월 23일 금요일",
-  wallpaper: null,               // 예: "wallpaper.jpg"
+  wallpaper: null,               // 홈 화면 배경 (null이면 기본 배경)
+  lockWallpaper: "lock.jpg",     // 잠금화면 배경
   wifi: "home_5G",
   battery: 64,
 
