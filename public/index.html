@@ -302,6 +302,8 @@ img{-webkit-user-drag:none}
 .prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
 
 /* messenger extras */
+.av.ch{background:#4a5b70}
+.ln .sav.ch{background:#4a5b70}
 .bb.file{display:flex;gap:10px;align-items:center;min-width:210px;max-width:240px;background:#fff!important;padding:10px 12px}
 .bb.file .fi{width:38px;height:44px;border-radius:5px;background:#e8eef4;display:grid;place-items:center;font-size:10px;font-weight:800;color:#5c87b2;flex:none}
 .bb.file .fx{display:flex;flex-direction:column;min-width:0}
@@ -615,6 +617,7 @@ const nav = (back, title = '', right = '', solid = false) => `<div class="nav${s
 
 /* ── messenger ── */
 const nowTime = () => { const [h, m] = String(D.time).split(':').map(Number); const pm = h >= 12; const hh = h % 12 || 12; return `${pm ? '오후' : '오전'} ${hh}:${String(m).padStart(2, '0')}`; };
+const CHANNEL_AV = '<svg viewBox="0 0 24 24"><path d="M12 4a5 5 0 0 0-5 5v3.2L5.5 15h13L17 12.2V9a5 5 0 0 0-5-5zM10 17.5a2 2 0 0 0 4 0" fill="#fff"/></svg>';
 const GROUP_AV = '<svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3.3" fill="#fff"/><circle cx="16" cy="9" r="3.3" fill="#fff"/><path d="M1.5 19c.5-3.3 3-5.2 6.5-5.2s6 1.9 6.5 5.2zM9.5 19c.5-3.3 3-5.2 6.5-5.2s6 1.9 6.5 5.2z" fill="#fff"/></svg>';
 /* 사진 참조: 숫자 = 사진 앱의 몇 번째 사진(1부터), 글자 = 파일 이름, null = 빈 타일 */
 function photoHTML(ref, i){
@@ -637,8 +640,8 @@ function lineHTML(c, m, i, first, showTime){
   const me = m.from === 'me', who = whoOf(c, m), body = bodyHTML(c, m, i);
   const tm = showTime ? `<div class="tm">${me && m.read === false ? '<span class="rd">1</span>' : ''}<span>${esc(m.time)}</span></div>` : '';
   if (me) return `<div class="ln me${first ? ' first' : ''}"><div class="col"><div class="wrap">${body}${tm}</div></div></div>`;
-  const av = c.group ? PERSON : avatar(c.avatar);
-  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
+  const av = c.channel ? CHANNEL_AV : c.group ? PERSON : avatar(c.avatar);
+  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.channel ? ' ch' : ''}" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
 }
 function chatPage(c){
   const playLive = !c._played; c._played = true; c.unread = 0;
@@ -652,7 +655,9 @@ function chatPage(c){
     html += lineHTML(c, m, i, who !== prevWho, showTime); prevWho = who;
   });
   const total = unreadTotal();
-  const input = c.blocked
+  const input = c.channel
+    ? `<div class="cin blocked">알림 전용 채널이라 메시지를 보낼 수 없어요.</div>`
+    : c.blocked
     ? `<div class="cin blocked">차단한 친구입니다. 메시지를 보낼 수 없습니다.</div>`
     : `<div class="cin"><button class="plus" data-attach aria-label="사진 보내기"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg></button><div class="fld${c.draft ? ' has' : ''}">${c.draft ? `${esc(c.draft)}<span class="cur"></span>` : '메시지 입력'}</div>${c.draft ? '<span class="snd on"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></span>' : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r=".8"/><circle cx="15" cy="10" r=".8"/><path d="M8.5 14.5c1.8 2 5.2 2 7 0"/></svg>'}</div>`;
   const p = page('chat', 'dark', `<div class="chat-h"><button class="bk" data-back><svg viewBox="0 0 12 20"><path d="M10 2 2 10l8 8"/></svg>${total || ''}</button><div class="nm">${esc(c.name)}${c.group ? `<small>${c.group}</small>` : ''}</div><div class="rt">${IC.search}<svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></div></div>
@@ -760,7 +765,7 @@ function showProfile(c, who, p){
   s.onclick = e => { if (e.target.closest('.px') || e.target === s){ s.remove(); setSB('dark'); } };
 }
 function chatRow(c, i){
-  return `<button class="crow${c.blocked ? ' blk' : ''}" data-chat="${i}"><div class="av">${c.group ? GROUP_AV : avatar(c.avatar)}</div>
+  return `<button class="crow${c.blocked ? ' blk' : ''}" data-chat="${i}"><div class="av${c.channel ? ' ch' : ''}">${c.channel ? CHANNEL_AV : c.group ? GROUP_AV : avatar(c.avatar)}</div>
     <div class="bd"><div class="cn">${esc(c.name)}${c.group ? `<small>${c.group}</small>` : ''}${c.blocked ? '<em>차단</em>' : ''}</div><div class="cp">${esc(lastText(c))}</div></div>
     <div class="cm"><span class="ct">${c.pinned ? '<svg class="pin" viewBox="0 0 24 24"><path d="M15 3l6 6-3 1-4 4 1 5-2 2-4-4-5 5-1-1 5-5-4-4 2-2 5 1 4-4z"/></svg>' : ''}${esc(c.last)}</span>${c.unread ? `<span class="kbdg">${c.unread}</span>` : ''}</div></button>`;
 }
