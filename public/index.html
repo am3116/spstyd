@@ -425,7 +425,9 @@ const avatar = src => src ? `<img src="${esc(src)}" alt="">` : PERSON;
 const appIcon = (k, n) => `<div class="icon"><div class="ic">${ICON[k]}</div>${n ? `<span class="bdg">${n}</span>` : ''}</div>`;
 
 /* ── status bar ── */
-$('#sbt').textContent = D.time;
+const [HH, MM] = String(D.time).split(':').map(Number);
+const clock12 = `${HH % 12 || 12}:${String(MM || 0).padStart(2, '0')}`;
+$('#sbt').textContent = clock12;
 $('#batt').setAttribute('width', Math.max(2, 20 * D.battery / 100).toFixed(1));
 if (D.wallpaper) wall.style.backgroundImage = `url('${D.wallpaper}')`;
 function setSB(mode){ sb.className = mode === 'dark' ? 'dark' : ''; hb.className = mode === 'dark' ? 'dark' : ''; }
@@ -459,7 +461,7 @@ function keypad({ title, hint, code, onOk, onCancel }){
 /* ── lock screen ── */
 function renderLock(){
   const notes = D.lockNotes.map(n => `<div class="ncard"><div class="ni">${ICON[n.app] || ICON.messenger}</div><div class="nt"><div class="nh"><span>${esc(n.from)}</span><small>${esc(n.time)}</small></div><div class="nb">${esc(n.text)}</div></div></div>`).join('');
-  lockL.innerHTML = `<div id="lkFace"><div class="lk-date">${esc(D.dateText)}</div><div class="lk-time">${esc(D.time)}</div><div class="lk-notes">${notes}</div><div class="lk-hint">위로 쓸어올리거나 눌러서 열기</div></div>`;
+  lockL.innerHTML = `<div id="lkFace"><div class="lk-date">${esc(D.dateText)}</div><div class="lk-time">${esc(clock12)}</div><div class="lk-notes">${notes}</div><div class="lk-hint">위로 쓸어올리거나 눌러서 열기</div></div>`;
   const face = $('#lkFace');
   let y0 = null, shown = false;
   const open = () => {
@@ -478,6 +480,7 @@ function unlock(){
   homeL.style.visibility = 'visible';
   homeL.animate([{ transform: 'scale(1.12)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: E });
   (D.banners || []).forEach(b => setTimeout(() => banner(b), (b.delay || 5) * 1000));
+  (D.incoming || []).forEach(x => setTimeout(() => deliver(x), (x.after || 10) * 1000));
 }
 
 /* ── banner ── */
@@ -590,6 +593,7 @@ function chatPage(c){
     <div class="msgs">${html}</div>${input}`);
   p._chat = c;
   const box = p.querySelector('.msgs');
+  if (c.draftLoop && !c.blocked) draftLoop(p.querySelector('.fld'), [].concat(c.draftLoop), p);
   const toEnd = () => { box.scrollTop = box.scrollHeight; };
   requestAnimationFrame(toEnd);
   let lastWho = prevWho;
@@ -610,6 +614,7 @@ function chatPage(c){
     setTimeout(() => { t.remove(); if (p.isConnected) { append(m); setTimeout(() => play(rest, done), 500); } }, wait);
   };
   if (queue.length) setTimeout(() => play(queue), 800);
+  p._receive = m => play([m]);
 
   p.addEventListener('click', e => {
     if (e.target.closest('.notice')) return e.target.closest('.notice').classList.toggle('open');
@@ -627,6 +632,34 @@ function chatPage(c){
     });
   });
   return p;
+}
+
+/* 입력창에 썼다 지웠다 반복 */
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function draftLoop(fld, lines, p){
+  const set = t => { fld.classList.toggle('has', !!t); fld.innerHTML = t ? `${esc(t)}<span class="cur"></span>` : '<span class="cur"></span>메시지 입력'; };
+  (async () => {
+    await wait(1500);
+    for (let k = 0; p.isConnected; k++){
+      const line = lines[k % lines.length];
+      for (let i = 1; i <= line.length; i++){ if (!p.isConnected) return; set(line.slice(0, i)); await wait(170 + Math.random() * 160); }
+      await wait(1800);
+      for (let i = line.length - 1; i >= 0; i--){ if (!p.isConnected) return; set(line.slice(0, i)); await wait(70); }
+      await wait(2200);
+    }
+  })();
+}
+/* 시간이 지나면서 오는 카톡 */
+function deliver(x){
+  const c = D.chats.find(c => c.name === x.chat); if (!c) return;
+  const m = Object.assign({ from: 'them' }, x); delete m.chat; delete m.after; m.time = m.time || nowTime();
+  c.messages.push(m); c.last = m.time;
+  const top = stack[stack.length - 1];
+  if (top && top._chat === c && top.isConnected){ top._receive(m); return; }
+  c.unread = (c.unread || 0) + 1;
+  const preview = m.sticker ? '이모티콘을 보냈습니다.' : m.img !== undefined || m.imgs ? '사진을 보냈습니다.' : m.voice ? '음성메시지를 보냈습니다.' : m.text;
+  banner({ app: 'messenger', from: c.name, text: preview, open: { app: 'messenger', chat: c.name } });
+  if (!stack.length) renderHome(); else if (top && top.onShow) top.onShow();
 }
 let audioEl = null;
 function playVoice(btn){
