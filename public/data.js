@@ -1304,13 +1304,16 @@ window.PHONE = {
                 explicit: true  // 19금 표시 }
      src가 없으면 재생 화면만 움직이고 소리는 안 나요 */
   music: {
+    /* 미니 플레이어에 떠 있는 '지금 듣던 곡' (처음엔 일시정지 상태) */
+    nowPlaying: { title: "WILDFLOWER", artist: "Billie Eilish", dur: "4:21", art: "music/wildflower.jpg", src: null },
     playlist: {
       title: "새로운 플레이리스트",
       cover: null,              // 플레이리스트 사진 파일 이름
       tint: "#e8e0d5",          // 화면 배경색 (사진에 맞춰 바꾸면 예뻐요)
+      /* 같이 만든 사람들 — me: true 가 폰 주인 (옆에 '팔로우 중' 대신 ···) */
       collab: [
-        { name: "원빈", avatar: null },
-        { name: "성찬", avatar: null }
+        { name: "pwb", handle: "@biniii32", avatar: null, me: true },
+        { name: "정성찬", handle: "@jsco913", avatar: null }
       ],
       tracks: []
     }
