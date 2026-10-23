@@ -1169,6 +1169,36 @@ function chatPage(c){
     snd.addEventListener('click', ev => { ev.stopPropagation(); send(); });
     upd();
     inp.addEventListener('focus', () => setTimeout(() => { box.scrollTop = box.scrollHeight; }, 350));
+    /* 컴퓨터로 볼 때(폰 키보드가 없을 때): 아이폰 키보드를 띄워서 눌러 쓸 수 있게 */
+    const fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (fine){
+      let kb = null, raw = '', pre = '', sh = false;
+      const paint = () => { inp.value = pre + hangulCompose(raw); upd(); };
+      const setShift = on => { sh = on; kb.classList.toggle('sh', on); kb.querySelectorAll('[data-k2]').forEach(e => { const k = e.dataset.k2; if (KB_SHIFT[k]){ const l = on ? KB_SHIFT[k] : k; e.textContent = l; e.dataset.l = l; } }); };
+      const open = () => {
+        if (kb) return;
+        kb = el(KB_HTML); cin.after(kb); cin.classList.add('kbon');
+        kb.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 300, easing: E });
+        setTimeout(() => { box.scrollTop = box.scrollHeight; }, 320);
+        pre = inp.value; raw = '';
+        kb.addEventListener('pointerdown', ev => { ev.preventDefault();
+          const t = ev.target.closest('.k'); if (!t) return;
+          t.classList.add('pr'); setTimeout(() => t.classList.remove('pr'), 140);
+          const k = t.dataset.k2;
+          if (k === 'shift'){ setShift(!sh); return; }
+          if (k === 'del'){ if (raw) raw = raw.slice(0, -1); else pre = pre.slice(0, -1); paint(); return; }
+          if (t.classList.contains('wr')){ send(); pre = ''; raw = ''; return; }
+          if (k === ' '){ pre = pre + hangulCompose(raw) + ' '; raw = ''; paint(); return; }
+          if (!k) return;
+          raw += sh ? (KB_SHIFT[k] || k) : k; if (sh) setShift(false); paint();
+        });
+      };
+      const close = () => { if (!kb) return; const k = kb; kb = null; cin.classList.remove('kbon'); k.animate([{ transform: 'none' }, { transform: 'translateY(100%)' }], { duration: 240, easing: E }).onfinish = () => k.remove(); };
+      inp.addEventListener('focus', open);
+      inp.addEventListener('input', ev => { if (ev.isTrusted){ pre = inp.value; raw = ''; } });
+      box.addEventListener('pointerdown', () => { inp.blur(); close(); });
+      const sendBase = send; snd.addEventListener('click', () => { pre = ''; raw = ''; });
+    }
     return inp;
   };
   if (fld && !c.draftLoop) enterInput();
@@ -1195,6 +1225,36 @@ function chatPage(c){
   return p;
 }
 
+/* 한글 자모 → 글자 조합 (두벌식) */
+const H_CHO = 'ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ', H_JUNG = 'ㅏㅐㅑㅒㅓㅔㅕㅖㅗㅘㅙㅚㅛㅜㅝㅞㅟㅠㅡㅢㅣ';
+const H_JONG = ['','ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄹ','ㄺ','ㄻ','ㄼ','ㄽ','ㄾ','ㄿ','ㅀ','ㅁ','ㅂ','ㅄ','ㅅ','ㅆ','ㅇ','ㅈ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+const H_VC = { 'ㅗㅏ':'ㅘ','ㅗㅐ':'ㅙ','ㅗㅣ':'ㅚ','ㅜㅓ':'ㅝ','ㅜㅔ':'ㅞ','ㅜㅣ':'ㅟ','ㅡㅣ':'ㅢ' };
+const H_JC = { 'ㄱㅅ':'ㄳ','ㄴㅈ':'ㄵ','ㄴㅎ':'ㄶ','ㄹㄱ':'ㄺ','ㄹㅁ':'ㄻ','ㄹㅂ':'ㄼ','ㄹㅅ':'ㄽ','ㄹㅌ':'ㄾ','ㄹㅍ':'ㄿ','ㄹㅎ':'ㅀ','ㅂㅅ':'ㅄ' };
+function hangulCompose(seq){
+  let out = '', c = '', v = '', j = '';
+  const isV = ch => H_JUNG.includes(ch);
+  const flush = () => {
+    const jj = j.length === 2 ? H_JC[j] : j;
+    if (c && v) out += String.fromCharCode(0xAC00 + (H_CHO.indexOf(c) * 21 + H_JUNG.indexOf(v)) * 28 + H_JONG.indexOf(jj));
+    else out += c + v + jj;
+    c = v = j = '';
+  };
+  for (const ch of seq){
+    if (isV(ch)){
+      if (j){ const mv = j.slice(-1); j = j.slice(0, -1); flush(); c = mv; v = ch; }
+      else if (c && !v) v = ch;
+      else if (v && H_VC[v + ch]) v = H_VC[v + ch];
+      else { if (c || v) flush(); v = ch; }
+    } else {
+      if (!c && !v) c = ch;
+      else if (c && v && !j && H_JONG.includes(ch)) j = ch;
+      else if (j.length === 1 && H_JC[j + ch]) j += ch;
+      else { flush(); c = ch; }
+    }
+  }
+  if (c || v || j) flush();
+  return out;
+}
 /* 입력창에 썼다 지웠다 반복 */
 const wait = ms => new Promise(r => setTimeout(r, ms));
 /* 입력창에 키보드로 한 글자씩 쓰고 → 이용자가 전송 버튼을 눌러야 보내짐 (새로고침 전까지 한 번만) */
