@@ -3045,5 +3045,34 @@ window.PHONE = {
         }
       ]
     }
+  },
+
+  /* ─────────── 인스타그램 ───────────
+     me: 내 계정 아이디 / accounts: 계정별 프로필
+     tag: 이름 밑에 걸어둘 계정 (누르면 그 사람 프로필로)
+     highlights: 하이라이트 [{ label, cover(사진 경로, 없으면 축구공 그림) }] */
+  instagram: {
+    badge: 6,
+    me: "biniii32",
+    accounts: {
+      biniii32: {
+        name: "박원빈",
+        pf: "ig/bin_pf.jpg",
+        tag: "jsco913",
+        followers: "623",
+        following: "318",
+        posts: ["ig/b1.jpg", "ig/b2.jpg", "ig/b3.jpg"]
+      },
+      jsco913: {
+        name: "정성찬",
+        pf: "ig/chan_pf.jpg",
+        tag: "biniii32",
+        story: true,
+        followers: "1,204",
+        following: "502",
+        highlights: [{ label: "⚽️축구", cover: null }],
+        posts: ["ig/c1.jpg"]
+      }
+    }
   }
 };
