@@ -490,26 +490,26 @@ body.mobb{align-items:flex-start}
 .ignav img{width:28px;height:28px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.5px #000}
 
 /* incoming call */
-.icall{position:absolute;inset:0;z-index:85;pointer-events:auto;color:#fff;overflow:hidden;background:#1c1c1e}
-.icbg{position:absolute;inset:-40px;background:#333 center/cover;filter:blur(38px) brightness(.55) saturate(1.2)}
-.ictop{position:absolute;top:96px;left:0;right:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px}
-.ictop small{font-size:16px;opacity:.75}
-.ictop b{font-size:34px;font-weight:600;letter-spacing:-.4px}
-.ict{font-size:17px;opacity:.8;font-variant-numeric:tabular-nums;min-height:1px}
-.icpf{position:absolute;top:240px;left:50%;transform:translateX(-50%);width:150px;height:150px;border-radius:50%;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.35);background:#888}
-.icpf img,.icpf svg{width:100%;height:100%;object-fit:cover;display:block}
-.icall.talk .icpf{width:84px;height:84px;top:176px}
-.icsm{position:absolute;left:44px;right:44px;bottom:200px;display:flex;justify-content:space-between}
-.icsm span,.icgrid span,.icbtn button{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:14px;color:#fff}
-.icsm i{width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center}
-.icsm svg{width:22px;height:22px;fill:#fff}.icsm svg.ln2{fill:none;stroke:#fff}
-.icbtn{position:absolute;left:44px;right:44px;bottom:70px;display:flex;justify-content:space-between}
+.icall{position:absolute;inset:0;z-index:85;pointer-events:auto;color:#fff;overflow:hidden;background:#141414}
+.icbg{position:absolute;inset:-60px;background:#333 center/cover;filter:blur(60px) brightness(.5) saturate(1.1);opacity:.9}
+.icall::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 50% 45%,transparent,rgba(10,10,10,.85));pointer-events:none}
+.icall>*:not(.icbg){position:absolute;z-index:1}
+.ictop{top:58px;left:0;right:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.ictop b{font-size:30px;font-weight:400;letter-spacing:-.3px}
+.ictop small{font-size:16px;opacity:.6}
+.ict{font-size:17px;opacity:.8;font-variant-numeric:tabular-nums}
+.icsm{left:58px;right:58px;bottom:240px;display:flex;justify-content:space-between}
+.icsm span{min-width:110px}
+.icsm span,.icgrid span,.icbtn button{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:15px;color:#fff}
+.icsm i{width:28px;height:28px;display:grid;place-items:center}
+.icsm svg{width:26px;height:26px;fill:#fff}
+.icbtn{left:58px;right:58px;bottom:96px;display:flex;justify-content:space-between}
+.icbtn button{min-width:110px}
 .icall.talk .icbtn{justify-content:center}
-.icbtn i{width:76px;height:76px;border-radius:50%;display:grid;place-items:center}
-.icbtn i.r{background:#ff3b30}.icbtn i.g{background:#34c759;animation:icp 1.4s infinite}
-.icbtn svg{width:34px;height:34px;fill:#fff}
-@keyframes icp{0%,100%{box-shadow:0 0 0 0 rgba(52,199,89,.55)}60%{box-shadow:0 0 0 16px rgba(52,199,89,0)}}
-.icgrid{position:absolute;left:30px;right:30px;bottom:190px;display:grid;grid-template-columns:repeat(3,1fr);row-gap:22px}
+.icbtn i{width:78px;height:78px;border-radius:50%;display:grid;place-items:center}
+.icbtn i.r{background:#ff3b30}.icbtn i.g{background:#4cd964}
+.icbtn svg{width:36px;height:36px;fill:#fff}
+.icgrid{left:30px;right:30px;bottom:210px;display:grid;grid-template-columns:repeat(3,1fr);row-gap:22px}
 .icgrid i{width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,.16);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);display:grid;place-items:center}
 .icgrid svg{width:30px;height:30px;stroke:#fff;stroke-width:1.6}
 
@@ -568,7 +568,7 @@ body.mobb{align-items:flex-start}
 .cwk span:first-child,.cwk span:last-child{color:#8a8a8e}
 .c26 .scroll{padding-top:132px;padding-bottom:120px}
 .cmon h3{font-size:22px;font-weight:700;margin:16px 0 6px;padding-left:10px}
-.cmon h3.cur{color:var(--cr)}
+.cmon h3.mcur{color:var(--cr)}
 .cgr{display:grid;grid-template-columns:repeat(7,1fr)}
 .cday{min-height:74px;border-top:.5px solid #e2e2e6;display:flex;flex-direction:column;align-items:stretch;padding:4px 1px 4px;text-align:center;min-width:0}
 .cday.e{border-top-color:transparent}
@@ -1397,7 +1397,7 @@ function calendarPage(){
       const bars = L.slice(0, 2).map(e => { const c = CAL_COLORS[e.cal] || '#af52de'; return `<i style="background:${c}26;color:${c}">${esc(e.title)}</i>`; }).join('') + (L.length > 2 ? `<i class="more">+${L.length - 2}</i>` : '');
       cells += `<button class="cday${wd === 0 || wd === 6 ? ' we' : ''}${cur && d === C.today ? ' td' : ''}" data-cd="${y}-${mo}-${d}"><span class="dn">${d}</span>${bars}</button>`;
     }
-    return `<section class="cmon" data-ym="${y}-${mo}"><h3${cur ? ' class="cur"' : ''}>${mo}월</h3><div class="cgr">${cells}</div></section>`;
+    return `<section class="cmon" data-ym="${y}-${mo}"><h3${cur ? ' class="mcur"' : ''}>${mo}월</h3><div class="cgr">${cells}</div></section>`;
   };
   const p = page('c26', 'dark', `<div class="cwk">${'일월화수목금토'.split('').map(w => `<span>${w}</span>`).join('')}</div>
     <div class="gbar"><button class="lg lgp bk yr" data-back>${IC.back}<span class="cy">${C.year}년</span></button><span class="lg lgp"><svg viewBox="0 0 24 24" class="ln2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>${IC.search.replace('<svg', '<svg class="ln2"')}<svg viewBox="0 0 24 24" class="ln2"><path d="M12 5v14M5 12h14"/></svg></span></div>
@@ -1547,22 +1547,19 @@ function igProfile(id){
 
 /* ── 전화 수신 화면 ── */
 function ringTone(){
-  try {
-    const A = new (window.AudioContext || window.webkitAudioContext)(); let on = true;
-    const note = (f, t, d) => { const o = A.createOscillator(), g = A.createGain(); o.type = 'sine'; o.frequency.value = f; g.gain.setValueAtTime(0, A.currentTime + t); g.gain.linearRampToValueAtTime(.12, A.currentTime + t + .02); g.gain.exponentialRampToValueAtTime(.001, A.currentTime + t + d); o.connect(g).connect(A.destination); o.start(A.currentTime + t); o.stop(A.currentTime + t + d + .05); };
-    const loop = () => { if (!on) return; [[1046,0],[1318,.16],[1568,.32],[1318,.48],[1046,.64],[1318,.8]].forEach(([f,t]) => note(f, t, .35)); setTimeout(loop, 2600); };
-    loop(); return () => { if (!on) return; on = false; setTimeout(() => A.close().catch(() => {}), 400); };
-  } catch (_) { return () => {}; }
+  const a = new Audio('music/ring.mp3'); a.loop = true; a.volume = .8;
+  a.play().catch(() => {});
+  let on = true;
+  return () => { if (!on) return; on = false; a.pause(); a.currentTime = 0; };
 }
 function incomingCall(c){
   if (ov.querySelector('.icall')) return;
   const av = c.avatar || '';
   const o = el(`<div class="icall"><div class="icbg" style="background-image:url('${esc(av)}')"></div>
-    <div class="ictop"><small>휴대전화</small><b>${esc(c.name)}</b><span class="ict"></span></div>
-    <div class="icpf">${av ? `<img src="${esc(av)}" alt="">` : PERSON}</div>
-    <div class="icsm"><span><i><svg viewBox="0 0 24 24" class="ln2"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.3 1.6M5 4.5 3 6.5M19 4.5l2 2"/></svg></i>알림</span><span><i><svg viewBox="0 0 24 24"><path d="M12 4C6.8 4 3 7.3 3 11.3c0 2.3 1.3 4.3 3.3 5.6L5.6 20l3.7-2c.9.2 1.8.3 2.7.3 5.2 0 9-3.3 9-7.3S17.2 4 12 4z"/></svg></i>메시지</span></div>
+    <div class="ictop"><b>${esc(c.name)}</b><small>휴대전화</small><span class="ict"></span></div>
+    <div class="icsm"><span><i><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.2V13l2.4 1.7" stroke="#2a2a2a" stroke-width="1.8" fill="none" stroke-linecap="round"/><path d="M4.2 7.2a3 3 0 0 1 4-4.2M19.8 7.2a3 3 0 0 0-4-4.2M7.5 20l-1.5 2M16.5 20l1.5 2" stroke="#fff" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg></i>나중에 보기</span><span><i><svg viewBox="0 0 24 24"><path d="M12 4C6.8 4 3 7.3 3 11.3c0 2.3 1.3 4.3 3.3 5.6L5.6 20l3.7-2c.9.2 1.8.3 2.7.3 5.2 0 9-3.3 9-7.3S17.2 4 12 4z"/></svg></i>메시지</span></div>
     <div class="icbtn"><button data-dec><i class="r"><svg viewBox="0 0 24 24"><path d="M12 9c-3.4 0-6.6 1-8.6 2.8-.6.6-.7 1.6-.1 2.3l1.3 1.5c.5.6 1.4.7 2.1.3l2.1-1.3c.5-.3.8-.9.7-1.5l-.2-1.4c1.7-.6 3.7-.6 5.4 0l-.2 1.4c-.1.6.2 1.2.7 1.5l2.1 1.3c.7.4 1.6.3 2.1-.3l1.3-1.5c.6-.7.5-1.7-.1-2.3C18.6 10 15.4 9 12 9z"/></svg></i>거절</button>
-      <button data-acc><i class="g"><svg viewBox="0 0 24 24"><path d="M6.6 3.2c1-1 2.5-.8 3.1.5l1.2 2.7c.4 1 .1 2.1-.8 2.7l-1 .7c1 2.3 2.9 4.3 5.3 5.4l.7-1c.6-.9 1.7-1.2 2.7-.8l2.7 1.2c1.3.6 1.6 2.1.5 3.1l-1.5 1.5c-1.8 1.8-5.6.8-9.5-3.1S3.3 6.5 5.1 4.7z"/></svg></i>수락</button></div></div>`);
+      <button data-acc><i class="g"><svg viewBox="0 0 24 24"><path d="M6.6 3.2c1-1 2.5-.8 3.1.5l1.2 2.7c.4 1 .1 2.1-.8 2.7l-1 .7c1 2.3 2.9 4.3 5.3 5.4l.7-1c.6-.9 1.7-1.2 2.7-.8l2.7 1.2c1.3.6 1.6 2.1.5 3.1l-1.5 1.5c-1.8 1.8-5.6.8-9.5-3.1S3.3 6.5 5.1 4.7z"/></svg></i>응답</button></div></div>`);
   ov.appendChild(o); setSB('light');
   o.animate([{ transform: 'translateY(-100%)' }, { transform: 'none' }], { duration: 450, easing: E });
   const stopRing = ringTone(); try { navigator.vibrate && navigator.vibrate([400, 300, 400, 300, 400]); } catch (_) {}
@@ -1574,7 +1571,7 @@ function incomingCall(c){
     if (state === 'ring' && e.target.closest('[data-dec]')){ state = 'end'; log('missed'); close(); return; }
     if (state === 'ring' && e.target.closest('[data-acc]')){
       state = 'talk'; stopRing(); clearTimeout(miss); o.classList.add('talk');
-      o.querySelector('.ictop small').textContent = '';
+      o.querySelector('.ictop small').remove();
       const t = o.querySelector('.ict'); t.textContent = '0:00';
       timer = setInterval(() => { sec++; t.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`; }, 1000);
       o.querySelector('.icsm').outerHTML = `<div class="icgrid">${[['스피커','<path d="M4 9v6h4l5 4V5L8 9zM16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/>'],['FaceTime','<rect x="3" y="7" width="12" height="10" rx="2.5"/><path d="m15 11 6-3.5v9L15 13"/>'],['소리 끔','<path d="M9 5a3 3 0 0 1 6 0v6a3 3 0 0 1-6 0zM5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M4 4l16 16"/>'],['통화 추가','<circle cx="10" cy="8" r="3.5"/><path d="M3.5 19c.8-3.3 3.3-5 6.5-5M18 13v6M15 16h6"/>'],['키패드','<circle cx="6" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="18" cy="5" r="1.3"/><circle cx="6" cy="11" r="1.3"/><circle cx="12" cy="11" r="1.3"/><circle cx="18" cy="11" r="1.3"/><circle cx="6" cy="17" r="1.3"/><circle cx="12" cy="17" r="1.3"/><circle cx="18" cy="17" r="1.3"/>'],['더보기','<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>']].map(([l, d]) => `<span><i><svg viewBox="0 0 24 24" class="ln2">${d}</svg></i>${l}</span>`).join('')}</div>`;
