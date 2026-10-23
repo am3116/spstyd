@@ -524,13 +524,13 @@ body.mobb{align-items:flex-start}
 .kmid{flex:7 1 0;display:flex;gap:6px;padding:0 8px}
 .k.fn{font-size:17px;flex:0 0 46px}
 .k.fn svg{width:23px;height:23px;fill:none;stroke:#000;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
-.kb.sh [data-k2="shift"] svg{fill:#000}
+.kb.sh [data-k2="shift"] svg{fill:#000;stroke:#000}
+.kb [data-k2]{font-weight:400}
 .k.w{flex:0 0 44px}.k.w2{flex:0 0 44px}.k.wr{flex:0 0 94px}
 .k.sp{flex:1 1 auto}
 .k.sp small{position:absolute;right:9px;bottom:4px;font-size:12px;color:#b0b0b5}
 .k.pr{background:#dfe1e6}
-.kr .k[data-k2]:not(.fn):not(.sp).pr::after{content:attr(data-k2);position:absolute;bottom:38px;left:50%;transform:translateX(-50%);width:54px;height:58px;border-radius:10px 10px 7px 7px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.22);display:grid;place-items:center;font-size:32px;z-index:3}
-.kb.sh .k.pr::after{content:none}
+.kr .k[data-k2]:not(.fn):not(.sp).pr::after{content:attr(data-l);position:absolute;bottom:38px;left:50%;transform:translateX(-50%);width:54px;height:58px;border-radius:10px 10px 7px 7px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.22);display:grid;place-items:center;font-size:32px;z-index:3}
 .kb2{height:64px;display:flex;justify-content:space-between;padding:2px 26px 0}
 .kb2 svg{width:28px;height:28px;fill:none;stroke:#55565c;stroke-width:1.5}
 .cin.kbon{margin:6px 10px 8px;border-radius:30px;padding:6px 6px;background:rgba(238,241,244,.96);box-shadow:0 4px 18px rgba(0,0,0,.1),inset 0 0 0 1px rgba(255,255,255,.8);gap:6px}
@@ -1164,9 +1164,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 /* 입력창에 키보드로 한 글자씩 쓰고 → 이용자가 전송 버튼을 눌러야 보내짐 (새로고침 전까지 한 번만) */
 const KB_ROWS = [['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ'],['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ'],['ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ']];
 const KB_SHIFT = { 'ㅂ':'ㅃ','ㅈ':'ㅉ','ㄷ':'ㄸ','ㄱ':'ㄲ','ㅅ':'ㅆ','ㅐ':'ㅒ','ㅔ':'ㅖ' };
-const KB_HTML = `<div class="kb"><div class="ksug"><span>나</span><span>아</span><span>나는</span></div><div class="kr">${KB_ROWS[0].map(k => `<span class="k" data-k2="${k}">${k}</span>`).join('')}</div>
-  <div class="kr r2">${KB_ROWS[1].map(k => `<span class="k" data-k2="${k}">${k}</span>`).join('')}</div>
-  <div class="kr"><span class="k fn" data-k2="shift"><svg viewBox="0 0 24 24"><path d="M12 4.5 4.5 12h4v7h7v-7h4z"/></svg></span><span class="kmid">${KB_ROWS[2].map(k => `<span class="k" data-k2="${k}">${k}</span>`).join('')}</span><span class="k fn" data-k2="del"><svg viewBox="0 0 24 24"><path d="M9 5h11v14H9l-6-7z"/><path d="m12 9.5 5 5M17 9.5l-5 5"/></svg></span></div>
+const KB_HTML = `<div class="kb"><div class="ksug"><span>나</span><span>아</span><span>나는</span></div><div class="kr">${KB_ROWS[0].map(k => `<span class="k" data-k2="${k}" data-l="${k}">${k}</span>`).join('')}</div>
+  <div class="kr r2">${KB_ROWS[1].map(k => `<span class="k" data-k2="${k}" data-l="${k}">${k}</span>`).join('')}</div>
+  <div class="kr"><span class="k fn" data-k2="shift"><svg viewBox="0 0 24 24"><path d="M12 4.5 4.5 12h4v7h7v-7h4z"/></svg></span><span class="kmid">${KB_ROWS[2].map(k => `<span class="k" data-k2="${k}" data-l="${k}">${k}</span>`).join('')}</span><span class="k fn" data-k2="del"><svg viewBox="0 0 24 24"><path d="M9 5h11v14H9l-6-7z"/><path d="m12 9.5 5 5M17 9.5l-5 5"/></svg></span></div>
   <div class="kr"><span class="k fn w">123</span><span class="k fn w2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="1.1" fill="#000"/><circle cx="15" cy="10" r="1.1" fill="#000"/><path d="M7.5 13.5h9a4.5 4.5 0 0 1-9 0z" fill="#000"/></svg></span><span class="k sp" data-k2=" "><small>한</small></span><span class="k fn wr"><svg viewBox="0 0 24 24"><path d="M19 6v5a2 2 0 0 1-2 2H6M9.5 9.5 6 13l3.5 3.5"/></svg></span></div>
   <div class="kb2"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg><svg viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></div></div>`;
 /* "형 햄버거 사갈까요" 를 자판 누르는 순서로 (누를 키, 누른 뒤 입력창 글자) */
@@ -1182,8 +1182,8 @@ function draftLoop(fld, lines, p){
   const snd = el('<button class="snd" data-dsend aria-label="전송"><svg viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>');
   const kb = el(KB_HTML);
   const set = t => { fld.classList.toggle('has', !!t); fld.innerHTML = t ? `${esc(t)}<span class="cur"></span>` : '<span class="cur"></span>메시지 입력'; if (t && hash.isConnected) hash.replaceWith(snd); const w = (t || '').trim().split(' ').pop(); const sg = kb.querySelectorAll('.ksug span'); if (w){ sg[0].textContent = w; sg[1].textContent = '"' + w + '"'; sg[2].textContent = w + '?'; } };
-  const press = k => { const e = k && kb.querySelector(`[data-k2="${k}"]`); if (!e) return; e.classList.add('pr'); setTimeout(() => e.classList.remove('pr'), 140); };
-  const shift = on => { kb.classList.toggle('sh', on); kb.querySelectorAll('[data-k2]').forEach(e => { const k = e.dataset.k2; if (KB_SHIFT[k]) e.textContent = on ? KB_SHIFT[k] : k; }); };
+  const press = k => { const e = k && kb.querySelector(`[data-k2="${k}"]`); if (!e) return; e.classList.add('pr'); setTimeout(() => e.classList.remove('pr'), 160); };
+  const shift = on => { kb.classList.toggle('sh', on); kb.querySelectorAll('[data-k2]').forEach(e => { const k = e.dataset.k2; if (KB_SHIFT[k]){ const l = on ? KB_SHIFT[k] : k; e.textContent = l; e.dataset.l = l; } }); };
   const reset = () => { c._drafting = false; };
   (async () => {
     await wait(900);
@@ -1194,9 +1194,9 @@ function draftLoop(fld, lines, p){
     await wait(900);
     for (const [k, t] of steps){
       if (!p.isConnected) return reset();
-      if (k === 'shift'){ press('shift'); shift(true); await wait(260); continue; }
+      if (k === 'shift'){ shift(true); await wait(420); continue; }
       press(k === ' ' ? ' ' : (Object.keys(KB_SHIFT).find(x => KB_SHIFT[x] === k) || k));
-      if (kb.classList.contains('sh')) setTimeout(() => shift(false), 120);
+      if (kb.classList.contains('sh')) setTimeout(() => shift(false), 200);
       set(t); await wait(k === ' ' ? 260 : 190 + Math.random() * 170);
     }
     /* 여기서 멈춰서 커서만 깜빡 — 전송은 이용자가 */
