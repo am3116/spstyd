@@ -1427,6 +1427,57 @@ window.PHONE = {
       ]
     },
     {
+      "name": "시생법 조별과제",
+      "group": 8,
+      "avatar": null,
+      "unread": 0,
+      "last": "9월 23일",
+      "messages": [
+        {
+          "day": "2026년 9월 23일 수요일"
+        },
+        {
+          "day": "송가온님이 한단비님, 상우님, 🌈님, 매기님, 지은님, 박원빈님과 남기훈님을 초대했습니다."
+        },
+        {
+          "from": "송가온",
+          "text": "안녕하세요 이번에 시생법 조별 팀장하게된 과제헌터 송가온입니다.",
+          "time": "오후 3:52",
+          "rc": 2
+        },
+        {
+          "from": "송가온",
+          "text": "신한 110031901250904 송가온",
+          "time": "오후 3:52",
+          "rc": 2
+        },
+        {
+          "from": "송가온",
+          "text": "여기로 인당 15,000원씩 입금해주시면 제가 자료조사부터 피피티 제작 발표까지 다 하겠습니다. 여러분 이름 빼지도 않을거구요.",
+          "time": "오후 3:53",
+          "rc": 2
+        },
+        {
+          "from": "송가온",
+          "text": "최소 A학점 이상 보장드리고, A+달성시 15,000원 제가 다 먹고 A 받으면 5,000원 돌려드립니다. A 밑으로 받을경우 전액 환불해 드리겠지만 그럴 일은 없으니 걱정안하셔도 됩니다.",
+          "time": "오후 3:54",
+          "rc": 2
+        },
+        {
+          "from": "송가온",
+          "text": "어떡하실래요?",
+          "time": "오후 3:54",
+          "rc": 2
+        },
+        {
+          "from": "남기훈",
+          "text": "입금완료",
+          "time": "오후 5:11",
+          "rc": 4
+        }
+      ]
+    },
+    {
       "name": "MT 3조",
       "group": 8,
       "avatar": null,
@@ -1592,57 +1643,6 @@ window.PHONE = {
           "from": "them",
           "text": "아.....그래?? 인스타엔 없길래 솔로인 줄 알았어",
           "time": "오후 2:15"
-        }
-      ]
-    },
-    {
-      "name": "시생법 조별과제",
-      "group": 8,
-      "avatar": null,
-      "unread": 0,
-      "last": "9월 7일",
-      "messages": [
-        {
-          "day": "2026년 9월 7일 월요일"
-        },
-        {
-          "day": "송가온님이 한단비님, 상우님, 🌈님, 매기님, 지은님, 박원빈님과 남기훈님을 초대했습니다."
-        },
-        {
-          "from": "송가온",
-          "text": "안녕하세요 이번에 시생법 조별 팀장하게된 과제헌터 송가온입니다.",
-          "time": "오후 3:52",
-          "rc": 2
-        },
-        {
-          "from": "송가온",
-          "text": "신한 110031901250904 송가온",
-          "time": "오후 3:52",
-          "rc": 2
-        },
-        {
-          "from": "송가온",
-          "text": "여기로 인당 15,000원씩 입금해주시면 제가 자료조사부터 피피티 제작 발표까지 다 하겠습니다. 여러분 이름 빼지도 않을거구요.",
-          "time": "오후 3:53",
-          "rc": 2
-        },
-        {
-          "from": "송가온",
-          "text": "최소 A학점 이상 보장드리고, A+달성시 15,000원 제가 다 먹고 A 받으면 5,000원 돌려드립니다. A 밑으로 받을경우 전액 환불해 드리겠지만 그럴 일은 없으니 걱정안하셔도 됩니다.",
-          "time": "오후 3:54",
-          "rc": 2
-        },
-        {
-          "from": "송가온",
-          "text": "어떡하실래요?",
-          "time": "오후 3:54",
-          "rc": 2
-        },
-        {
-          "from": "남기훈",
-          "text": "입금완료",
-          "time": "오후 5:11",
-          "rc": 4
         }
       ]
     },
@@ -2758,7 +2758,7 @@ window.PHONE = {
       "artist": "Billie Eilish",
       "dur": "4:21",
       "art": "music/wildflower.jpg",
-      "src": null
+      "src": "music/wildflower.mp3"
     },
     "playlist": {
       "title": "새로운 플레이리스트",
@@ -2782,35 +2782,35 @@ window.PHONE = {
           "title": "Sacrifice",
           "artist": "The Weeknd",
           "dur": "3:08",
-          "art": null,
+          "art": "music/t1.jpg",
           "src": null
         },
         {
           "title": "bad",
           "artist": "wave to earth",
           "dur": "4:23",
-          "art": null,
+          "art": "music/t2.jpg",
           "src": null
         },
         {
           "title": "Glimpse of Us",
           "artist": "Joji",
           "dur": "3:53",
-          "art": null,
+          "art": "music/t3.jpg",
           "src": null
         },
         {
           "title": "Kirari",
           "artist": "Fujii Kaze",
           "dur": "3:58",
-          "art": null,
+          "art": "music/t4.jpg",
           "src": null
         },
         {
           "title": "DANCE",
           "artist": "offonoff",
           "dur": "3:32",
-          "art": null,
+          "art": "music/t5.jpg",
           "src": null,
           "star": true
         },
@@ -2818,14 +2818,14 @@ window.PHONE = {
           "title": "String (feat. 선우정아)",
           "artist": "Colde",
           "dur": "3:41",
-          "art": null,
+          "art": "music/t6.jpg",
           "src": null
         },
         {
           "title": "Back On 74",
           "artist": "Jungle",
           "dur": "3:28",
-          "art": null,
+          "art": "music/t7.jpg",
           "src": null
         }
       ]
