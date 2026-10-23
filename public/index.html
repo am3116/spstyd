@@ -26,6 +26,8 @@ img{-webkit-user-drag:none}
 #phone{position:relative;width:393px;height:852px;flex:none;will-change:transform;border-radius:56px;overflow:hidden;background:#000;isolation:isolate;
   box-shadow:0 0 0 10px #121214,0 0 0 12px #3a3a40,0 0 0 13px #18181a,0 40px 90px rgba(0,0,0,.8)}
 #phone.mob{border-radius:0;box-shadow:none}
+#phone.mob #sb,#phone.mob #island{display:none}
+body.mobb{align-items:flex-start}
 #phone.tiny .spot{display:none}
 #phone.tiny .hgrid{row-gap:16px}
 #phone.mob #hb{bottom:max(6px,env(safe-area-inset-bottom,0px));height:52px}
@@ -674,12 +676,18 @@ function fit(){
     phone.classList.add('mob');
     /* 아주 좁은 폰(360px 미만)만 비율대로 축소, 나머지는 실제 크기 그대로 */
     const k = W < 360 ? W / 360 : 1;
-    phone.style.width = (W / k) + 'px'; phone.style.height = (H / k) + 'px';
+    /* 진짜 폰엔 이미 상태바·다이내믹 아일랜드가 있으니 가짜 상태바 부분(위 40px)은 화면 밖으로 밀어냄 */
+    const CUT = 40;
+    phone.style.width = (W / k) + 'px'; phone.style.height = (H / k + CUT) + 'px';
+    phone.style.transformOrigin = 'top center';
     phone.style.transform = k === 1 ? 'none' : `scale(${k})`;
+    phone.style.marginTop = -(CUT * k) + 'px';
+    document.body.classList.add('mobb');
     phone.classList.toggle('short', H / k < 790);
     phone.classList.toggle('tiny', H / k < 700);
   } else {
     const s = Math.min(1, (H - 40) / 852, (W - 40) / 393); phone.classList.remove('mob');
+    phone.style.marginTop = ''; phone.style.transformOrigin = ''; document.body.classList.remove('mobb');
     phone.style.width = '393px'; phone.style.height = '852px'; phone.style.transform = `scale(${s})`; phone.classList.remove('short');
   }
 }
@@ -733,7 +741,16 @@ $('#batt').setAttribute('width', Math.max(2, 20 * D.battery / 100).toFixed(1));
 if (D.wallpaper) wall.style.backgroundImage = `url('${D.wallpaper}')`;
 function setSB(mode){ const c = mode === 'dark' ? 'dark' : ''; const top = stack[stack.length - 1];
   /* 화면에 이미 '<' 뒤로가기가 있으면 왼쪽 위 '홈'은 숨김 */
-  sb.className = c; hb.className = c; }
+  sb.className = c; hb.className = c;
+  /* 폰으로 볼 때: 진짜 상태바 뒤 배경색을 지금 화면 색에 맞춤 */
+  if (phone.classList.contains('mob')) requestAnimationFrame(() => {
+    let bg = '#000';
+    if (top){ const b = getComputedStyle(top).backgroundColor; if (b && b !== 'rgba(0, 0, 0, 0)' && b !== 'transparent') bg = b; }
+    document.body.style.background = bg;
+    let m = document.querySelector('meta[name=theme-color]'); if (!m){ m = document.createElement('meta'); m.name = 'theme-color'; document.head.appendChild(m); }
+    m.content = bg;
+  });
+}
 
 /* ── keypad (shared by lock screen and locked note) ── */
 const LETTERS = ['', 'ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ'];

@@ -142,7 +142,7 @@ window.PHONE = {
           "time": "오후 12:46"
         },
         {
-          "day": "2026년 6월 26일 금요일"
+          "day": "2026년 9월 26일 토요일"
         },
         {
           "from": "me",
@@ -160,7 +160,7 @@ window.PHONE = {
           "time": "오후 11:48"
         },
         {
-          "day": "2026년 6월 27일 토요일"
+          "day": "2026년 9월 27일 일요일"
         },
         {
           "from": "me",
@@ -1914,9 +1914,66 @@ window.PHONE = {
 
   /* 사진 앱 — src에 파일 이름, caption에 날짜·설명 */
   photos: [
-    { src: null, caption: "" }, { src: null, caption: "" }, { src: null, caption: "" },
-    { src: null, caption: "" }, { src: null, caption: "" }, { src: null, caption: "" },
-    { src: null, caption: "" }, { src: null, caption: "" }, { src: null, caption: "" }
+    {
+      "src": "photos/p01.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p02.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p03.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p04.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p05.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p06.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p07.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p08.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p09.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p10.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p11.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p12.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p13.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p14.jpg",
+      "caption": ""
+    },
+    {
+      "src": "photos/p15.jpg",
+      "caption": ""
+    }
   ],
 
   /* 캘린더 — 6월~12월
@@ -2720,10 +2777,16 @@ window.PHONE = {
       "when": "월요일"
     },
     {
+      "name": "우체국 택배",
+      "type": "in",
+      "kind": "알 수 없음",
+      "when": "월요일"
+    },
+    {
       "name": "1588-****",
       "type": "missed",
       "kind": "알 수 없음",
-      "when": "10월 18일"
+      "when": "일요일"
     },
     {
       "name": "건우",
@@ -2734,12 +2797,6 @@ window.PHONE = {
       "name": "건우",
       "type": "in",
       "when": "10월 9일"
-    },
-    {
-      "name": "우체국 택배",
-      "type": "in",
-      "kind": "알 수 없음",
-      "when": "10월 19일"
     }
   ],
 
