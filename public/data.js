@@ -2825,13 +2825,13 @@ window.PHONE = {
         {
           "name": "pwb",
           "handle": "@biniii32",
-          "avatar": null,
+          "avatar": "profiles/am_bin.jpg",
           "me": true
         },
         {
           "name": "정성찬",
           "handle": "@jsco913",
-          "avatar": null
+          "avatar": "profiles/am_chan.jpg"
         }
       ],
       "tracks": [
