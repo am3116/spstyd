@@ -25,6 +25,8 @@ img{-webkit-user-drag:none}
 #phone{position:relative;width:393px;height:852px;flex:none;will-change:transform;border-radius:56px;overflow:hidden;background:#000;isolation:isolate;
   box-shadow:0 0 0 10px #121214,0 0 0 12px #3a3a40,0 0 0 13px #18181a,0 40px 90px rgba(0,0,0,.8)}
 #phone.mob{border-radius:0;box-shadow:none}
+#phone.mob #hb{bottom:max(6px,env(safe-area-inset-bottom,0px));height:52px}
+#phone.mob #hb i{width:150px;height:6px}
 #wall{position:absolute;inset:-2px;background:linear-gradient(170deg,#18263a 0%,#3d3f5c 45%,#b9786a 100%) center/cover;transition:filter .45s,transform .45s}
 #wall.dim{filter:blur(22px) brightness(.6);transform:scale(1.08)}
 .layer{position:absolute;inset:0}
@@ -41,14 +43,10 @@ img{-webkit-user-drag:none}
 #sb .r{display:flex;gap:6px;align-items:center}
 #sb svg{fill:currentColor}
 #island{position:absolute;z-index:90;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;background:#000;border-radius:20px}
-#hb{position:absolute;z-index:85;bottom:0;left:50%;transform:translateX(-50%);width:220px;height:34px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;touch-action:none;cursor:grab}
+#hb{position:absolute;z-index:85;bottom:0;left:50%;transform:translateX(-50%);width:240px;height:46px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;touch-action:none;cursor:grab}
 #hb:hover i{transform:scaleX(1.08)}
 #hb.pulse i{animation:hbp 1.4s ease-in-out 2}
 @keyframes hbp{50%{transform:scaleX(1.25) translateY(-3px);opacity:.6}}
-#sbk{display:none;position:absolute;left:22px;top:6px;height:48px;padding:0 8px;align-items:center;gap:4px;font-size:14px;font-weight:600;color:inherit;pointer-events:auto}
-#sbk svg{width:7px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-#sbk:active{opacity:.45}
-#sb.crumb #sbk{display:flex}#sb.crumb .t{visibility:hidden}
 #hb i{width:139px;height:5px;border-radius:3px;background:#fff;transition:background .3s,transform .2s}
 #hb.dark i{background:#000}
 
@@ -108,6 +106,13 @@ img{-webkit-user-drag:none}
 .wcal .wn{font-size:46px;font-weight:300;line-height:1;margin:2px 0 8px}
 .wcal .we{font-size:13px;font-weight:600;padding-left:7px;border-left:3px solid #af52de;margin-top:5px;line-height:1.25}
 .wcal .we small{display:block;color:var(--grey);font-weight:400;font-size:12px}
+
+.wmus{background:linear-gradient(160deg,#2b2f38,#121318);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
+.wmus .wart{position:absolute;top:15px;left:16px;width:64px;height:64px;border-radius:9px;background:#333 center/cover;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.wmus .wtx{display:flex;flex-direction:column}
+.wmus b{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wmus small{font-size:13px;opacity:.7}
+.wmus .wst{position:absolute;top:16px;right:14px;font-size:11px;font-weight:600;color:#fa5d73}
 .wwx{background:linear-gradient(180deg,#2f86e6,#58a8f0);color:#fff}
 .wwx .c{font-size:15px;font-weight:600}.wwx .tp{font-size:44px;font-weight:300;line-height:1.1}
 .wwx .ds{position:absolute;left:16px;bottom:14px;font-size:13px;font-weight:600;line-height:1.35}
@@ -268,6 +273,14 @@ img{-webkit-user-drag:none}
 .evt .bar{width:4px;align-self:stretch;border-radius:2px;background:#af52de}
 .evt b{flex:1;font-weight:500}.evt small{color:var(--grey);font-size:14px}
 .cal-pg .nb-back,.cal-pg .nb-right{color:var(--red)}
+.cal-arr{display:flex;gap:6px}
+.cal-arr button{width:40px;height:40px;display:grid;place-items:center;color:var(--red)}
+.cal-arr button:disabled{opacity:.25}
+.cal-arr svg{width:12px;height:20px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.cal-arr .fw svg{transform:scaleX(-1)}
+#evts{border-top:.5px solid var(--sep)}
+.evt b{display:flex;flex-direction:column;gap:1px}
+.evt .ew{color:var(--grey);font-size:13px;font-weight:400}
 
 /* calls */
 .prow{display:flex;align-items:center;gap:8px;padding-left:16px;position:relative;min-height:62px}
@@ -496,7 +509,7 @@ img{-webkit-user-drag:none}
   <div id="lockL" class="layer"></div>
   <div id="appL" class="layer"></div>
   <div id="ov"></div>
-  <div id="sb"><button id="sbk" aria-label="홈으로"><svg viewBox="0 0 7 12"><path d="M6 1 1 6l5 5"/></svg>홈</button><span class="t" id="sbt"></span><span class="r">
+  <div id="sb"><span class="t" id="sbt"></span><span class="r">
     <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
     <svg width="16" height="12" viewBox="0 0 16 12"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.2-1.2A10.3 10.3 0 0 0 8 .6 10.3 10.3 0 0 0 .8 3.5L2 4.7a8.6 8.6 0 0 1 6-2.4Zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2A6.8 6.8 0 0 0 8 4a6.8 6.8 0 0 0-4.8 1.9l1.2 1.2c1-.9 2.2-1.4 3.6-1.4Zm0 3.4c-.6 0-1.2.2-1.6.6L8 11.3l1.6-1.6c-.4-.4-1-.6-1.6-.6Z"/></svg>
     <svg width="27" height="13" viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.8" fill="none" stroke="currentColor" opacity=".4"/><rect id="batt" x="2" y="2" width="14" height="9" rx="2.4"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2Z" opacity=".4"/></svg>
@@ -536,12 +549,13 @@ function fit(){
   const W = Math.round(vv ? vv.width : innerWidth), H = Math.round(vv ? vv.height : innerHeight);
   document.documentElement.style.setProperty('--vh', H + 'px');
   if (W < 520){
-    const s = W / 393; phone.classList.add('mob');
-    phone.style.height = (H / s) + 'px'; phone.style.transform = `scale(${s})`;
-    phone.classList.toggle('short', H / s < 790);
+    /* 폰: 축소하지 않고 실제 화면 크기에 그대로 맞춤 (비율 틀어짐 방지) */
+    phone.classList.add('mob');
+    phone.style.width = W + 'px'; phone.style.height = H + 'px'; phone.style.transform = 'none';
+    phone.classList.toggle('short', H < 790);
   } else {
     const s = Math.min(1, (H - 40) / 852, (W - 40) / 393); phone.classList.remove('mob');
-    phone.style.height = '852px'; phone.style.transform = `scale(${s})`; phone.classList.remove('short');
+    phone.style.width = '393px'; phone.style.height = '852px'; phone.style.transform = `scale(${s})`; phone.classList.remove('short');
   }
 }
 addEventListener('resize', fit); addEventListener('orientationchange', () => setTimeout(fit, 250));
@@ -593,8 +607,7 @@ $('#batt').setAttribute('width', Math.max(2, 20 * D.battery / 100).toFixed(1));
 if (D.wallpaper) wall.style.backgroundImage = `url('${D.wallpaper}')`;
 function setSB(mode){ const c = mode === 'dark' ? 'dark' : ''; const top = stack[stack.length - 1];
   /* 화면에 이미 '<' 뒤로가기가 있으면 왼쪽 위 '홈'은 숨김 */
-  const crumb = top && !top.querySelector('[data-back]');
-  sb.className = c + (crumb ? ' crumb' : ''); hb.className = c; }
+  sb.className = c; hb.className = c; }
 
 /* ── keypad (shared by lock screen and locked note) ── */
 const LETTERS = ['', 'ABC','DEF','GHI','JKL','MNO','PQRS','TUV','WXYZ'];
@@ -659,16 +672,23 @@ function banner(b){
 }
 
 /* ── home ── */
+function musicWidget(){
+  const t = (typeof mState !== 'undefined' && mState.cur) || (D.music && D.music.nowPlaying);
+  if (!t) return '';
+  const playing = typeof mState !== 'undefined' && mState.playing;
+  return `<button class="widget wmus" data-app="music"><span class="wart" style="${t.art ? `background-image:url('${esc(t.art)}')` : ''}"></span>
+    <span class="wtx"><b>${esc(t.title)}</b><small>${esc(t.artist)}</small></span>
+    <span class="wst">${playing ? '재생 중' : '최근 재생'}</span></button>`;
+}
 const unreadTotal = () => D.chats.reduce((s, c) => s + (c.unread || 0), 0);
 const missed = () => D.calls.filter(c => c.type === 'missed').length;
 function renderHome(){
-  const ev = (D.calendar.events[String(D.calendar.today)] || []).slice(0, 2);
-  const w = D.weather;
+  const ev = eventsOn(D.calendar.year, D.calendar.month, D.calendar.today).slice(0, 2);
   const app = (k, label, n) => `<button class="app" data-app="${k}">${appIcon(k, n)}<span class="lbl">${label}</span></button>`;
   homeL.innerHTML = `<div class="hgrid">
-    <button class="widget wcal" data-app="calendar"><div class="wd">${esc(D.dateText.split(' ').pop())}</div><div class="wn">${D.calendar.today}</div>${ev.map(e => `<div class="we">${esc(e.title)}<small>${esc(e.time)}</small></div>`).join('') || '<div class="we">일정 없음</div>'}</button>
-    <button class="widget wwx" data-app="weather"><div class="c">${esc(w.city)}</div><div class="tp">${w.temp}°</div><div class="ds">${esc(w.desc)}<small>최고:${w.hi}° 최저:${w.lo}°</small></div></button>
-    ${app('photos', '사진')}${app('calendar', '캘린더')}${app('clock', '시계')}${app('weather', '날씨')}${app('settings', '설정')}${app('music', '음악')}
+    <button class="widget wcal" data-app="calendar"><div class="wd">${esc(D.dateText.split(' ').pop())}</div><div class="wn">${D.calendar.today}</div>${ev.map(e => `<div class="we" style="border-left-color:${CAL_COLORS[e.cal] || '#af52de'}">${esc(e.title)}<small>${esc(e.time || '하루 종일')}</small></div>`).join('') || '<div class="we">일정 없음</div>'}</button>
+    ${musicWidget()}
+    ${app('photos', '사진')}${app('calendar', '캘린더')}${app('clock', '시계')}${app('settings', '설정')}${app('music', '음악')}
   </div>
   <div class="spot">검색</div>
   <div class="dock">${app('phone', '전화', missed())}${app('safari', 'Safari')}${app('messenger', '메신저', unreadTotal())}${app('notes', '메모')}</div>`;
@@ -722,12 +742,11 @@ hb.addEventListener('pointermove', e => {
 const hbEnd = () => {
   if (!hbDrag) return; const dy = hbDrag.dy; hbDrag = null;
   if (!stack.length) return;
-  if (dy > 40 || dy < 4) goHome();
+  if (dy > 24 || dy < 6) goHome();
   else { const from = appL.style.transform; appL.style.transform = ''; appL.style.borderRadius = ''; appL.animate([{ transform: from }, { transform: 'none' }], { duration: 260, easing: E }); }
 };
 hb.addEventListener('pointerup', hbEnd);
 hb.addEventListener('pointercancel', hbEnd);
-$('#sbk').addEventListener('click', goHome);
 let hintShown = false;
 appL.addEventListener('click', e => { if (e.target.closest('[data-back]')) pop(); });
 
@@ -980,22 +999,53 @@ function photosPage(){
 }
 
 /* ── calendar ── */
-function calendarPage(){
-  const C = D.calendar, first = new Date(C.year, C.month - 1, 1).getDay(), days = new Date(C.year, C.month, 0).getDate();
-  let cells = '';
-  for (let i = 0; i < first; i++) cells += '<div class="cal-d"></div>';
-  for (let d = 1; d <= days; d++){
-    const wd = (first + d - 1) % 7;
-    cells += `<button class="cal-d${wd === 0 || wd === 6 ? ' we' : ''}${d === C.today ? ' td sel' : ''}" data-day="${d}"><span>${d}</span>${C.events[d] ? '<i></i>' : ''}</button>`;
-  }
-  const list = d => (C.events[d] || []).map(e => `<div class="evt"><span class="bar"></span><b>${esc(e.title)}</b><small>${esc(e.time)}</small></div>`).join('') || '<div class="evt muted">일정 없음</div>';
-  const p = page('cal-pg', 'dark', `${nav(C.year + '년')}<div class="scroll"><div class="cal-head"><div class="lt">${C.month}월</div></div>
-    <div class="cal-g">${'일월화수목금토'.split('').map(w => `<div class="cal-w">${w}</div>`).join('')}${cells}</div><div id="evts" style="border-top:.5px solid var(--sep)">${list(C.today)}</div></div>`);
-  p.addEventListener('click', e => {
-    const b = e.target.closest('[data-day]'); if (!b) return;
-    p.querySelectorAll('.cal-d.sel').forEach(x => x.classList.remove('sel')); b.classList.add('sel');
-    p.querySelector('#evts').innerHTML = list(b.dataset.day);
+const CAL_COLORS = { 학사: '#ff3b30', 개인: '#af52de', 약속: '#34c759', 운동: '#ff9500', 과제: '#007aff' };
+const pad2 = n => String(n).padStart(2, '0');
+const tmin = t => { const m = String(t || '').match(/(오전|오후)\s*(\d+):(\d+)/); if (!m) return -1; let h = +m[2] % 12; if (m[1] === '오후') h += 12; return h * 60 + +m[3]; };
+function eventsOn(y, mo, d){
+  const C = D.calendar, key = `${y}-${pad2(mo)}-${pad2(d)}`, out = [];
+  const dt = new Date(y, mo - 1, d), dow = dt.getDay();
+  (C.events[key] || []).forEach(e => out.push(e));
+  if (y === C.year && mo === C.month && C.events[String(d)]) C.events[String(d)].forEach(e => out.push(e));
+  (C.weekly || []).forEach(w => {
+    if (w.dow !== dow) return;
+    if (w.from && key < w.from) return; if (w.to && key > w.to) return;
+    if ((w.skip || []).includes(key)) return;
+    out.push(w);
   });
+  (C.ranges || []).forEach(r => { if (key >= r.from && key <= r.to) out.push(Object.assign({ time: '하루 종일' }, r)); });
+  return out.sort((a, b) => tmin(a.time) - tmin(b.time));
+}
+function calendarPage(){
+  const C = D.calendar;
+  const min = C.min || '2026-06', max = C.max || '2026-12';
+  let y = C.year, mo = C.month, selD = C.today;
+  const p = page('cal-pg', 'dark', `<div class="nav"><button class="nb-back" data-back>${IC.back}<span class="cy"></span></button><span></span><span class="nb-right cal-arr"><button data-mv="-1" aria-label="이전 달">${IC.back}</button><button data-mv="1" aria-label="다음 달" class="fw">${IC.back}</button></span></div>
+    <div class="scroll"><div class="cal-head"><div class="lt cm"></div></div><div class="cal-g"></div><div id="evts"></div></div>`);
+  const list = d => { const L = eventsOn(y, mo, d); return L.length ? L.map(e => `<div class="evt"><span class="bar" style="background:${CAL_COLORS[e.cal] || '#af52de'}"></span><b>${esc(e.title)}${e.where ? `<small class="ew">${esc(e.where)}</small>` : ''}</b><small>${esc(e.time || '하루 종일')}</small></div>`).join('') : '<div class="evt muted">일정 없음</div>'; };
+  const draw = () => {
+    const first = new Date(y, mo - 1, 1).getDay(), days = new Date(y, mo, 0).getDate();
+    const isNow = y === C.year && mo === C.month;
+    let cells = '';
+    for (let i = 0; i < first; i++) cells += '<div class="cal-d"></div>';
+    for (let d = 1; d <= days; d++){
+      const wd = (first + d - 1) % 7, n = eventsOn(y, mo, d).length;
+      cells += `<button class="cal-d${wd === 0 || wd === 6 ? ' we' : ''}${isNow && d === C.today ? ' td' : ''}${d === selD ? ' sel' : ''}" data-day="${d}"><span>${d}</span>${n ? '<i></i>' : ''}</button>`;
+    }
+    p.querySelector('.cy').textContent = y + '년';
+    p.querySelector('.cm').textContent = mo + '월';
+    p.querySelector('.cal-g').innerHTML = '일월화수목금토'.split('').map(w => `<div class="cal-w">${w}</div>`).join('') + cells;
+    p.querySelector('#evts').innerHTML = list(selD);
+    const k = `${y}-${pad2(mo)}`;
+    p.querySelector('[data-mv="-1"]').disabled = k <= min; p.querySelector('[data-mv="1"]').disabled = k >= max;
+  };
+  p.addEventListener('click', e => {
+    const mv = e.target.closest('[data-mv]');
+    if (mv && !mv.disabled){ mo += +mv.dataset.mv; if (mo < 1){ mo = 12; y--; } if (mo > 12){ mo = 1; y++; } selD = (y === C.year && mo === C.month) ? C.today : 1; draw(); return; }
+    const b = e.target.closest('[data-day]'); if (!b) return;
+    selD = +b.dataset.day; draw();
+  });
+  draw();
   return p;
 }
 
@@ -1183,7 +1233,7 @@ function settingsPage(){
     </div></div>`);
 }
 
-const APPS = { messenger: messengerPage, notes: notesPage, clock: clockPage, photos: photosPage, calendar: calendarPage, phone: phonePage, safari: safariPage, weather: weatherPage, settings: settingsPage, music: musicPage };
+const APPS = { messenger: messengerPage, notes: notesPage, clock: clockPage, photos: photosPage, calendar: calendarPage, phone: phonePage, safari: safariPage, settings: settingsPage, music: musicPage };
 
 setSB('light'); renderLock(); renderHome();
 })();
