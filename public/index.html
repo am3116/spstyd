@@ -657,6 +657,16 @@ function syncClock(){
   return changed;
 }
 syncClock();
+/* 날짜 자리표시: {today} / {yesterday} → 열어본 날(한국 시간) 기준 날짜로 */
+(function relDates(){
+  const C = D.calendar, WD = '일월화수목금토';
+  const mk = off => { const d = new Date(C.year, C.month - 1, C.today + off); return { y: d.getFullYear(), mo: d.getMonth() + 1, d: d.getDate(), w: WD[d.getDay()] }; };
+  const T = { '{today}': mk(0), '{yesterday}': mk(-1) };
+  const lab = x => `${x.y}년 ${x.mo}월 ${x.d}일 ${x.w}요일`;
+  D.chats.forEach(c => (c.messages || []).forEach(m => { if (m.day && T[m.day]) m.day = lab(T[m.day]); }));
+  const ev = C.events || {};
+  Object.keys(T).forEach(k => { const key = '@' + k.slice(1, -1); if (!ev[key]) return; const x = T[k]; const dk = `${x.y}-${String(x.mo).padStart(2, '0')}-${String(x.d).padStart(2, '0')}`; ev[dk] = (ev[dk] || []).concat(ev[key]); delete ev[key]; });
+})();
 const E = 'cubic-bezier(.32,.72,0,1)';
 const $ = s => document.querySelector(s);
 const el = html => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
@@ -1023,17 +1033,21 @@ function chatPage(c){
 
 /* 입력창에 썼다 지웠다 반복 */
 const wait = ms => new Promise(r => setTimeout(r, ms));
+/* 입력창에 한 번 써서 잠깐 망설이다(커서 깜빡) 보냄 — 새로고침 전까지 한 번만 */
 function draftLoop(fld, lines, p){
+  const c = p._chat; if (!c || c._draftDone || c._drafting) return;
+  c._drafting = true;
   const set = t => { fld.classList.toggle('has', !!t); fld.innerHTML = t ? `${esc(t)}<span class="cur"></span>` : '<span class="cur"></span>메시지 입력'; };
+  const line = lines[0];
   (async () => {
     await wait(1500);
-    for (let k = 0; p.isConnected; k++){
-      const line = lines[k % lines.length];
-      for (let i = 1; i <= line.length; i++){ if (!p.isConnected) return; set(line.slice(0, i)); await wait(170 + Math.random() * 160); }
-      await wait(1800);
-      for (let i = line.length - 1; i >= 0; i--){ if (!p.isConnected) return; set(line.slice(0, i)); await wait(70); }
-      await wait(2200);
-    }
+    for (let i = 1; i <= line.length; i++){ if (!p.isConnected){ c._drafting = false; return; } set(line.slice(0, i)); await wait(170 + Math.random() * 160); }
+    await wait(1900);
+    if (!p.isConnected){ c._drafting = false; return; }
+    c._draftDone = true; c._drafting = false;
+    fld.classList.remove('has'); fld.innerHTML = '메시지 입력';
+    const m = { from: 'me', text: line, time: nowTime(), read: false };
+    c.messages.push(m); c.last = m.time; p._api.append(m);
   })();
 }
 /* 시간이 지나면서 오는 카톡 */
