@@ -87,7 +87,7 @@ window.PHONE = {
       "name": "성차니형❤️",
       "avatar": "profiles/chan.jpg",
       "unread": 0,
-      "last": "8월 11일",
+      "last": "10월 13일",
       "pinned": true,
       "profile": {
         "status": "경영학과 22"
@@ -177,7 +177,7 @@ window.PHONE = {
           "fold": true
         },
         {
-          "day": "2026년 8월 10일 월요일"
+          "day": "2026년 10월 12일 월요일"
         },
         {
           "from": "them",
@@ -275,7 +275,7 @@ window.PHONE = {
           "time": "오후 7:07"
         },
         {
-          "day": "2026년 8월 11일 화요일"
+          "day": "2026년 10월 13일 화요일"
         },
         {
           "from": "them",
@@ -1721,10 +1721,10 @@ window.PHONE = {
       "name": "박소연",
       "avatar": null,
       "unread": 0,
-      "last": "8월 10일",
+      "last": "10월 12일",
       "messages": [
         {
-          "day": "2026년 8월 10일 월요일"
+          "day": "2026년 10월 12일 월요일"
         },
         {
           "from": "them",
@@ -2438,6 +2438,7 @@ window.PHONE = {
           "where": "동네 고깃집"
         }
       ],
+      "2026-10-13": [{ "title": "전공 실기 시험", "time": "오전 9:00", "cal": "학사", "where": "체육관" }],
       "2026-10-12": [
         {
           "title": "중등임용 원서접수 마감",

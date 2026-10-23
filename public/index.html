@@ -381,6 +381,36 @@ img{-webkit-user-drag:none}
 .prof-acts svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.6}
 
 /* music — 공유 플레이리스트 (iOS 26 애플뮤직 느낌) */
+/* phone 26 */
+.ph26{background:#fff;color:#000}
+.ph26 .scroll{padding-top:112px;padding-bottom:130px}
+.ph26 .gbar{color:#000}
+.pedit{font-size:16px;padding:0 16px}
+.ph26 .gbar .lgc{width:46px}
+.pseg{padding:4px;gap:0;font-size:15px}
+.pseg button{height:38px;padding:0 15px;border-radius:19px;white-space:nowrap}
+.pseg .on{background:rgba(0,0,0,.09);font-weight:500}
+.csr2{margin:2px 16px 18px;height:40px;border-radius:20px;background:rgba(118,118,128,.12);display:flex;align-items:center;gap:7px;padding:0 12px;color:#8a8a8e;font-size:17px}
+.csr2 svg{width:18px;height:18px;color:#000}.csr2 .mic{margin-left:auto}
+.prow2{display:flex;align-items:center;gap:12px;padding:0 16px;min-height:76px;position:relative}
+.prow2+.prow2::before{content:'';position:absolute;top:0;left:82px;right:16px;height:.5px;background:#dcdce0}
+.pav{width:54px;height:54px;border-radius:50%;flex:none;display:grid;place-items:center;overflow:hidden;background:linear-gradient(180deg,#a5b1d9,#7480b8);color:#fff;font-size:19px;font-weight:600;letter-spacing:-.03em}
+.pav img{width:100%;height:100%;object-fit:cover}
+.pav.ps svg{width:100%;height:100%}
+.prow2 .pn{flex:1;min-width:0}
+.prow2 .pn b{display:block;font-size:17px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow2.miss .pn b{color:#e5383b}
+.prow2 .pn small{display:flex;align-items:center;gap:4px;color:#8a8a8e;font-size:15px;margin-top:1px}
+.prow2 .pn small svg{width:11px;height:11px;fill:none;stroke:#8a8a8e;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.prow2 .pd{color:#8a8a8e;font-size:15px;flex:none}
+.prow2 .inf{width:38px;height:38px;border-radius:50%;background:#f2f2f4;display:grid;place-items:center;flex:none}
+.prow2 .inf svg{width:20px;height:20px;stroke:#0a84ff;fill:none;stroke-width:1.5}
+.ptabs{position:absolute;z-index:8;left:14px;right:14px;bottom:24px;height:66px;border-radius:33px;display:flex;align-items:center;padding:0 5px;background:rgba(250,250,250,.88)}
+.ptabs span{flex:1;height:56px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:500;color:#111;white-space:nowrap}
+.ptabs svg.ln2{fill:none;stroke:currentColor;width:28px}
+.ptabs svg{width:24px;height:24px;fill:currentColor}
+.ptabs .on{background:rgba(0,0,0,.07);color:#0a84ff}
+
 /* ── liquid glass (iOS 26) ── */
 .lg{-webkit-backdrop-filter:blur(25px) saturate(180%);backdrop-filter:blur(25px) saturate(180%);background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 32px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
 .lgc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none}
@@ -518,7 +548,8 @@ img{-webkit-user-drag:none}
 .mini svg{width:26px;height:26px;fill:#111}
 .mtabs{position:absolute;z-index:7;left:14px;right:14px;bottom:28px;display:flex;gap:10px;align-items:center}
 .tabs{flex:1;height:64px;border-radius:32px;display:flex;align-items:center;padding:0 5px}
-.tabs>span{flex:1;height:54px;border-radius:27px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:500;color:#111}
+.tabs>span{flex:1;height:54px;border-radius:27px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:500;color:#111;white-space:nowrap}
+.ptabs svg.ln2{fill:none;stroke:currentColor;width:28px}
 .tabs svg{width:25px;height:25px;fill:#111}
 .tabs>span.on{background:rgba(0,0,0,.07);color:var(--mred)}
 .tabs>span.on svg{fill:var(--mred)}
@@ -1260,11 +1291,18 @@ function calendarPage(){
 
 /* ── phone ── */
 function phonePage(){
-  const ICON_OUT = IC.out;
-  const rows = f => D.calls.filter(c => f === 'all' || c.type === 'missed').map(c => `<div class="prow${c.type === 'missed' ? ' miss' : ''}"><span class="pi">${c.type === 'out' ? ICON_OUT : ''}</span><div class="pn"><b>${esc(c.name)}${c.count > 1 ? ` (${c.count})` : ''}</b><small>${esc(c.kind || '휴대전화')}</small></div><span class="pd">${esc(c.when)}</span><span class="inf">${IC.info}</span></div>`).join('') || '<p class="mempty">최근 통화 없음</p>';
-  const p = page('', 'dark', `<div class="nav"><span class="nb-back" style="color:var(--blue)">편집</span><div class="seg"><button class="on" data-f="all">모두</button><button data-f="miss">부재중 전화</button></div><span></span></div>
-    <div class="scroll"><div class="lt">최근 통화</div><div class="srch">${IC.search}검색</div><div id="calls">${rows('all')}</div></div>
-    <div class="tabbar"><span><svg viewBox="0 0 24 24"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>즐겨찾기</span><span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>최근 통화</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="10" r="3"/><path d="M6.5 18.5c1.2-2 3.2-3 5.5-3s4.3 1 5.5 3"/></svg>연락처</span><span><svg viewBox="0 0 24 24">${[6,12,18].map(x=>[5,10,15].map(y=>`<circle cx="${x}" cy="${y}" r="1.4"/>`).join('')).join('')}<circle cx="12" cy="20" r="1.4"/></svg>키패드</span></div>`);
+  const avOf = c => {
+    const chat = D.chats.find(x => x.name === c.name && !x.group);
+    if (chat && chat.avatar) return `<span class="pav"><img src="${esc(chat.avatar)}" alt=""></span>`;
+    if (/^[\d+(]/.test(c.name)) return `<span class="pav ps">${PERSON}</span>`;
+    const n = c.name.replace(/[^\p{L}\p{N}]/gu, '');
+    return `<span class="pav">${esc(n.length <= 2 ? n : n[0])}</span>`;
+  };
+  const ARR = t => t === 'out' ? '<svg viewBox="0 0 12 12"><path d="M3 9 9 3M4.5 3H9v4.5"/></svg>' : '<svg viewBox="0 0 12 12"><path d="M9 3 3 9M3 4.5V9h4.5"/></svg>';
+  const rows = f => D.calls.filter(c => f === 'all' || c.type === 'missed').map(c => `<div class="prow2${c.type === 'missed' ? ' miss' : ''}">${avOf(c)}<div class="pn"><b>${esc(c.name)}</b><small>${ARR(c.type)}${esc(c.kind || '휴대전화')}${c.count > 1 ? ` (${c.count})` : ''}</small></div><span class="pd">${esc(c.when)}</span><span class="inf">${IC.info}</span></div>`).join('') || '<p class="mempty">최근 통화 없음</p>';
+  const p = page('ph26', 'dark', `<div class="gbar"><span class="lg lgp pedit">편집</span><span class="lg lgp pseg"><button class="on" data-f="all">모두</button><button data-f="miss">부재중 전화</button></span><span class="lg lgc"><svg viewBox="0 0 24 24" class="ln2"><path d="M4 7h16M7 12h10M10 17h4"/></svg></span></div>
+    <div class="scroll"><div class="lt">최근 통화</div><div class="csr2">${IC.search.replace('<svg', '<svg class="ln2"')}검색${NI.mic}</div><div id="calls">${rows('all')}</div></div>
+    <div class="ptabs lg"><span><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z"/></svg>즐겨찾기</span><span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6.5V12H8.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>최근 통화</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="9.5" r="3.6" fill="#fff"/><path d="M5.6 18.6c1.3-2.6 3.6-3.9 6.4-3.9s5.1 1.3 6.4 3.9" fill="#fff"/></svg>연락처</span><span><svg viewBox="0 0 24 24">${[5,12,19].map(x=>[4,10,16].map(y=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join('')).join('')}<circle cx="12" cy="21.5" r="2.4"/></svg>키패드</span><span><svg viewBox="0 0 28 24" class="ln2" style="stroke-width:2.4"><circle cx="7" cy="12" r="4.8"/><circle cx="21" cy="12" r="4.8"/><path d="M7 16.8h14"/></svg>음성 사서함</span></div>`);
   p.addEventListener('click', e => {
     const b = e.target.closest('[data-f]'); if (!b) return;
     p.querySelectorAll('[data-f]').forEach(x => x.classList.toggle('on', x === b));
