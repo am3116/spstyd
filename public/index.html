@@ -316,6 +316,8 @@ img{-webkit-user-drag:none}
 .prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
 
 /* messenger extras */
+.older{display:block;margin:10px auto 4px;padding:6px 14px;border-radius:14px;background:rgba(0,0,0,.12);color:#fff;font-size:12.5px}
+.skip{position:absolute;inset:0;z-index:95;background:#000;display:grid;place-items:center;color:#fff;font-size:20px;font-weight:600;letter-spacing:.02em;opacity:0}
 .bb .lnk{color:#2f6fd6;text-decoration:underline;word-break:break-all}
 .bb.haspv{padding-bottom:0;overflow:hidden;max-width:240px}
 .lpv{margin:9px -11px 0;padding:10px 12px 11px;border-top:.5px solid rgba(0,0,0,.1);background:#f7f7f7;display:flex;flex-direction:column;gap:2px;white-space:normal}
@@ -657,6 +659,7 @@ function unlock(){
   homeL.animate([{ transform: 'scale(1.12)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 420, easing: E });
   (D.banners || []).forEach(b => setTimeout(() => banner(b), (b.delay || 5) * 1000));
   (D.incoming || []).forEach(x => setTimeout(() => deliver(x), (x.after || 10) * 1000));
+  runScene();
 }
 
 /* ── banner ── */
@@ -787,15 +790,26 @@ function lineHTML(c, m, i, first, showTime){
 }
 function chatPage(c){
   const playLive = !c._played; c._played = true; c.unread = 0;
-  const shown = c.messages.filter(m => !(playLive && m.live));
+  const all = c.messages.filter(m => !(playLive && m.live));
   const queue = playLive ? c.messages.filter(m => m.live) : [];
-  let html = '', prevWho = null;
-  shown.forEach((m, i) => {
-    if (m.day){ html += `<div class="dpill"><span>${esc(m.day)}</span></div>`; prevWho = null; return; }
-    const who = whoOf(c, m), next = shown[i + 1];
-    const showTime = !(next && !next.day && whoOf(c, next) === who && next.time === m.time);
-    html += lineHTML(c, m, i, who !== prevWho, showTime); prevWho = who;
-  });
+  let limit = c.pageSize || 30, prevWho = null;
+  const build = () => {
+    /* 뒤에서부터 limit개 메시지(날짜선 제외)만 */
+    let n = 0, start = all.length;
+    while (start > 0 && n < limit){ start--; if (!all[start].day) n++; }
+    while (start > 0 && !all[start].day) start--;   /* 날짜선부터 보이게 */
+    const shown = all.slice(start);
+    let html = start > 0 ? '<button class="older" data-older>이전 대화 보기</button>' : '';
+    prevWho = null;
+    shown.forEach((m, i) => {
+      if (m.day){ html += `<div class="dpill"><span>${esc(m.day)}</span></div>`; prevWho = null; return; }
+      const who = whoOf(c, m), next = shown[i + 1];
+      const showTime = !(next && !next.day && whoOf(c, next) === who && next.time === m.time);
+      html += lineHTML(c, m, start + i, who !== prevWho, showTime); prevWho = who;
+    });
+    return html;
+  };
+  const html = build();
   const total = unreadTotal();
   const input = c.channel
     ? `<div class="cin blocked">알림 전용 채널이라 메시지를 보낼 수 없어요.</div>`
@@ -807,7 +821,7 @@ function chatPage(c){
     <div class="msgs">${html}</div>${input}`);
   p._chat = c;
   const box = p.querySelector('.msgs');
-  if (c.draftLoop && !c.blocked) draftLoop(p.querySelector('.fld'), [].concat(c.draftLoop), p);
+  if (c.draftLoop && !c.blocked && !(D.scene && D.scene.chat === c.name)) draftLoop(p.querySelector('.fld'), [].concat(c.draftLoop), p);
   const toEnd = () => { box.scrollTop = box.scrollHeight; };
   requestAnimationFrame(toEnd);
   let lastWho = prevWho;
@@ -829,8 +843,20 @@ function chatPage(c){
   };
   if (queue.length) setTimeout(() => play(queue), 800);
   p._receive = m => play([m]);
+  /* 장면 연출용 */
+  const fld = p.querySelector('.fld');
+  p._api = {
+    append: m => append(m),
+    typing: () => typing(),
+    setDraft: t => { if (!fld) return; fld.classList.toggle('has', !!t); fld.innerHTML = t ? `${esc(t)}<span class="cur"></span>` : '메시지 입력'; },
+    markRead: () => box.querySelectorAll('.rd').forEach(r => r.remove())
+  };
 
   p.addEventListener('click', e => {
+    if (e.target.closest('[data-older]')){
+      const h0 = box.scrollHeight, t0 = box.scrollTop; limit += c.pageSize || 30;
+      box.innerHTML = build(); box.scrollTop = box.scrollHeight - h0 + t0; return;
+    }
     if (e.target.closest('.notice')) return e.target.closest('.notice').classList.toggle('open');
     const pr = e.target.closest('[data-prof]'); if (pr) return showProfile(c, pr.dataset.prof, p);
     const v = e.target.closest('[data-voice]'); if (v) return playVoice(v);
@@ -874,6 +900,61 @@ function deliver(x){
   const preview = m.sticker ? '이모티콘을 보냈습니다.' : m.img !== undefined || m.imgs ? '사진을 보냈습니다.' : m.voice ? '음성메시지를 보냈습니다.' : m.text;
   banner({ app: 'messenger', from: c.name, text: preview, open: { app: 'messenger', chat: c.name } });
   if (!stack.length) renderHome(); else if (top && top.onShow) top.onShow();
+}
+/* ── 장면 연출 (data.js의 scene) ── */
+function setFixedClock(t24, dateText){
+  D.realTime = false; D.time = t24; if (dateText) D.dateText = dateText;
+  const m = String(dateText || '').match(/(\d+)월 (\d+)일/); if (m){ D.calendar.month = +m[1]; D.calendar.today = +m[2]; }
+  clock12 = to12(D.time); $('#sbt').textContent = clock12;
+}
+async function runScene(){
+  const S = D.scene; if (!S || !S.steps) return;
+  const c = D.chats.find(x => x.name === S.chat); if (!c) return;
+  const chatTop = () => { const t = stack[stack.length - 1]; return t && t._chat === c && t.isConnected ? t : null; };
+  const waitOpen = async () => { while (!chatTop()) await wait(400); return chatTop(); };
+  const put = m => { m.time = m.time || nowTime(); c.messages.push(m); c.last = m.time; };
+  for (const st of S.steps){
+    if (st.wait){ await wait(st.wait * 1000); continue; }
+    if (st.waitOpen){ await waitOpen(); await wait(800); continue; }
+    if (st.from === 'them' && (st.text || st.sticker)){
+      const m = Object.assign({}, st); delete m.wait;
+      const top = chatTop();
+      if (top){ put(m); top._receive(m); await wait(Math.min(2600, 900 + String(m.text || '').length * 60) + 600); }
+      else deliver(Object.assign({ chat: c.name }, m));
+      continue;
+    }
+    if (st.draft){
+      const top = await waitOpen();
+      for (let k = 0; k < (st.loops || 2); k++){
+        const line = st.draft;
+        for (let i = 1; i <= line.length; i++){ top._api.setDraft(line.slice(0, i)); await wait(170 + Math.random() * 160); }
+        await wait(1600);
+        if (k < (st.loops || 2) - 1 || !st.thenSend){ for (let i = line.length - 1; i >= 0; i--){ top._api.setDraft(line.slice(0, i)); await wait(70); } await wait(1800); }
+      }
+      if (st.thenSend){ await wait(700); top._api.setDraft(''); const m = { from: 'me', text: st.draft, read: false }; put(m); top._api.append(m); }
+      continue;
+    }
+    if (st.typing){
+      const top = await waitOpen();
+      for (let k = 0; k < st.typing.length; k++){
+        if (k % 2 === 0){ const t = top._api.typing(); await wait(st.typing[k] * 1000); t.remove(); }
+        else await wait(st.typing[k] * 1000);
+      }
+      continue;
+    }
+    if (st.read){ c.messages.forEach(m => { if (m.from === 'me') m.read = true; }); const top = chatTop(); if (top) top._api.markRead(); continue; }
+    if (st.skip){
+      const o = el(`<div class="skip"><span>${esc(st.skip.label || '다음 날 아침')}</span></div>`); ov.appendChild(o);
+      o.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 900, fill: 'forwards' });
+      await wait(1100);
+      setFixedClock(st.skip.time, st.skip.dateText);
+      if (st.skip.day){ const m = { day: st.skip.day }; c.messages.push(m); const top = chatTop(); if (top) top._api.append(m); }
+      await wait(1500);
+      o.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 900, fill: 'forwards' }).onfinish = () => o.remove();
+      if (!stack.length) renderHome();
+      continue;
+    }
+  }
 }
 let audioEl = null;
 function playVoice(btn){
