@@ -110,7 +110,7 @@ img{-webkit-user-drag:none}
 .wcal .we small{display:block;color:var(--grey);font-weight:400;font-size:12px}
 
 .wmus{background:linear-gradient(160deg,#2b2f38,#121318);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;gap:2px}
-.wmus .wart{position:absolute;top:15px;left:16px;width:64px;height:64px;border-radius:9px;background:#333 center/cover;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.wmus .wart{position:absolute;top:16px;left:16px;width:48px;height:48px;border-radius:8px;background:#333 center/cover;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 .wmus .wtx{display:flex;flex-direction:column}
 .wmus b{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wmus small{font-size:13px;opacity:.7}
@@ -221,22 +221,6 @@ img{-webkit-user-drag:none}
 .banner{position:absolute;top:52px;left:8px;right:8px;z-index:70}
 .banner .ncard{background:rgba(245,245,247,.86);box-shadow:0 8px 30px rgba(0,0,0,.18)}
 
-/* notes */
-.notes-pg .nb-back,.notes-pg .nb-right{color:var(--note)}
-.note-row{flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;min-height:66px;padding:10px 16px}
-.note-row b{font-size:17px;font-weight:600;display:flex;align-items:center;gap:6px}
-.note-row b svg{width:14px;height:14px;fill:var(--grey)}
-.note-row small{font-size:15px;color:var(--grey);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
-.note-row small em{font-style:normal;color:#3c3c43;margin-right:6px}
-.note-v{padding:4px 22px 120px;white-space:pre-line;font-size:17px;line-height:1.55}
-.note-v .nd{text-align:center;color:var(--grey);font-size:13px;margin-bottom:12px}
-.note-v h2{font-size:28px;margin:0 0 6px;font-weight:700;line-height:1.25}
-.note-lock{position:absolute;inset:98px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:0 40px 120px;text-align:center}
-.note-lock svg{width:44px;height:44px;fill:var(--note)}
-.note-lock b{font-size:19px}
-.note-lock p{margin:0;color:var(--grey);font-size:15px;line-height:1.4}
-.note-lock button{margin-top:8px;color:var(--note);font-size:17px;font-weight:600}
-
 /* alarms */
 .alarm{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;position:relative;width:100%;text-align:left}
 .alarm+.alarm::before{content:'';position:absolute;top:0;left:16px;right:0;height:.5px;background:rgba(255,255,255,.15)}
@@ -259,166 +243,86 @@ img{-webkit-user-drag:none}
 .viewer .cap{position:absolute;left:0;right:0;bottom:56px;text-align:center;color:#fff;font-size:15px;padding:0 24px}
 .viewer .nav .nb-back{color:#fff}
 
-/* calendar */
-.cal-head{display:flex;justify-content:space-between;align-items:baseline;margin:0 16px 10px}
-.cal-head .lt{margin:0}
-.cal-g{display:grid;grid-template-columns:repeat(7,1fr);text-align:center}
-.cal-w{font-size:12px;color:var(--grey);font-weight:500;padding:4px 0 6px;border-bottom:.5px solid var(--sep)}
-.cal-d{height:56px;padding-top:7px;font-size:19px;display:flex;flex-direction:column;align-items:center;border-top:.5px solid #eee}
-.cal-d span{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-variant-numeric:tabular-nums}
-.cal-d.td span{color:var(--red);font-weight:600}
-.cal-d.sel span{background:#000;color:#fff;font-weight:600}
-.cal-d.sel.td span{background:var(--red);color:#fff}
-.cal-d.we{color:var(--grey)}
-.cal-d i{width:5px;height:5px;border-radius:50%;background:#c7c7cc;margin-top:3px}
+
+/* ── liquid glass (iOS 26) ── */
+.lg{-webkit-backdrop-filter:blur(25px) saturate(180%);backdrop-filter:blur(25px) saturate(180%);background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 32px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
+.lgc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none}
+.lgc svg{width:20px;height:20px}
+.lgp{height:46px;border-radius:23px;display:flex;align-items:center;gap:22px;padding:0 18px;flex:none}
+.lgp svg{width:21px;height:21px}
+.gbar{position:absolute;z-index:8;top:52px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.gbar>*{pointer-events:auto}
+.gfoot{position:absolute;z-index:8;left:16px;right:16px;bottom:30px;display:flex;justify-content:space-between;align-items:center;gap:10px;pointer-events:none}
+.gfoot>*{pointer-events:auto}
+.ln2{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bk svg{width:12px;height:20px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+
+/* notes 26 */
+.n26{background:#f2f2f7;color:#000;--nt:#e0a700}
+.n26 .scroll{padding-top:104px;padding-bottom:130px}
+.n26 .gbar,.n26 .gfoot{color:var(--nt)}
+.n26 .dots svg{fill:var(--nt)}
+.n26 .lt{margin-bottom:0}
+.ncount{margin:0 16px 22px;color:#8a8a8e;font-size:15px}
+.nsec{font-size:21px;font-weight:700;margin:0 16px 8px;letter-spacing:-.01em}
+.nbox{background:#fff;border-radius:22px;margin:0 16px 26px;overflow:hidden}
+.nrow{display:block;width:100%;text-align:left;padding:11px 18px;position:relative}
+.nrow+.nrow::before{content:'';position:absolute;top:0;left:18px;right:0;height:.5px;background:#d1d1d6}
+.nrow b{display:block;font-size:17px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nrow small{display:flex;align-items:center;gap:7px;font-size:15px;color:#8a8a8e;margin-top:2px;white-space:nowrap;overflow:hidden}
+.nrow small em{font-style:normal;color:#3c3c43}
+.nrow small i{font-style:normal;overflow:hidden;text-overflow:ellipsis}
+.nrow small svg{width:12px;height:12px;fill:#8a8a8e;flex:none;margin-right:-3px}
+.nsrch{flex:1;height:46px;border-radius:23px;display:flex;align-items:center;gap:8px;padding:0 16px;color:#6d6d72;font-size:17px}
+.nsrch svg{width:19px;height:19px;flex:none}
+.nsrch .mic{margin-left:auto}
+.ncomp svg{width:22px;height:22px}
+.nv26 .scroll{padding-top:108px;padding-bottom:140px;background:#fff}
+.nv26{background:#fff}
+.note-v{padding:4px 22px 40px;white-space:pre-line;font-size:17px;line-height:1.55}
+.note-v .nd{text-align:center;color:#8a8a8e;font-size:13px;margin-bottom:12px}
+.note-v h2{font-size:28px;margin:0 0 6px;font-weight:700;line-height:1.25}
+.ntools{flex:1;height:50px;border-radius:25px;display:flex;justify-content:space-around;align-items:center;color:var(--nt)}
+.ntools svg{width:23px;height:23px}
+.nlock{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:0 40px 60px;text-align:center}
+.nlock svg{width:46px;height:46px;fill:#a1a1a6}
+.nlock b{font-size:20px;font-weight:600;margin-top:6px}
+.nlock p{margin:0;color:#8a8a8e;font-size:15px;line-height:1.4}
+.nlock button{margin-top:10px;color:var(--nt);font-size:17px;font-weight:600;padding:10px 22px;border-radius:22px}
+
+/* calendar 26 */
+.c26{background:#fff;color:#000;--cr:#ff3b30}
+.c26 .gbar,.c26 .gfoot{color:var(--cr)}
+.c26 .gbar .yr{font-size:17px;color:var(--cr);gap:6px;padding:0 16px 0 14px}
+.cwk{position:absolute;z-index:7;top:0;left:0;right:0;padding:106px 0 6px;display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:12px;font-weight:500;color:#000;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);box-shadow:0 .5px 0 rgba(0,0,0,.12)}
+.cwk span:first-child,.cwk span:last-child{color:#8a8a8e}
+.c26 .scroll{padding-top:132px;padding-bottom:120px}
+.cmon h3{font-size:22px;font-weight:700;margin:16px 0 6px;padding-left:10px}
+.cmon h3.cur{color:var(--cr)}
+.cgr{display:grid;grid-template-columns:repeat(7,1fr)}
+.cday{min-height:74px;border-top:.5px solid #e2e2e6;display:flex;flex-direction:column;align-items:stretch;padding:4px 1px 4px;text-align:center;min-width:0}
+.cday.e{border-top-color:transparent}
+.cday .dn{align-self:center;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:16px;font-weight:500;font-variant-numeric:tabular-nums;margin-bottom:3px}
+.cday.we .dn{color:#8a8a8e}
+.cday.td .dn{background:var(--cr);color:#fff;font-weight:700}
+.cday.sel:not(.td) .dn{background:#000;color:#fff}
+.cday i{display:block;font-style:normal;font-size:9.5px;line-height:14px;height:14px;border-radius:4px;padding:0 3px;margin:1px 1px 0;white-space:nowrap;overflow:hidden;text-overflow:clip;text-align:left;font-weight:600}
+.cday i.more{background:none;color:#8a8a8e;text-align:center;font-weight:500}
+.c26 .gfoot .lg,.n26 .gfoot .lg{background:rgba(255,255,255,.9)}
+.c26 .gfoot .lgp{font-size:17px;font-weight:500;color:var(--cr);padding:0 22px}
+.csh{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,.18);animation:fade .2s}
+.csh .sh2{margin:0 8px 8px;border-radius:32px;padding:18px 0 22px;max-height:60%;overflow:auto;background:rgba(255,255,255,.82);animation:up .32s cubic-bezier(.32,.72,0,1)}
+.csh h4{margin:0 22px 8px;font-size:20px;font-weight:700}
+.csh h4 small{display:block;font-size:14px;font-weight:500;color:#8a8a8e;margin-top:2px}
+.csh .evt{padding:11px 22px}
 .evt{display:flex;gap:10px;padding:12px 16px;font-size:16px;align-items:center}
 .evt .bar{width:4px;align-self:stretch;border-radius:2px;background:#af52de}
 .evt b{flex:1;font-weight:500}.evt small{color:var(--grey);font-size:14px}
-.cal-pg .nb-back,.cal-pg .nb-right{color:var(--red)}
-.cal-arr{display:flex;gap:6px}
-.cal-arr button{width:40px;height:40px;display:grid;place-items:center;color:var(--red)}
-.cal-arr button:disabled{opacity:.25}
-.cal-arr svg{width:12px;height:20px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-.cal-arr .fw svg{transform:scaleX(-1)}
-#evts{border-top:.5px solid var(--sep)}
-.evt b{display:flex;flex-direction:column;gap:1px}
-.evt .ew{color:var(--grey);font-size:13px;font-weight:400}
+.evt .ew{display:block;font-weight:400;margin-top:2px}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
 
-/* calls */
-.prow{display:flex;align-items:center;gap:8px;padding-left:16px;position:relative;min-height:62px}
-.prow+.prow::before{content:'';position:absolute;top:0;left:44px;right:0;height:.5px;background:var(--sep)}
-.prow .pi{width:20px;flex:none}.prow .pi svg{width:15px;height:15px;fill:var(--grey)}
-.prow .pn{flex:1;min-width:0}
-.prow .pn b{display:block;font-size:17px;font-weight:600}.prow .pn small{color:var(--grey);font-size:14px}
-.prow.miss .pn b{color:var(--red)}
-.prow .pd{color:var(--grey);font-size:15px}
-.prow .inf{width:44px;display:grid;place-items:center}.prow .inf svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.6}
-
-/* safari / weather / settings */
-.favs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 8px;padding:0 16px}
-.fav{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:11px;color:#333;text-align:center}
-.fav i{width:62px;height:62px;border-radius:14px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:26px;font-weight:700;color:var(--blue);box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.sbar{position:absolute;z-index:6;left:0;right:0;bottom:0;padding:8px 14px 34px;background:rgba(242,242,247,.94);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);box-shadow:0 -.5px 0 var(--sep)}
-.sbar .ad{height:46px;border-radius:13px;background:#fff;box-shadow:0 1px 6px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px;padding:0 14px;color:var(--grey);font-size:16px}
-.sbar .ad b{color:#000;font-size:14px}
-.row .clk{width:20px;height:20px;stroke:var(--grey);fill:none;stroke-width:1.7;flex:none}
-.wx{background:linear-gradient(180deg,#2c6fd1 0%,#4d93e3 45%,#7fb5ee 100%);color:#fff}
-.wx .top{text-align:center;padding:40px 0 34px}
-.wx .top .ct{font-size:34px}
-.wx .top .tp{font-size:96px;font-weight:200;line-height:1;margin-left:24px}
-.wx .top .ds{font-size:20px;font-weight:500}
-.wcard{margin:0 16px 10px;border-radius:16px;background:rgba(30,80,160,.3);padding:12px 14px}
-.wcard .wh{font-size:12.5px;font-weight:600;opacity:.7;padding-bottom:9px;border-bottom:.5px solid rgba(255,255,255,.25);margin-bottom:10px}
-.hrs{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none;font-size:15px;font-weight:600;text-align:center}
-.hrs div{display:flex;flex-direction:column;gap:8px;align-items:center;flex:none}
-.st-ic{width:29px;height:29px;border-radius:7px;display:grid;place-items:center;flex:none}
-.st-ic svg{width:18px;height:18px;fill:#fff}
-.prof{display:flex;align-items:center;gap:14px;padding:12px 16px}
-.prof .pa{width:60px;height:60px;border-radius:50%;background:linear-gradient(#a5abb6,#858a94);color:#fff;font-size:24px;font-weight:600;display:grid;place-items:center;flex:none}
-.prof b{display:block;font-size:21px;font-weight:600}.prof small{color:var(--grey);font-size:13px}
-
-/* messenger extras */
-.bb.vcall{display:flex;align-items:center;gap:10px;min-width:170px;padding:11px 16px;font-size:16px}
-.bb.vcall svg{width:20px;height:20px;fill:#2bb24c;flex:none}
-.bb.vcall span{flex:1;text-align:right}
-.bb.vcall small{font-size:13px;color:#666;font-variant-numeric:tabular-nums}
-.me .bb.vcall small{color:#6b5d00}
-.rq.wimg{flex-direction:row;align-items:center;gap:8px}
-.rq.wimg img{width:34px;height:34px;border-radius:4px;object-fit:cover;flex:none}
-.rq .rqt{display:flex;flex-direction:column;gap:1px;min-width:0}
-.older{display:block;margin:10px auto 4px;padding:6px 14px;border-radius:14px;background:rgba(0,0,0,.12);color:#fff;font-size:12.5px}
-.skip{position:absolute;inset:0;z-index:95;background:#000;display:grid;place-items:center;color:#fff;font-size:20px;font-weight:600;letter-spacing:.02em;opacity:0}
-.bb .lnk{color:#2f6fd6;text-decoration:underline;word-break:break-all}
-.bb.haspv{padding-bottom:0;overflow:hidden;max-width:240px}
-.lpv{margin:9px -11px 0;padding:10px 12px 11px;border-top:.5px solid rgba(0,0,0,.1);background:#f7f7f7;display:flex;flex-direction:column;gap:2px;white-space:normal}
-.lpv b{font-size:14px;font-weight:600;color:#111}
-.lpv span{font-size:12.5px;color:#666;line-height:1.35}
-.lpv small{font-size:11.5px;color:#999;margin-top:2px}
-.av.post,.ln .sav.post{background:#fff;border:.5px solid #e3e3e3}
-.av.post svg,.ln .sav.post svg{width:100%;height:100%}
-.bb.alim{padding:0;background:#fff!important;width:252px;border-radius:14px;position:relative;white-space:normal}
-.ln.th.first .bb.alim{border-top-left-radius:4px}
-.alim .ah{background:#f9e54e;padding:13px 14px;font-weight:700;font-size:14.5px;border-radius:14px 14px 0 0;color:#111}
-.ln.th.first .alim .ah{border-top-left-radius:4px}
-.alim .ab{padding:13px 14px 15px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-all;color:#111}
-.alim .tel{color:#2f6fd6;text-decoration:underline}
-.alim .kb{position:absolute;top:-9px;right:-9px;width:28px;height:28px;border-radius:50%;background:#3a3a3a;display:grid;place-items:center;box-shadow:0 0 0 2px var(--kk-sky)}
-.alim .kb svg{width:16px;height:16px}
-.av.ch{background:#4a5b70}
-.ln .sav.ch{background:#4a5b70}
-.bb.file{background:#fff!important;width:236px;padding:13px 14px 12px;border-radius:12px;white-space:normal}
-.bb.file .ft{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
-.bb.file .fn{font-size:15px;font-weight:500;color:#111;word-break:break-all;line-height:1.35}
-.bb.file .ft svg{width:30px;height:30px;flex:none;stroke:#1c8fd6;fill:none;stroke-width:1.5;stroke-linejoin:round}
-.bb.file .fs{font-size:12.5px;color:#8a8a8a;margin-top:6px}
-.bb.file .fs+.fs{margin-top:2px}
-.bb.file .fo{font-size:13px;color:#1c8fd6;margin-top:10px}
-.crow .cn em{font-style:normal;font-size:11px;font-weight:600;color:#fff;background:#b0b0b6;border-radius:4px;padding:1px 5px}
-.crow.blk .cn,.crow.blk .cp{opacity:.55}
-.crow .ct{display:flex;align-items:center;gap:3px}
-.pin{width:12px;height:12px;fill:#aaa}
-.hid-row{display:block;width:100%;padding:16px 18px;text-align:left;font-size:14px;color:#999;border-top:.5px solid #eee}
-.notice{flex:none;margin:0 10px 6px;display:flex;gap:8px;align-items:flex-start;text-align:left;background:rgba(255,255,255,.92);border-radius:12px;padding:10px 12px;font-size:13.5px;color:#222;box-shadow:0 1px 4px rgba(0,0,0,.08)}
-.notice svg{width:18px;height:18px;flex:none;stroke:#333;fill:none;stroke-width:1.7}
-.notice span{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
-.notice.open span{white-space:pre-wrap}
-.rq{display:flex;flex-direction:column;gap:1px;padding-bottom:7px;margin-bottom:7px;border-bottom:.5px solid rgba(0,0,0,.15);font-size:12.5px}
-.rq b{font-weight:600}
-.rq span{color:rgba(0,0,0,.5);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
-.stk{font-size:84px;line-height:1.05}
-.stk img{display:block;width:120px;height:120px;object-fit:contain}
-.bb.img.multi{display:grid;gap:2px;width:220px}
-.bb.img.multi.n2{grid-template-columns:1fr 1fr}
-.bb.img.multi.n3{grid-template-columns:1fr 1fr}
-.bb.img.multi.n3 .cell:first-child{grid-column:span 2}
-.bb.img.multi.n4{grid-template-columns:1fr 1fr}
-.bb.img.multi .cell{position:relative;aspect-ratio:1;overflow:hidden}
-.bb.img.multi.n3 .cell:first-child{aspect-ratio:2/1}
-.bb.img.multi .cell img,.bb.img.multi .cell .ph{width:100%;height:100%}
-.bb.img.multi .more{position:absolute;inset:0;background:rgba(0,0,0,.45);color:#fff;font-size:22px;font-weight:600;display:grid;place-items:center}
-.bb.aud{display:flex;align-items:center;gap:9px;min-width:180px;text-align:left}
-.bb.aud .pl{width:28px;height:28px;border-radius:50%;background:rgba(0,0,0,.08);display:grid;place-items:center;flex:none}
-.bb.aud .pl svg{width:11px;height:11px;fill:#333}
-.bb.aud .wv{display:flex;gap:2px;align-items:center;height:22px;flex:1}
-.bb.aud .wv i{width:2.5px;border-radius:2px;background:rgba(0,0,0,.4)}
-.bb.aud.playing .wv i{animation:eq .7s ease-in-out infinite alternate;background:rgba(0,0,0,.7)}
-.bb.aud .wv i:nth-child(3n){animation-delay:-.3s}.bb.aud .wv i:nth-child(3n+1){animation-delay:-.55s}
-@keyframes eq{from{transform:scaleY(.35)}to{transform:scaleY(1.15)}}
-.bb.aud .du{font-size:12px;color:#555;font-variant-numeric:tabular-nums}
-.bb.typing{display:flex;gap:4px;padding:13px 14px}
-.bb.typing i{width:7px;height:7px;border-radius:50%;background:#b8b8b8;animation:td 1.2s infinite}
-.bb.typing i:nth-child(2){animation-delay:.2s}.bb.typing i:nth-child(3){animation-delay:.4s}
-@keyframes td{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
-.pop{animation:pop .35s cubic-bezier(.2,1.4,.4,1)}
-@keyframes pop{from{transform:scale(.7);opacity:0}}
-.cin .plus{flex:none}
-.cin .fld.has{color:#111}
-.cur{display:inline-block;width:2px;height:18px;background:#2f7cf6;margin-left:1px;vertical-align:-4px;animation:blink 1s steps(1) infinite}
-@keyframes blink{50%{opacity:0}}
-.cin .snd{width:36px;height:36px;border-radius:12px;background:var(--kk-yellow);display:grid;place-items:center;flex:none}
-.cin .snd svg{width:18px;height:18px;stroke:#3a1d1d;stroke-width:2.4;fill:none}
-.cin.blocked{justify-content:center;color:#999;font-size:14px;padding:16px 10px 40px}
-.sheet-bg{position:absolute;inset:0;z-index:30;background:rgba(0,0,0,.3);display:flex;flex-direction:column;justify-content:flex-end}
-.sheet{background:#fff;border-radius:16px 16px 0 0;padding:8px 0 34px;max-height:62%;display:flex;flex-direction:column}
-.sheet .grab{width:36px;height:5px;border-radius:3px;background:#d1d1d6;margin:0 auto 8px}
-.sheet-h{display:flex;justify-content:space-between;align-items:center;padding:4px 16px 10px;font-size:16px}
-.sheet-h button{color:#555;font-size:15px;min-height:44px;padding:0 4px}
-.sheet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;overflow-y:auto;scrollbar-width:none}
-.sheet-grid button{aspect-ratio:1;overflow:hidden}
-.sheet-grid img,.sheet-grid .ph{width:100%;height:100%;object-fit:cover}
-.prof-bg{position:absolute;inset:0;z-index:35;background:linear-gradient(180deg,#7d8a99,#4b5561) center/cover;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:70px}
-.prof-bg .px{position:absolute;top:50px;left:8px;width:44px;height:44px;display:grid;place-items:center;font-size:22px;color:#fff}
-.prof-card{display:flex;flex-direction:column;align-items:center;gap:6px;padding-bottom:28px;border-bottom:.5px solid rgba(255,255,255,.3);width:calc(100% - 40px)}
-.prof-card .pav{width:96px;height:96px;border-radius:36px;overflow:hidden;background:#a9c0d6;display:grid;place-items:center;margin-bottom:8px}
-.prof-card .pav img{width:100%;height:100%;object-fit:cover}.prof-card .pav svg{width:66%;height:66%}
-.prof-card b{font-size:20px;font-weight:600}
-.prof-card span{font-size:14px;opacity:.85;text-align:center;padding:0 20px}
-.prof-acts{display:flex;gap:44px;padding-top:20px;font-size:12px}
-.prof-acts span{display:flex;flex-direction:column;align-items:center;gap:6px}
-.prof-acts svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.6}
-
-/* music — 공유 플레이리스트 (iOS 26 애플뮤직 느낌) */
-.music{--mred:#fa2d48;--mtint:#e8e0d5;background:var(--mtint);color:#000}
+.music{--mred:#fa2d48;--mtint:#ffffff;background:var(--mtint);color:#000}
 .music .scroll{padding-top:112px;padding-bottom:200px}
 .gl{background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(20px) saturate(1.6);backdrop-filter:blur(20px) saturate(1.6);box-shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.08),inset 0 0 0 .5px rgba(255,255,255,.7)}
 .mtop{position:absolute;z-index:6;top:52px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:center}
@@ -451,23 +355,24 @@ img{-webkit-user-drag:none}
 .mlist{margin:6px 16px 0 0;border-top:.5px solid rgba(0,0,0,.14);margin-left:20px}
 .mrow{display:flex;align-items:center;gap:10px;width:100%;padding:8px 0;text-align:left;position:relative}
 .mrow+.mrow::before{content:'';position:absolute;top:0;left:58px;right:0;height:.5px;background:rgba(0,0,0,.14)}
-.mrow .star{position:absolute;left:-14px;font-size:11px;color:#6d6863;width:10px;text-align:center}
+.mrow .star{position:absolute;left:-14px;font-size:11px;color:#8a8a8e;width:10px;text-align:center}
 .mart-w{position:relative;width:48px;height:52px;flex:none}
 .mart{display:block;width:38px;height:38px;border-radius:5px;flex:none;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.mart.na{display:grid;place-items:center}.mart.na svg{width:52%;height:52%;fill:#b4b4ba}
 .mart-w .cav{position:absolute;right:-2px;bottom:-2px;width:30px;height:30px;box-shadow:0 0 0 1.5px var(--mtint)}
 .mrow .mt{flex:1;min-width:0;display:flex;flex-direction:column;padding-left:6px}
 .mrow .mt b{font-size:15.5px;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:5px}
-.mrow .mt b em{font-style:normal;font-size:9px;font-weight:700;color:#fff;background:#6d6863;border-radius:50%;width:15px;height:15px;display:inline-grid;place-items:center;flex:none}
-.mrow .mt small{font-size:14px;color:#77716b;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mrow .mt b em{font-style:normal;font-size:9px;font-weight:700;color:#fff;background:#8a8a8e;border-radius:50%;width:15px;height:15px;display:inline-grid;place-items:center;flex:none}
+.mrow .mt small{font-size:14px;color:#8a8a8e;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mrow.now .mt b{color:var(--mred)}
 .hearts{display:flex;flex-direction:row-reverse;flex:none;min-width:30px;justify-content:flex-start}
-.hearts i{width:30px;height:30px;border-radius:50%;background:#d7cfc6;box-shadow:0 0 0 2px var(--mtint);display:grid;place-items:center;font-style:normal;font-size:15px;margin-left:-20px;position:relative}
+.hearts i{width:30px;height:30px;border-radius:50%;background:#e5e5ea;box-shadow:0 0 0 2px var(--mtint);display:grid;place-items:center;font-style:normal;font-size:15px;margin-left:-20px;position:relative}
 .hearts i:last-child{margin-left:0}
 .mrow .more{color:#333;font-size:15px;letter-spacing:1px;flex:none;width:28px;text-align:center}
-.mempty{text-align:center;color:#77716b;font-size:15px;padding:30px 20px}
-.mfoot{color:#77716b;font-size:13px;padding:12px 0 0 20px;margin:0}
-.mini{position:absolute;z-index:7;left:14px;right:14px;bottom:100px;height:62px;border-radius:31px;background:rgba(250,248,245,.86);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;padding:0 12px 0 10px}
-.mini .mart{width:42px;height:42px;border-radius:7px}
+.mempty{text-align:center;color:#8a8a8e;font-size:15px;padding:30px 20px}
+.mfoot{color:#8a8a8e;font-size:13px;padding:12px 0 0 20px;margin:0}
+.mini{position:absolute;z-index:7;left:14px;right:14px;bottom:100px;height:62px;border-radius:31px;background:rgba(250,250,252,.86);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;padding:0 12px 0 10px}
+.mini .mart{width:40px;height:40px;border-radius:6px}
 .mini .mtx{flex:1;min-width:0;display:flex;flex-direction:column}
 .mini b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini small{font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1085,19 +990,45 @@ function lastText(c){
   return '';
 }
 
-/* ── notes ── */
-function notesPage(){
-  const rows = D.notes.map((n, i) => `<button class="row tap note-row" data-note="${i}"><b>${n.locked ? IC.lock : ''}${esc(n.title)}</b><small><em>${esc(n.date)}</em>${n.locked ? '잠겨 있음' : esc((n.body.split('\n').find(l => l.trim() && l.trim() !== n.title) || '').trim())}</small></button>`).join('');
-  return page('grouped notes-pg', 'dark', `${nav('폴더', '메모')}<div class="scroll"><div class="lt">메모</div><div class="srch">${IC.search}검색</div><div class="group">${rows}</div><p class="muted" style="text-align:center;font-size:13px;margin-top:18px">${D.notes.length}개의 메모</p></div>`);
+/* ── notes (iOS 26) ── */
+const NI = {
+  dots:'<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.9"/><circle cx="12" cy="12" r="1.9"/><circle cx="19" cy="12" r="1.9"/></svg>',
+  mic:'<svg viewBox="0 0 24 24" class="ln2 mic"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg>',
+  compose:'<svg viewBox="0 0 24 24" class="ln2"><path d="M12 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5V12"/><path d="M18.4 3.6a2 2 0 0 1 2.8 2.8L12.5 15 9 16l1-3.5z"/></svg>',
+  share:'<svg viewBox="0 0 24 24" class="ln2"><path d="M12 3v12M7.5 7.5 12 3l4.5 4.5M6 11H5v9h14v-9h-1"/></svg>',
+  check:'<svg viewBox="0 0 24 24" class="ln2"><circle cx="5" cy="7" r="1.6"/><circle cx="5" cy="12" r="1.6"/><circle cx="5" cy="17" r="1.6"/><path d="M10 7h10M10 12h10M10 17h10"/></svg>',
+  clip:'<svg viewBox="0 0 24 24" class="ln2"><path d="m20 11.5-8 8a5 5 0 0 1-7-7l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7L9.7 17.2a1.7 1.7 0 0 1-2.4-2.4L15 7"/></svg>',
+  pen:'<svg viewBox="0 0 24 24" class="ln2"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>',
+  aa:'<svg viewBox="0 0 24 24"><text x="1" y="18" font-size="15" font-weight="600" fill="currentColor" font-family="-apple-system,sans-serif">Aa</text></svg>'
+};
+const nISO = n => n.iso ? n.iso.split('-').map(Number) : null;
+const nDate = n => { const a = nISO(n); return a ? `${a[0]}. ${a[1]}. ${a[2]}.` : (n.date || ''); };
+function nGroup(n){
+  const a = nISO(n); if (!a) return '이전 30일';
+  const C = D.calendar, now = new Date(C.year, C.month - 1, C.today), d = new Date(a[0], a[1] - 1, a[2]);
+  const diff = Math.round((now - d) / 864e5);
+  if (diff <= 0) return '오늘'; if (diff === 1) return '어제'; if (diff <= 7) return '이전 7일';
+  if (diff <= 30 && d.getMonth() === now.getMonth()) return '이전 30일';
+  return d.getFullYear() === now.getFullYear() ? `${a[1]}월` : `${a[0]}년`;
 }
-function noteView(n){ return `<div class="nd">${esc(n.date)}</div><h2>${esc(n.title)}</h2>${esc(n.body)}`; }
+function notesPage(){
+  const groups = [];
+  D.notes.forEach((n, i) => { const g = nGroup(n); let G = groups.find(x => x.g === g); if (!G) groups.push(G = { g, rows: [] }); G.rows.push([n, i]); });
+  const row = ([n, i]) => `<button class="nrow tap" data-note="${i}"><b>${esc(n.title)}</b><small><em>${esc(nDate(n))}</em>${n.locked ? `${IC.lock}<i>잠김</i>` : `<i>${esc((n.body.split('\n').find(l => l.trim() && l.trim() !== n.title) || '추가 텍스트 없음').trim())}</i>`}</small></button>`;
+  return page('n26', 'dark', `<div class="gbar"><button class="lg lgc bk" data-back aria-label="폴더">${IC.back}</button><span class="lg lgc dots">${NI.dots}</span></div>
+    <div class="scroll"><div class="lt">메모</div><div class="ncount">${D.notes.length}개의 메모</div>${groups.map(G => `<div class="nsec">${esc(G.g)}</div><div class="nbox">${G.rows.map(row).join('')}</div>`).join('')}</div>
+    <div class="gfoot"><span class="lg nsrch">${IC.search.replace('<svg', '<svg class="ln2"')}검색${NI.mic}</span><span class="lg lgc ncomp">${NI.compose}</span></div>`);
+}
+function noteView(n){ return `<div class="nd">${esc(nDate(n))}${n.iso ? '' : ''}</div><h2>${esc(n.title)}</h2>${esc(n.body.replace(new RegExp('^' + n.title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\n+'), ''))}`; }
 function notePage(n){
-  const p = page('notes-pg', 'dark', `${nav('메모', '', '완료')}<div class="scroll"><div class="note-v">${n.locked ? '' : noteView(n)}</div></div>
-    ${n.locked ? `<div class="note-lock">${IC.lock}<b>이 메모는 잠겨 있습니다</b><p>메모를 보려면 암호를 입력하세요.</p><button data-unlock>메모 보기</button></div>` : ''}`);
+  const p = page('n26 nv26', 'dark', `<div class="gbar"><button class="lg lgc bk" data-back aria-label="메모">${IC.back}</button><span class="lg lgp">${NI.share}<span class="dots">${NI.dots}</span></span></div>
+    <div class="scroll"><div class="note-v">${n.locked ? '' : noteView(n)}</div></div>
+    ${n.locked ? `<div class="nlock">${IC.lock}<b>이 메모는 잠겨 있습니다.</b><p>이 메모를 보려면 암호를 입력하세요.</p><button class="lg" data-unlock>메모 보기</button></div>` : ''}
+    <div class="gfoot"><span class="lg ntools">${NI.check}${NI.aa}${NI.clip}${NI.pen}</span><span class="lg lgc ncomp">${NI.compose}</span></div>`);
   if (n.locked) p.querySelector('[data-unlock]').onclick = () => {
     const wrap = el('<div class="notepad"></div>');
     const pad = keypad({ title: '메모 암호 입력', hint: '', code: n.code,
-      onOk: () => { wrap.remove(); p.querySelector('.note-lock').remove(); p.querySelector('.note-v').innerHTML = noteView(n); setSB('dark'); },
+      onOk: () => { wrap.remove(); p.querySelector('.nlock').remove(); p.querySelector('.note-v').innerHTML = noteView(n); setSB('dark'); },
       onCancel: () => { wrap.remove(); setSB('dark'); } });
     wrap.appendChild(pad); p.appendChild(wrap); setSB('light');
   };
@@ -1151,34 +1082,41 @@ function eventsOn(y, mo, d){
 }
 function calendarPage(){
   const C = D.calendar;
-  const min = C.min || '2026-06', max = C.max || '2026-12';
-  let y = C.year, mo = C.month, selD = C.today;
-  const p = page('cal-pg', 'dark', `<div class="nav"><button class="nb-back" data-back>${IC.back}<span class="cy"></span></button><span></span><span class="nb-right cal-arr"><button data-mv="-1" aria-label="이전 달">${IC.back}</button><button data-mv="1" aria-label="다음 달" class="fw">${IC.back}</button></span></div>
-    <div class="scroll"><div class="cal-head"><div class="lt cm"></div></div><div class="cal-g"></div><div id="evts"></div></div>`);
-  const list = d => { const L = eventsOn(y, mo, d); return L.length ? L.map(e => `<div class="evt"><span class="bar" style="background:${CAL_COLORS[e.cal] || '#af52de'}"></span><b>${esc(e.title)}${e.where ? `<small class="ew">${esc(e.where)}</small>` : ''}</b><small>${esc(e.time || '하루 종일')}</small></div>`).join('') : '<div class="evt muted">일정 없음</div>'; };
-  const draw = () => {
-    const first = new Date(y, mo - 1, 1).getDay(), days = new Date(y, mo, 0).getDate();
-    const isNow = y === C.year && mo === C.month;
+  const [y0, m0] = (C.min || '2026-06').split('-').map(Number), [y1, m1] = (C.max || '2026-12').split('-').map(Number);
+  const months = []; for (let y = y0, m = m0; y < y1 || (y === y1 && m <= m1); m === 12 ? (m = 1, y++) : m++) months.push([y, m]);
+  const month = ([y, mo]) => {
+    const first = new Date(y, mo - 1, 1).getDay(), days = new Date(y, mo, 0).getDate(), cur = y === C.year && mo === C.month;
     let cells = '';
-    for (let i = 0; i < first; i++) cells += '<div class="cal-d"></div>';
+    for (let i = 0; i < first; i++) cells += '<div class="cday e"></div>';
     for (let d = 1; d <= days; d++){
-      const wd = (first + d - 1) % 7, n = eventsOn(y, mo, d).length;
-      cells += `<button class="cal-d${wd === 0 || wd === 6 ? ' we' : ''}${isNow && d === C.today ? ' td' : ''}${d === selD ? ' sel' : ''}" data-day="${d}"><span>${d}</span>${n ? '<i></i>' : ''}</button>`;
+      const wd = (first + d - 1) % 7, L = eventsOn(y, mo, d);
+      const bars = L.slice(0, 2).map(e => { const c = CAL_COLORS[e.cal] || '#af52de'; return `<i style="background:${c}26;color:${c}">${esc(e.title)}</i>`; }).join('') + (L.length > 2 ? `<i class="more">+${L.length - 2}</i>` : '');
+      cells += `<button class="cday${wd === 0 || wd === 6 ? ' we' : ''}${cur && d === C.today ? ' td' : ''}" data-cd="${y}-${mo}-${d}"><span class="dn">${d}</span>${bars}</button>`;
     }
-    p.querySelector('.cy').textContent = y + '년';
-    p.querySelector('.cm').textContent = mo + '월';
-    p.querySelector('.cal-g').innerHTML = '일월화수목금토'.split('').map(w => `<div class="cal-w">${w}</div>`).join('') + cells;
-    p.querySelector('#evts').innerHTML = list(selD);
-    const k = `${y}-${pad2(mo)}`;
-    p.querySelector('[data-mv="-1"]').disabled = k <= min; p.querySelector('[data-mv="1"]').disabled = k >= max;
+    return `<section class="cmon" data-ym="${y}-${mo}"><h3${cur ? ' class="cur"' : ''}>${mo}월</h3><div class="cgr">${cells}</div></section>`;
   };
+  const p = page('c26', 'dark', `<div class="cwk">${'일월화수목금토'.split('').map(w => `<span>${w}</span>`).join('')}</div>
+    <div class="gbar"><button class="lg lgp bk yr" data-back>${IC.back}<span class="cy">${C.year}년</span></button><span class="lg lgp"><svg viewBox="0 0 24 24" class="ln2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>${IC.search.replace('<svg', '<svg class="ln2"')}<svg viewBox="0 0 24 24" class="ln2"><path d="M12 5v14M5 12h14"/></svg></span></div>
+    <div class="scroll">${months.map(month).join('')}</div>
+    <div class="gfoot"><button class="lg lgp" data-today>오늘</button><span class="lg lgp" style="color:#000;font-size:15px;gap:16px"><span>캘린더</span><span>받은 편지함</span></span></div>`);
+  const sc = p.querySelector('.scroll');
+  const toMonth = (y, mo, smooth) => { const s = p.querySelector(`[data-ym="${y}-${mo}"]`); if (s) sc.scrollTo({ top: s.offsetTop - 132, behavior: smooth ? 'smooth' : 'auto' }); };
+  sc.addEventListener('scroll', () => {
+    let yr = months[0][0]; p.querySelectorAll('.cmon').forEach(s => { if (s.offsetTop - 140 <= sc.scrollTop) yr = s.dataset.ym.split('-')[0]; });
+    p.querySelector('.cy').textContent = yr + '년';
+  }, { passive: true });
   p.addEventListener('click', e => {
-    const mv = e.target.closest('[data-mv]');
-    if (mv && !mv.disabled){ mo += +mv.dataset.mv; if (mo < 1){ mo = 12; y--; } if (mo > 12){ mo = 1; y++; } selD = (y === C.year && mo === C.month) ? C.today : 1; draw(); return; }
-    const b = e.target.closest('[data-day]'); if (!b) return;
-    selD = +b.dataset.day; draw();
+    if (e.target.closest('[data-today]')) return toMonth(C.year, C.month, true);
+    if (e.target.closest('.csh') && !e.target.closest('.sh2')) return p.querySelector('.csh').remove();
+    const b = e.target.closest('[data-cd]'); if (!b) return;
+    p.querySelectorAll('.cday.sel').forEach(x => x.classList.remove('sel')); b.classList.add('sel');
+    const [y, mo, d] = b.dataset.cd.split('-').map(Number), L = eventsOn(y, mo, d);
+    const wd = '일월화수목금토'[new Date(y, mo - 1, d).getDay()];
+    const old = p.querySelector('.csh'); if (old) old.remove();
+    p.appendChild(el(`<div class="csh"><div class="sh2 lg"><h4>${mo}월 ${d}일 ${wd}요일<small>${L.length ? `일정 ${L.length}개` : '일정 없음'}</small></h4>${L.map(e => `<div class="evt"><span class="bar" style="background:${CAL_COLORS[e.cal] || '#af52de'}"></span><b>${esc(e.title)}${e.where ? `<small class="ew">${esc(e.where)}</small>` : ''}</b><small>${esc(e.time || '하루 종일')}</small></div>`).join('')}</div></div>`));
   });
-  draw();
+  requestAnimationFrame(() => toMonth(C.year, C.month));
+  setTimeout(() => toMonth(C.year, C.month), 60);
   return p;
 }
 
@@ -1272,7 +1210,7 @@ function weatherPage(){
 
 /* ── music ── */
 const MART = ['#f6a5c0,#e9446a','#ffd27a,#f2785c','#9ad0f5,#5b7cf0','#c5b3f6,#8a5cf0','#a8e6cf,#3bb4a1','#f5c6a5,#d77a61','#d6d6d6,#8e8e93','#ffb3a7,#c94b4b'];
-const artBg = (t, i) => t && t.art ? `url('${esc(t.art)}') center/cover` : `linear-gradient(135deg,${MART[(i < 0 ? 0 : i) % MART.length]})`;
+const artBg = (t, i) => t && t.art ? `url('${esc(t.art)}') center/cover` : '#ececf0';
 const NOTE = '<svg viewBox="0 0 24 24"><path d="M9 18.5a2.5 2.5 0 1 1-2.5-2.5H9V5l10-2v12.5a2.5 2.5 0 1 1-2.5-2.5H19V6.6L11 8.2v10.3z"/></svg>';
 /* 지금 듣는 곡: 처음엔 data.js의 music.nowPlaying (일시정지 상태) */
 let mState = { i: -1, cur: null, playing: false, t: 0, timer: null, audio: null };
@@ -1378,7 +1316,7 @@ function musicPage(){
   const who = C.length ? `<button class="pwho"><span class="avs">${C.map((c, i) => [c, i]).sort((a, b) => (b[0].me ? 1 : 0) - (a[0].me ? 1 : 0)).slice(0, 3).map(([, i]) => collabAv(i)).join('')}</span>${esc((C.find(c => c.me) || C[0]).name)}${C.length > 1 ? ` 외 ${C.length - 1}명` : ''}<svg viewBox="0 0 8 13"><path d="M1 1l5.5 5.5L1 12"/></svg></button>` : '';
   const hearts = n => n ? `<span class="hearts">${Array.from({ length: Math.min(n, 3) }, (_, k) => `<i style="z-index:${3 - k}">${k === 0 ? '❤️' : ''}</i>`).join('')}</span>` : '<span class="hearts"></span>';
   const rows = T.length ? T.map((t, i) => `<button class="mrow" data-track="${i}"><span class="star">${t.star ? '★' : ''}</span>
-      <span class="mart-w"><span class="mart" style="background:${artBg(t, i)}"></span>${t.by !== undefined && C[t.by] ? collabAv(t.by) : ''}</span>
+      <span class="mart-w"><span class="mart${t.art ? '' : ' na'}" style="background:${artBg(t, i)}">${t.art ? '' : NOTE}</span>${t.by !== undefined && C[t.by] ? collabAv(t.by) : ''}</span>
       <span class="mt"><b>${esc(t.title)}${t.explicit ? '<em>19</em>' : ''}</b><small>${esc(t.artist)}</small></span>${hearts(t.hearts)}<span class="more">···</span></button>`).join('')
     : '<p class="mempty">플레이리스트에 아직 노래가 없어요.</p>';
   const p = page('music', 'dark', `
