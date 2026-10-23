@@ -903,7 +903,8 @@ function bodyHTML(c, m, i){
 }
 function lineHTML(c, m, i, first, showTime){
   const me = m.from === 'me', who = whoOf(c, m), body = bodyHTML(c, m, i);
-  const tm = showTime ? `<div class="tm">${me && m.read === false ? '<span class="rd">1</span>' : ''}<span>${esc(m.time)}</span></div>` : '';
+  const rc = typeof m.rc === 'number' ? m.rc : (me && m.read === false ? 1 : 0);
+  const tm = (showTime || rc) ? `<div class="tm">${rc ? `<span class="rd">${rc}</span>` : ''}${showTime ? `<span>${esc(m.time)}</span>` : ''}</div>` : '';
   if (me) return `<div class="ln me${first ? ' first' : ''}"><div class="col"><div class="wrap">${body}${tm}</div></div></div>`;
   const av = c.icon === 'post' ? POST_AV : c.channel ? CHANNEL_AV : c.group ? PERSON : avatar(c.avatar);
   return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.icon === 'post' ? ' post' : c.channel ? ' ch' : ''}" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
