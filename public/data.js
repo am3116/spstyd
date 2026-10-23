@@ -1973,6 +1973,10 @@ window.PHONE = {
     {
       "src": "photos/p15.jpg",
       "caption": ""
+    },
+    {
+      "src": "photos/p16.jpg",
+      "caption": ""
     }
   ],
 

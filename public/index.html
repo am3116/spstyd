@@ -417,6 +417,31 @@ body.mobb{align-items:flex-start}
 .phtabs svg{width:24px;height:24px;fill:currentColor}
 .phtabs .on{background:rgba(0,0,0,.07);color:#0a84ff}
 
+/* camera (iOS 26 셀카 화면) */
+.cam2{background:#000;color:#fff}
+.cam2 .cv{position:absolute;inset:0;background:#222 center/cover no-repeat}
+.ctop-b{position:absolute;top:0;left:0;right:0;height:124px;background:rgba(20,20,20,.62)}
+.cbot-b{position:absolute;bottom:0;left:0;right:0;height:204px;background:linear-gradient(rgba(20,20,20,.55),rgba(0,0,0,.9))}
+.cam2 .cam-flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:9}
+.cbar{position:absolute;top:75px;right:16px;display:flex;gap:8px;align-items:center}
+.cc{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center}
+.cc svg{width:18px;height:18px;stroke:#ffd60a}
+.cpill{height:36px;border-radius:18px;background:rgba(255,255,255,.14);display:flex;align-items:center;gap:20px;padding:0 14px}
+.cpill svg{width:19px;height:19px;fill:#fff;stroke:#fff}
+.cpill svg.ln2{fill:none;stroke-width:1.4}
+.cmini{position:absolute;left:0;right:0;bottom:221px;display:flex;justify-content:center;gap:6px}
+.cmini span{width:36px;height:36px;border-radius:50%;background:rgba(60,60,60,.7);display:grid;place-items:center}
+.cmini svg{width:18px;height:18px;stroke:#fff}
+.cshut{position:absolute;left:50%;bottom:114px;transform:translateX(-50%);width:76px;height:76px;border-radius:50%;border:3.5px solid #fff;display:grid;place-items:center;background:#000}
+.cshut i{width:64px;height:64px;border-radius:50%;background:#fff;transition:transform .12s}.cshut:active i{transform:scale(.88)}
+.crow2{position:absolute;left:16px;right:16px;bottom:34px;display:flex;align-items:center;justify-content:space-between}
+.cthumb{width:46px;height:46px;border-radius:50%;background:#333 center/cover;border:1.5px solid rgba(255,255,255,.25)}
+.cmode{height:46px;border-radius:23px;background:rgba(40,40,40,.85);display:flex;align-items:center;padding:4px;font-size:15px}
+.cmode span{padding:0 22px}
+.cmode b{height:38px;border-radius:19px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);color:#ffd60a;font-weight:500;padding:0 22px;display:grid;place-items:center}
+.cflip{width:46px;height:46px;border-radius:50%;background:rgba(40,40,40,.85);display:grid;place-items:center}
+.cflip svg{width:22px;height:22px;stroke:#fff;stroke-width:1.8}
+
 /* ── liquid glass (iOS 26) ── */
 .lg{-webkit-backdrop-filter:blur(25px) saturate(180%);backdrop-filter:blur(25px) saturate(180%);background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 32px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
 .lgc{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;flex:none}
@@ -1375,38 +1400,28 @@ function placesPage(q, list){
 
 /* ── camera ── */
 function cameraPage(){
-  const p = page('cam', 'light', `<video playsinline muted autoplay></video><div class="cam-msg" hidden></div><div class="cam-flash"></div>
-    <div class="cam-top"><button data-back aria-label="닫기">${IC.back}</button><span>사진</span><span></span></div>
-    <div class="cam-bot"><button class="cam-thumb" data-camroll aria-label="최근 사진"></button><button class="cam-shut" data-shot aria-label="촬영"><i></i></button><button class="cam-flip" data-flip aria-label="전후면 전환"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><path d="M9 13a3 3 0 0 1 5.2-2M15 13a3 3 0 0 1-5.2 2M14.5 9.5V11H13M9.5 16.5V15H11"/></svg></button></div>`);
-  const video = p.querySelector('video'), msg = p.querySelector('.cam-msg');
-  let stream = null, facing = 'user';
-  const stop = () => { if (stream) stream.getTracks().forEach(t => t.stop()); stream = null; };
-  const start = async () => {
-    stop();
-    try {
-      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('nocam');
-      stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: facing }, audio: false });
-      video.srcObject = stream; video.classList.toggle('mirror', facing === 'user'); msg.hidden = true;
-      await video.play().catch(() => {});
-    } catch (_) {
-      msg.hidden = false; msg.textContent = '카메라를 켤 수 없어요. 브라우저에서 카메라 권한을 허용하면 볼 수 있어요.';
-    }
-  };
-  start();
-  const watch = setInterval(() => { if (!p.isConnected){ stop(); clearInterval(watch); } }, 500);
+  const C = D.camera || {};
+  const view = C.view || 'photos/cam_view.jpg';
+  const last = () => { const ph = D.photos.filter(x => x.src); return ph.length ? ph[ph.length - 1].src : ''; };
+  const ico = d => `<svg viewBox="0 0 24 24" class="ln2">${d}</svg>`;
+  const p = page('cam2', 'light', `<div class="cv" style="background-image:url('${esc(view)}')"></div><div class="ctop-b"></div><div class="cbot-b"></div><div class="cam-flash"></div>
+    <div class="cbar"><span class="cc on">${ico('<path d="M4 8V5.5A1.5 1.5 0 0 1 5.5 4H8M16 4h2.5A1.5 1.5 0 0 1 20 5.5V8M20 16v2.5a1.5 1.5 0 0 1-1.5 1.5H16M8 20H5.5A1.5 1.5 0 0 1 4 18.5V16"/><circle cx="12" cy="10" r="2.6"/><path d="M7.5 17c.8-2.2 2.4-3.3 4.5-3.3s3.7 1.1 4.5 3.3"/>')}</span>
+      <span class="cpill"><svg viewBox="0 0 24 24"><path d="M14.5 3.5a8.5 8.5 0 1 0 6 13.9A7 7 0 0 1 14.5 3.5z"/><circle cx="17" cy="5" r=".9"/><circle cx="19.5" cy="8" r=".7"/><circle cx="20" cy="4" r=".6"/></svg><svg viewBox="0 0 24 24"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/><circle cx="17.5" cy="17.5" r="4" fill="#fff" stroke="#000" stroke-width=".8"/><text x="17.5" y="19.6" text-anchor="middle" font-size="5.6" font-weight="700" fill="#000">A</text></svg>${ico('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6" stroke-dasharray="1.5 2"/><circle cx="12" cy="12" r="9" stroke-dasharray="1 2.2"/><path d="M4 4l16 16"/>')}<svg viewBox="0 0 24 24">${[6,12,18].map(x => `<circle cx="${x}" cy="9" r="2.1"/><circle cx="${x}" cy="15" r="2.1"/>`).join('')}</svg></span></div>
+    <div class="cmini"><span>${ico('<path d="M14 4h6v6M20 4l-6 6M10 20H4v-6M4 20l6-6"/>')}</span><span>${ico('<rect x="6" y="7" width="12" height="10" rx="1.5"/><circle cx="12" cy="11" r="1.8"/><path d="M9 16c.6-1.4 1.6-2 3-2s2.4.6 3 2M17 3.5a5 5 0 0 1 3 3M18.5 3l-1.6.6.6 1.6M7 20.5a5 5 0 0 1-3-3M5.5 21l1.6-.6-.6-1.6"/>')}</span></div>
+    <button class="cshut" data-shot aria-label="촬영"><i></i></button>
+    <div class="crow2"><button class="cthumb" data-camroll aria-label="최근 사진" style="background-image:url('${esc(last())}')"></button>
+      <span class="cmode"><span>비디오</span><b>사진</b></span>
+      <button class="cflip" data-flip aria-label="전후면 전환">${ico('<path d="M5 9.5A7.5 7.5 0 0 1 18.6 7M19 14.5A7.5 7.5 0 0 1 5.4 17"/><path d="M19.5 3.5v4h-4M4.5 20.5v-4h4"/>')}</button></div>`);
   p.addEventListener('click', e => {
-    if (e.target.closest('[data-flip]')){ facing = facing === 'user' ? 'environment' : 'user'; start(); return; }
+    if (e.target.closest('[data-flip]')){ p.querySelector('.cv').animate([{ transform: 'rotateY(0)', filter: 'blur(0)' }, { transform: 'rotateY(90deg)', filter: 'blur(8px)' }, { transform: 'rotateY(0)', filter: 'blur(0)' }], { duration: 520 }); return; }
     if (e.target.closest('[data-shot]')){
-      const f = p.querySelector('.cam-flash'); f.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 350 });
-      if (!stream || !video.videoWidth) return;
-      const cv = document.createElement('canvas'); cv.width = video.videoWidth; cv.height = video.videoHeight;
-      const g = cv.getContext('2d'); if (facing === 'user'){ g.translate(cv.width, 0); g.scale(-1, 1); }
-      g.drawImage(video, 0, 0); const url = cv.toDataURL('image/jpeg', .85);
-      D.photos.unshift({ src: url, caption: '방금 찍은 사진' });
-      p.querySelector('.cam-thumb').style.backgroundImage = `url('${url}')`;
+      p.querySelector('.cam-flash').animate([{ opacity: 1 }, { opacity: 0 }], { duration: 320 });
+      D.photos.push({ src: view, caption: '' });
+      const t = p.querySelector('.cthumb'); t.style.backgroundImage = `url('${view}')`;
+      t.animate([{ transform: 'scale(.6)' }, { transform: 'scale(1)' }], { duration: 300 });
       return;
     }
-    if (e.target.closest('[data-camroll]') && D.photos[0] && D.photos[0].src){ stop(); clearInterval(watch); openApp('photos'); }
+    if (e.target.closest('[data-camroll]')) openApp('photos');
   });
   return p;
 }
