@@ -25,6 +25,8 @@ img{-webkit-user-drag:none}
 #phone{position:relative;width:393px;height:852px;flex:none;will-change:transform;border-radius:56px;overflow:hidden;background:#000;isolation:isolate;
   box-shadow:0 0 0 10px #121214,0 0 0 12px #3a3a40,0 0 0 13px #18181a,0 40px 90px rgba(0,0,0,.8)}
 #phone.mob{border-radius:0;box-shadow:none}
+#phone.tiny .spot{display:none}
+#phone.tiny .hgrid{row-gap:16px}
 #phone.mob #hb{bottom:max(6px,env(safe-area-inset-bottom,0px));height:52px}
 #phone.mob #hb i{width:150px;height:6px}
 #wall{position:absolute;inset:-2px;background:linear-gradient(170deg,#18263a 0%,#3d3f5c 45%,#b9786a 100%) center/cover;transition:filter .45s,transform .45s}
@@ -92,7 +94,7 @@ img{-webkit-user-drag:none}
 
 /* home */
 .hgrid{position:absolute;top:66px;left:20px;right:20px;display:grid;grid-template-columns:repeat(4,1fr);row-gap:24px;justify-items:center}
-.app{display:flex;flex-direction:column;align-items:center;gap:5px;width:74px;transition:transform .15s,filter .15s}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px;width:100%;max-width:74px;transition:transform .15s,filter .15s}
 .app:active{transform:scale(.9);filter:brightness(.8)}
 .icon{position:relative;width:62px;height:62px;border-radius:14.5px;box-shadow:0 1px 4px rgba(0,0,0,.2)}
 .icon .ic{width:100%;height:100%;border-radius:inherit;overflow:hidden}
@@ -583,8 +585,12 @@ function fit(){
   if (W < 520){
     /* 폰: 축소하지 않고 실제 화면 크기에 그대로 맞춤 (비율 틀어짐 방지) */
     phone.classList.add('mob');
-    phone.style.width = W + 'px'; phone.style.height = H + 'px'; phone.style.transform = 'none';
-    phone.classList.toggle('short', H < 790);
+    /* 아주 좁은 폰(360px 미만)만 비율대로 축소, 나머지는 실제 크기 그대로 */
+    const k = W < 360 ? W / 360 : 1;
+    phone.style.width = (W / k) + 'px'; phone.style.height = (H / k) + 'px';
+    phone.style.transform = k === 1 ? 'none' : `scale(${k})`;
+    phone.classList.toggle('short', H / k < 790);
+    phone.classList.toggle('tiny', H / k < 700);
   } else {
     const s = Math.min(1, (H - 40) / 852, (W - 40) / 393); phone.classList.remove('mob');
     phone.style.width = '393px'; phone.style.height = '852px'; phone.style.transform = `scale(${s})`; phone.classList.remove('short');
