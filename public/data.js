@@ -47,8 +47,6 @@ window.PHONE = {
        { read: true }                                 원빈이 보낸 메시지의 '1'이 사라짐 (상대가 읽음)
        { typing: [2.5, 1.2, 1.8] }                    상대 입력 중… 표시: 보였다(2.5초) 사라졌다(1.2초) 보였다(1.8초)…
        { skip: { label, time, dateText, day } }       화면 암전 후 시간 건너뛰기 */
-  /* 햄버거 카톡 보내고 몇 초 뒤 성찬한테 전화 */
-  callAfterDraft: { chat: "성차니형❤️", after: 15 },
 
   scene: {
     chat: "성차니형❤️",
