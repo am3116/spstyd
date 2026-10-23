@@ -30,7 +30,7 @@ img{-webkit-user-drag:none}
 body.mobb{align-items:flex-start}
 #phone.tiny .spot{display:none}
 #phone.tiny .hgrid{row-gap:16px}
-#phone.mob #hb{bottom:max(6px,env(safe-area-inset-bottom,0px));height:52px}
+#phone.mob #hb{bottom:max(2px,env(safe-area-inset-bottom,0px));height:26px;padding-bottom:6px}
 #phone.mob #hb i{width:150px;height:6px}
 #wall{position:absolute;inset:-2px;background:linear-gradient(170deg,#18263a 0%,#3d3f5c 45%,#b9786a 100%) center/cover;transition:filter .45s,transform .45s}
 #wall.dim{filter:blur(22px) brightness(.6);transform:scale(1.08)}
@@ -48,7 +48,7 @@ body.mobb{align-items:flex-start}
 #sb .r{display:flex;gap:6px;align-items:center}
 #sb svg{fill:currentColor}
 #island{position:absolute;z-index:90;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;background:#000;border-radius:20px}
-#hb{position:absolute;z-index:85;bottom:0;left:50%;transform:translateX(-50%);width:240px;height:46px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;touch-action:none;cursor:grab}
+#hb{position:absolute;z-index:85;bottom:0;left:50%;transform:translateX(-50%);width:200px;height:24px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;touch-action:none;cursor:grab}
 #hb:hover i{transform:scaleX(1.08)}
 #hb.pulse i{animation:hbp 1.4s ease-in-out 2}
 @keyframes hbp{50%{transform:scaleX(1.25) translateY(-3px);opacity:.6}}
@@ -1167,11 +1167,13 @@ function chatPage(c){
     inp.addEventListener('keydown', ev => { if (ev.key === 'Enter' && !ev.isComposing){ ev.preventDefault(); send(); } });
     snd.addEventListener('pointerdown', ev => ev.preventDefault());
     snd.addEventListener('click', ev => { ev.stopPropagation(); send(); });
-    upd(); inp.focus();
-    setTimeout(() => { box.scrollTop = box.scrollHeight; }, 350);
+    upd();
+    inp.addEventListener('focus', () => setTimeout(() => { box.scrollTop = box.scrollHeight; }, 350));
+    return inp;
   };
+  if (fld && !c.draftLoop) enterInput();
   p.addEventListener('click', e => {
-    if (e.target.closest('.cin .fld')) return enterInput();
+    if (e.target.closest('.cin .fld')){ const i = enterInput() || fld.querySelector('.tin'); if (i && document.activeElement !== i) i.focus(); return; }
     if (e.target.closest('[data-older]')){
       const h0 = box.scrollHeight, t0 = box.scrollTop; limit += c.pageSize || 30; expanded = true;
       box.innerHTML = build(); box.scrollTop = box.scrollHeight - h0 + t0; return;

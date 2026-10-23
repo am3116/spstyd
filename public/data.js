@@ -317,9 +317,6 @@ window.PHONE = {
             "img": "photos/chan_0811_1.jpg"
           }
         }
-      ],
-      "draftLoop": [
-        "형 햄버거 사갈까요"
       ]
     },
     {
