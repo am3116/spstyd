@@ -405,11 +405,11 @@ img{-webkit-user-drag:none}
 .prow2 .pd{color:#8a8a8e;font-size:15px;flex:none}
 .prow2 .inf{width:38px;height:38px;border-radius:50%;background:#f2f2f4;display:grid;place-items:center;flex:none}
 .prow2 .inf svg{width:20px;height:20px;stroke:#0a84ff;fill:none;stroke-width:1.5}
-.ptabs{position:absolute;z-index:8;left:14px;right:14px;bottom:24px;height:66px;border-radius:33px;display:flex;align-items:center;padding:0 5px;background:rgba(250,250,250,.88)}
-.ptabs span{flex:1;height:56px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:500;color:#111;white-space:nowrap}
-.ptabs svg.ln2{fill:none;stroke:currentColor;width:28px}
-.ptabs svg{width:24px;height:24px;fill:currentColor}
-.ptabs .on{background:rgba(0,0,0,.07);color:#0a84ff}
+.phtabs{position:absolute;z-index:8;left:14px;right:14px;bottom:24px;height:66px;border-radius:33px;display:flex;align-items:center;padding:0 5px;background:rgba(250,250,250,.88)}
+.phtabs span{flex:1;height:56px;border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10px;font-weight:500;color:#111;white-space:nowrap}
+.phtabs svg.ln2{fill:none;stroke:currentColor;width:28px}
+.phtabs svg{width:24px;height:24px;fill:currentColor}
+.phtabs .on{background:rgba(0,0,0,.07);color:#0a84ff}
 
 /* ── liquid glass (iOS 26) ── */
 .lg{-webkit-backdrop-filter:blur(25px) saturate(180%);backdrop-filter:blur(25px) saturate(180%);background:rgba(255,255,255,.62);border:1px solid rgba(255,255,255,.55);box-shadow:0 8px 32px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
@@ -548,8 +548,7 @@ img{-webkit-user-drag:none}
 .mini svg{width:26px;height:26px;fill:#111}
 .mtabs{position:absolute;z-index:7;left:14px;right:14px;bottom:28px;display:flex;gap:10px;align-items:center}
 .tabs{flex:1;height:64px;border-radius:32px;display:flex;align-items:center;padding:0 5px}
-.tabs>span{flex:1;height:54px;border-radius:27px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10px;font-weight:500;color:#111;white-space:nowrap}
-.ptabs svg.ln2{fill:none;stroke:currentColor;width:28px}
+.tabs>span{flex:1;height:54px;border-radius:27px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:10.5px;font-weight:500;color:#111}
 .tabs svg{width:25px;height:25px;fill:#111}
 .tabs>span.on{background:rgba(0,0,0,.07);color:var(--mred)}
 .tabs>span.on svg{fill:var(--mred)}
@@ -1303,7 +1302,7 @@ function phonePage(){
   const rows = f => D.calls.filter(c => f === 'all' || c.type === 'missed').map(c => `<div class="prow2${c.type === 'missed' ? ' miss' : ''}">${avOf(c)}<div class="pn"><b>${esc(c.name)}</b><small>${ARR(c.type)}${esc(c.kind || '휴대전화')}${c.count > 1 ? ` (${c.count})` : ''}</small></div><span class="pd">${esc(c.when)}</span><span class="inf">${IC.info}</span></div>`).join('') || '<p class="mempty">최근 통화 없음</p>';
   const p = page('ph26', 'dark', `<div class="gbar"><span class="lg lgp pedit">편집</span><span class="lg lgp pseg"><button class="on" data-f="all">모두</button><button data-f="miss">부재중 전화</button></span><span class="lg lgc"><svg viewBox="0 0 24 24" class="ln2"><path d="M4 7h16M7 12h10M10 17h4"/></svg></span></div>
     <div class="scroll"><div class="lt">최근 통화</div><div class="csr2">${IC.search.replace('<svg', '<svg class="ln2"')}검색${NI.mic}</div><div id="calls">${rows('all')}</div></div>
-    <div class="ptabs lg"><span><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z"/></svg>즐겨찾기</span><span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6.5V12H8.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>최근 통화</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="9.5" r="3.6" fill="#fff"/><path d="M5.6 18.6c1.3-2.6 3.6-3.9 6.4-3.9s5.1 1.3 6.4 3.9" fill="#fff"/></svg>연락처</span><span><svg viewBox="0 0 24 24">${[5,12,19].map(x=>[4,10,16].map(y=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join('')).join('')}<circle cx="12" cy="21.5" r="2.4"/></svg>키패드</span><span><svg viewBox="0 0 28 24" class="ln2" style="stroke-width:2.4"><circle cx="7" cy="12" r="4.8"/><circle cx="21" cy="12" r="4.8"/><path d="M7 16.8h14"/></svg>음성 사서함</span></div>`);
+    <div class="phtabs lg"><span><svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3-4.6-4.4 6.3-.9z"/></svg>즐겨찾기</span><span class="on"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6.5V12H8.5" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>최근 통화</span><span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="9.5" r="3.6" fill="#fff"/><path d="M5.6 18.6c1.3-2.6 3.6-3.9 6.4-3.9s5.1 1.3 6.4 3.9" fill="#fff"/></svg>연락처</span><span><svg viewBox="0 0 24 24">${[5,12,19].map(x=>[4,10,16].map(y=>`<circle cx="${x}" cy="${y}" r="2.6"/>`).join('')).join('')}<circle cx="12" cy="21.5" r="2.4"/></svg>키패드</span><span><svg viewBox="0 0 28 24" class="ln2" style="stroke-width:2.4"><circle cx="7" cy="12" r="4.8"/><circle cx="21" cy="12" r="4.8"/><path d="M7 16.8h14"/></svg>음성 사서함</span></div>`);
   p.addEventListener('click', e => {
     const b = e.target.closest('[data-f]'); if (!b) return;
     p.querySelectorAll('[data-f]').forEach(x => x.classList.toggle('on', x === b));
@@ -1334,7 +1333,6 @@ function placesPage(q, list){
       ${r.menu ? `<div class="pmenu">${esc(r.menu)}</div>` : ''}</div>`).join('');
   return page('places', 'dark', `<div class="nav solid"><button class="nb-back" data-back>${IC.back}</button><span></span><span></span></div>
     <div class="scroll"><div class="psrch"><span>${esc(q)}</span>${IC.search}</div>
-      <div class="ptabs"><b>통합</b><span>플레이스</span><span>이미지</span><span>블로그</span><span>지도</span></div>
       <div class="psec">플레이스 <small>${list.length}</small></div>${cards}</div>`);
 }
 

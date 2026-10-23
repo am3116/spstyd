@@ -2761,8 +2761,8 @@ window.PHONE = {
       "src": "music/wildflower.mp3"
     },
     "playlist": {
-      "title": "새로운 플레이리스트",
-      "cover": null,
+      "title": "wbsc",
+      "cover": "music/cover.jpg",
       "tint": "#ffffff",
       "collab": [
         {
@@ -2783,50 +2783,50 @@ window.PHONE = {
           "artist": "The Weeknd",
           "dur": "3:08",
           "art": "music/t1.jpg",
-          "src": null
+          "src": "music/t1.mp3"
         },
         {
           "title": "bad",
           "artist": "wave to earth",
           "dur": "4:23",
           "art": "music/t2.jpg",
-          "src": null
+          "src": "music/t2.mp3"
         },
         {
           "title": "Glimpse of Us",
           "artist": "Joji",
-          "dur": "3:53",
+          "dur": "3:54",
           "art": "music/t3.jpg",
-          "src": null
+          "src": "music/t3.mp3"
         },
         {
           "title": "Kirari",
           "artist": "Fujii Kaze",
-          "dur": "3:58",
+          "dur": "3:57",
           "art": "music/t4.jpg",
-          "src": null
+          "src": "music/t4.mp3"
         },
         {
           "title": "DANCE",
           "artist": "offonoff",
-          "dur": "3:32",
+          "dur": "3:40",
           "art": "music/t5.jpg",
-          "src": null,
+          "src": "music/t5.mp3",
           "star": true
         },
         {
           "title": "String (feat. 선우정아)",
           "artist": "Colde",
-          "dur": "3:41",
+          "dur": "3:58",
           "art": "music/t6.jpg",
-          "src": null
+          "src": "music/t6.mp3"
         },
         {
           "title": "Back On 74",
           "artist": "Jungle",
-          "dur": "3:28",
+          "dur": "3:31",
           "art": "music/t7.jpg",
-          "src": null
+          "src": "music/t7.mp3"
         }
       ]
     }
