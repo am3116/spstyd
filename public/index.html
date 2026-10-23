@@ -953,7 +953,7 @@ async function runScene(){
   for (const st of S.steps){
     if (st.wait){ await wait(st.wait * 1000); continue; }
     if (st.waitOpen){ await waitOpen(); await wait(800); continue; }
-    if (st.from === 'them' && (st.text || st.sticker)){
+    if (st.from === 'them' && (st.text || st.sticker || st.img !== undefined)){
       const m = Object.assign({}, st); delete m.wait;
       const top = chatTop();
       if (top){ put(m); top._receive(m); await wait(Math.min(2600, 900 + String(m.text || '').length * 60) + 600); }

@@ -61,6 +61,9 @@ window.PHONE = {
       { wait: 12 },
       { skip: { label: "다음 날 아침", time: "8:10", dateText: "10월 24일 토요일", day: "2026년 10월 24일 토요일" } },
       { wait: 2 },
+      { from: "them", text: "원비나 화났어......?ㅜ" },
+      { from: "them", img: "photos/chan_selfie.jpg" },
+      { wait: 4 },
       { from: "them", text: "원비나 오늘 수업잘가고❤️❤️❤️❤️❤️❤️" }
     ]
   },
@@ -95,7 +98,7 @@ window.PHONE = {
   chats: [
     {
       "name": "성차니형❤️",
-      "avatar": null,
+      "avatar": "profiles/chan.jpg",
       "unread": 0,
       "last": "",
       "pinned": true,
