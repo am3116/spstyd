@@ -629,7 +629,7 @@ window.PHONE = {
     },
     {
       "name": "태오",
-      "avatar": null,
+      "avatar": "profiles/taeo.jpg",
       "unread": 3,
       "last": "오후 10:52",
       "messages": [

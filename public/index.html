@@ -1,6 +1,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>폰 엿보기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* Layout: 393×852 iPhone canvas, scaled to fit desktop; fills the screen on phones. Single dark backdrop by design. */
@@ -163,6 +164,9 @@ img{-webkit-user-drag:none}
 .sw.on{background:var(--green)}.sw.on::after{transform:translateX(20px)}
 
 /* messenger */
+.emo{display:inline-block!important;width:1.05em!important;height:1.05em!important;vertical-align:-.16em;margin:0 .04em;object-fit:contain;border-radius:0!important;flex:none}
+.crow .cn .emo,.chat-h .nm .emo{margin-left:-4px}
+.kk,.chat{font-family:"Apple SD Gothic Neo","AppleSDGothicNeo","Noto Sans KR",sans-serif;letter-spacing:-.3px}
 .kk-h{position:absolute;z-index:5;top:0;left:0;right:0;padding:58px 18px 10px;display:flex;justify-content:space-between;align-items:center;background:#fff}
 .kk-h b{font-size:22px;font-weight:700}
 .kk-h span{display:flex;gap:18px}.kk-h svg{width:24px;height:24px;stroke:#111;fill:none;stroke-width:1.7}
@@ -173,11 +177,11 @@ img{-webkit-user-drag:none}
 .av img{width:100%;height:100%;object-fit:cover}
 .av svg{width:68%;height:68%}
 .crow .bd{flex:1;min-width:0}
-.crow .cn{font-size:15.5px;font-weight:600;display:flex;gap:5px;align-items:center}
+.crow .cn{font-size:16px;font-weight:400;display:flex;gap:5px;align-items:center}
 .crow .cn small{color:#aaa;font-weight:500;font-size:14px}
-.crow .cp{font-size:13.5px;color:#888;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.crow .cp{font-size:14px;color:#8a8a8a;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .crow .cm{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;align-self:flex-start;padding-top:4px}
-.crow .ct{font-size:11.5px;color:#aaa}
+.crow .ct{font-size:12px;color:#9a9a9a}
 .kbdg{min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:#fa5a3c;color:#fff;font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
 .kk .tabbar{background:#fff;box-shadow:0 -.5px 0 #e5e5e5}
 .kk .tabbar span{color:#b3b3b3}.kk .tabbar .on{color:#111}
@@ -284,7 +288,7 @@ img{-webkit-user-drag:none}
 .bb.vcall span{flex:1;text-align:right}
 .bb.vcall span{font-variant-numeric:tabular-nums}
 .rq.wimg{flex-direction:row;align-items:center;gap:10px;padding:2px 0 10px;margin-bottom:9px;border-bottom-color:rgba(0,0,0,.1)}
-.rq.wimg img{width:52px;height:52px;border-radius:3px;object-fit:cover;flex:none}
+.rq.wimg>img{width:52px;height:52px;border-radius:3px;object-fit:cover;flex:none}
 .rq .rqt{display:flex;flex-direction:column;gap:1px;min-width:0}
 .rq.wimg .rqt{align-self:flex-start;padding-top:1px}
 .rq.wimg b{font-size:14.5px;font-weight:700;color:#111}
@@ -654,7 +658,9 @@ syncClock();
 const E = 'cubic-bezier(.32,.72,0,1)';
 const $ = s => document.querySelector(s);
 const el = html => { const t = document.createElement('template'); t.innerHTML = html.trim(); return t.content.firstElementChild; };
-const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const escA = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+/* 텍스트 속 ❤️ 는 아이폰 하트 이미지로 */
+const esc = s => escA(s).replace(/\u2764\uFE0F?/g, '<img class="emo" src="emoji/heart.png" alt="❤️">');
 const phone = $('#phone'), wall = $('#wall'), homeL = $('#homeL'), lockL = $('#lockL'), appL = $('#appL'), ov = $('#ov'), sb = $('#sb'), hb = $('#hb');
 
 /* ── fit to screen ── */
@@ -906,7 +912,7 @@ function lineHTML(c, m, i, first, showTime){
   const tm = (showTime || rc) ? `<div class="tm">${rc ? `<span class="rd">${rc}</span>` : ''}${showTime ? `<span>${esc(m.time)}</span>` : ''}</div>` : '';
   if (me) return `<div class="ln me${first ? ' first' : ''}"><div class="col"><div class="wrap">${body}${tm}</div></div></div>`;
   const av = c.icon === 'post' ? POST_AV : c.channel ? CHANNEL_AV : c.group ? PERSON : avatar(c.avatar);
-  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.icon === 'post' ? ' post' : c.channel ? ' ch' : ''}" data-prof="${esc(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
+  return `<div class="ln th${first ? ' first' : ''}">${first ? `<button class="sav${c.icon === 'post' ? ' post' : c.channel ? ' ch' : ''}" data-prof="${escA(who)}">${av}</button>` : ''}<div class="col">${first ? `<div class="who">${esc(who)}</div>` : ''}<div class="wrap">${body}${tm}</div></div></div>`;
 }
 function chatPage(c){
   const playLive = !c._played; c._played = true; c.unread = 0;
