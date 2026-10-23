@@ -514,14 +514,15 @@ body.mobb{align-items:flex-start}
 .icgrid svg{width:30px;height:30px;stroke:#fff;stroke-width:1.6}
 
 /* 키보드 (iOS 26 한글 두벌식) */
-.kb{flex:none;background:#cdd1da;border-radius:30px 30px 0 0;padding:6px 5px 0;position:relative;z-index:2;user-select:none;margin-top:-4px}
+.kb{container-type:inline-size;--kw:calc((100cqw - 54px) / 10);flex:none;background:#cdd1da;border-radius:30px 30px 0 0;padding:6px 5px 0;position:relative;z-index:2;user-select:none;margin-top:-4px}
 .ksug{display:flex;height:44px;align-items:center;margin-bottom:6px}
 .ksug span{flex:1;text-align:center;font-size:17px;color:#222;position:relative}
 .ksug span+span::before{content:'';position:absolute;left:0;top:-6px;bottom:-6px;width:1px;background:#b4b8c0}
 .kr{display:flex;gap:6px;justify-content:center;margin-bottom:11px}
-.kr.r2{padding:0 calc((100% - 54px) / 20)}
+.kr.r2{padding:0}
 .k{flex:1 1 0;min-width:0;height:44px;border-radius:9px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.12);display:grid;place-items:center;font-size:21px;color:#000;position:relative;transition:background .08s}
-.kmid{flex:7 1 0;display:flex;gap:6px;padding:0 8px}
+.kmid{flex:1 1 auto;display:flex;gap:6px;justify-content:center}
+.k[data-l]{flex:0 0 var(--kw)!important;width:var(--kw);height:44px;font-size:21px;line-height:1;overflow:hidden}
 .k.fn{font-size:17px;flex:0 0 46px}
 .k.fn svg{width:23px;height:23px;fill:none;stroke:#000;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
 .kb.sh [data-k2="shift"] svg{fill:#000;stroke:#000}
@@ -673,7 +674,7 @@ body.mobb{align-items:flex-start}
 .mempty{text-align:center;color:#8a8a8e;font-size:15px;padding:30px 20px}
 .mfoot{color:#8a8a8e;font-size:13px;padding:12px 0 0 20px;margin:0}
 .mini{position:absolute;z-index:7;left:14px;right:14px;bottom:100px;height:62px;border-radius:31px;background:rgba(250,250,252,.86);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);box-shadow:0 8px 24px rgba(0,0,0,.12);display:flex;align-items:center;gap:12px;padding:0 12px 0 10px}
-.mini .mart{width:40px;height:40px;border-radius:6px}
+.mini .mart{width:34px;height:34px;border-radius:5px}
 .mini .mtx{flex:1;min-width:0;display:flex;flex-direction:column}
 .mini b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mini small{font-size:13px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
