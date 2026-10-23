@@ -47,6 +47,9 @@ window.PHONE = {
        { read: true }                                 원빈이 보낸 메시지의 '1'이 사라짐 (상대가 읽음)
        { typing: [2.5, 1.2, 1.8] }                    상대 입력 중… 표시: 보였다(2.5초) 사라졌다(1.2초) 보였다(1.8초)…
        { skip: { label, time, dateText, day } }       화면 암전 후 시간 건너뛰기 */
+  /* 햄버거 카톡 보내고 몇 초 뒤 성찬한테 전화 */
+  callAfterDraft: { chat: "성차니형❤️", after: 15 },
+
   scene: {
     chat: "성차니형❤️",
     steps: [
@@ -309,6 +312,7 @@ window.PHONE = {
           "from": "me",
           "text": "이쁘네 이거",
           "time": "오전 9:58",
+          "read": false,
           "reply": {
             "to": "them",
             "text": "사진",
@@ -3059,8 +3063,8 @@ window.PHONE = {
         name: "박원빈",
         pf: "ig/bin_pf.jpg",
         tag: "jsco913",
-        followers: "623",
-        following: "318",
+        followers: "1,623",
+        following: "218",
         posts: ["ig/b1.jpg", "ig/b2.jpg", "ig/b3.jpg"]
       },
       jsco913: {
@@ -3068,9 +3072,9 @@ window.PHONE = {
         pf: "ig/chan_pf.jpg",
         tag: "biniii32",
         story: true,
-        followers: "1,204",
-        following: "502",
-        highlights: [{ label: "⚽️축구", cover: null }],
+        followers: "2,204",
+        following: "402",
+        highlights: [{ label: "⚽️", cover: "ig/hl_soccer.jpg" }],
         posts: ["ig/c1.jpg"]
       }
     }
