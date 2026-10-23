@@ -364,6 +364,11 @@ body.mobb{align-items:flex-start}
 .cin .fld.has{color:#111}
 .tin{flex:1;width:100%;border:0;outline:0;background:none;font:inherit;font-size:16px;color:#111;padding:0;-webkit-user-select:text;user-select:text}
 .tin::placeholder{color:#aaa}
+.tmir{flex:1;min-width:0;display:flex;align-items:center;font-size:16px;color:#111;white-space:pre;overflow:hidden}
+.tmir .cur{display:none}.tmir.on .cur{display:inline-block}
+.tmir.ph .tt::before{content:'메시지 입력';color:#aaa}
+.tmir.ph.on .tt::before{content:none}
+.tmir.ph.on::after{content:'메시지 입력';color:#aaa;margin-left:2px}
 .cin .fld{cursor:text}
 .cur{display:inline-block;width:2px;height:18px;background:#2f7cf6;margin-left:1px;vertical-align:-4px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
@@ -1161,7 +1166,7 @@ function chatPage(c){
       const text = inp.value.trim(); if (!text) return;
       const m = { from: 'me', text, time: nowTime(), read: false };
       c.messages.push(m); c.last = m.time; append(m);
-      inp.value = ''; upd(); inp.focus();
+      inp.value = ''; upd(); if (!inp.readOnly) inp.focus(); inp.dispatchEvent(new Event('input'));
     };
     inp.addEventListener('input', upd);
     inp.addEventListener('keydown', ev => { if (ev.key === 'Enter' && !ev.isComposing){ ev.preventDefault(); send(); } });
@@ -1169,15 +1174,20 @@ function chatPage(c){
     snd.addEventListener('click', ev => { ev.stopPropagation(); send(); });
     upd();
     inp.addEventListener('focus', () => setTimeout(() => { box.scrollTop = box.scrollHeight; }, 350));
-    /* 컴퓨터로 볼 때(폰 키보드가 없을 때): 아이폰 키보드를 띄워서 눌러 쓸 수 있게 */
-    const fine = window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (fine){
+    /* 폰·컴퓨터 모두: 진짜 키보드 대신 화면 속 아이폰 키보드로 입력 (폰 키보드가 화면을 밀어올리지 않게) */
+    const touch = !(window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches);
+    /* 폰: 진짜 입력칸은 숨기고(폰 키보드·위아래 막대가 안 뜨게) 글자+깜빡이는 커서만 그려줌 */
+    const mir = el('<span class="tmir"><span class="tt"></span><span class="cur"></span></span>');
+    if (touch){ inp.readOnly = true; inp.tabIndex = -1; inp.style.display = 'none'; fld.appendChild(mir); }
+    const mpaint = () => { mir.querySelector('.tt').textContent = inp.value; mir.classList.toggle('ph', !inp.value); };
+    inp.addEventListener('input', mpaint); mpaint();
+    {
       let kb = null, raw = '', pre = '', sh = false;
-      const paint = () => { inp.value = pre + hangulCompose(raw); upd(); };
+      const paint = () => { inp.value = pre + hangulCompose(raw); upd(); mpaint(); };
       const setShift = on => { sh = on; kb.classList.toggle('sh', on); kb.querySelectorAll('[data-k2]').forEach(e => { const k = e.dataset.k2; if (KB_SHIFT[k]){ const l = on ? KB_SHIFT[k] : k; e.textContent = l; e.dataset.l = l; } }); };
       const open = () => {
         if (kb) return;
-        kb = el(KB_HTML); cin.after(kb); cin.classList.add('kbon');
+        kb = el(KB_HTML); cin.after(kb); cin.classList.add('kbon'); mir.classList.add('on');
         kb.animate([{ transform: 'translateY(100%)' }, { transform: 'none' }], { duration: 300, easing: E });
         setTimeout(() => { box.scrollTop = box.scrollHeight; }, 320);
         pre = inp.value; raw = '';
@@ -1195,15 +1205,17 @@ function chatPage(c){
       };
       const close = () => { if (!kb) return; const k = kb; kb = null; cin.classList.remove('kbon'); k.animate([{ transform: 'none' }, { transform: 'translateY(100%)' }], { duration: 240, easing: E }).onfinish = () => k.remove(); };
       inp.addEventListener('focus', open);
+      inp._open = open;
       inp.addEventListener('input', ev => { if (ev.isTrusted){ pre = inp.value; raw = ''; } });
-      box.addEventListener('pointerdown', () => { inp.blur(); close(); });
+      box.addEventListener('pointerdown', () => { inp.blur(); close(); mir.classList.remove('on'); });
+      inp._touch = touch; inp._mir = mir;
       const sendBase = send; snd.addEventListener('click', () => { pre = ''; raw = ''; });
     }
     return inp;
   };
   if (fld && !c.draftLoop) enterInput();
   p.addEventListener('click', e => {
-    if (e.target.closest('.cin .fld')){ const i = enterInput() || fld.querySelector('.tin'); if (i && document.activeElement !== i) i.focus(); return; }
+    if (e.target.closest('.cin .fld')){ const i = enterInput() || fld.querySelector('.tin'); if (!i) return; if (i._touch) i._open(); else if (document.activeElement !== i) i.focus(); return; }
     if (e.target.closest('[data-older]')){
       const h0 = box.scrollHeight, t0 = box.scrollTop; limit += c.pageSize || 30; expanded = true;
       box.innerHTML = build(); box.scrollTop = box.scrollHeight - h0 + t0; return;
